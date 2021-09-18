@@ -1,0 +1,19 @@
+.vscode/
+.bloop/
+.bsp/
+.metals/
+*.log
+
+# course files
+forcomp/
+funsets/
+objsets/
+patmat/
+progfun1-example/
+project/
+recfun/
+target/
+
+# jupyter book
+*.yml
+_build/
