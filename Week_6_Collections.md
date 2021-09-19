@@ -260,4 +260,4 @@ class Coder(words: List[String]):
                 word <- wordsForNum(number.take(splitPoint))
                 rest <- encode(number.drop(splitPoint))
             yield word :: rest
-        ```
+```
