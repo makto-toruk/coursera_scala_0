@@ -1,0 +1,566 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>5 Lists &#8212; Lectures notes for Functional Programming Principles in Scala by Martin Odersky</title>
+    
+  <link href="_static/css/theme.css" rel="stylesheet" />
+  <link href="_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
+
+    
+  <link rel="stylesheet"
+    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/sphinx-book-theme.e8f53015daec13862f6db5e763c41738.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="_static/js/index.1c5a1a01449ed65a7b51.js">
+
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/togglebutton.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="6 Collections" href="Week_6_Collections.html" />
+    <link rel="prev" title="4 Types and Pattern Matching" href="Week_4_Types_and_Pattern_Matching.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="index.html">
+      
+      
+      <h1 class="site-logo" id="site-title">Lectures notes for Functional Programming Principles in Scala by Martin Odersky</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="Week_1_Introduction.html">
+   1 Introduction
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Week_2_Higher_Order_Functions.html">
+   2 Higher Order Functions
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Week_3_Data_and_Abstraction.html">
+   3 Data and Abstraction
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Week_4_Types_and_Pattern_Matching.html">
+   4 Types and Pattern Matching
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   5 Lists
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Week_6_Collections.html">
+   6 Collections
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="_sources/Week_5_Lists.md"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.md</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/makto-toruk/coursera_scala_0"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/makto-toruk/coursera_scala_0/issues/new?title=Issue%20on%20page%20%2FWeek_5_Lists.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        <a class="edit-button" href="https://github.com/makto-toruk/coursera_scala_0/edit/master/Week_5_Lists.md"><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Edit this page"><i class="fas fa-pencil-alt"></i>suggest edit</button></a>
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#a-closer-look-at-lists">
+   5.1 A Closer Look At Lists
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#tuples-and-generic-methods">
+   5.2 Tuples and Generic Methods
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#higher-order-list-functions">
+   5.3 Higher-Order List Functions
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#reduction-of-lists">
+   5.4 Reduction of Lists
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#reasoning-about-lists">
+   5.5 Reasoning about lists
+  </a>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="lists">
+<h1>5 Lists<a class="headerlink" href="#lists" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="a-closer-look-at-lists">
+<h2>5.1 A Closer Look At Lists<a class="headerlink" href="#a-closer-look-at-lists" title="Permalink to this headline">¶</a></h2>
+<ul>
+<li><p>Construction:</p>
+<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="k">val</span> <span class="n">fruits</span> <span class="k">=</span> <span class="n">list</span><span class="o">(</span><span class="s">&quot;Apple&quot;</span><span class="o">,</span> <span class="s">&quot;Orange&quot;</span><span class="o">,</span> <span class="s">&quot;Banana&quot;</span><span class="o">)</span>
+<span class="k">val</span> <span class="n">nums</span> <span class="k">=</span> <span class="mi">1</span> <span class="o">::</span> <span class="mi">2</span> <span class="o">::</span> <span class="nc">Nil</span>
+</pre></div>
+</div>
+</li>
+<li><p>Decomposition:</p>
+<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="n">fruits</span><span class="o">.</span><span class="n">head</span> <span class="c1">// &quot;Apple&quot;</span>
+<span class="n">nums</span><span class="o">.</span><span class="n">tail</span> <span class="c1">// 2 :: Nil</span>
+<span class="n">nums</span><span class="o">.</span><span class="n">isEmpty</span> <span class="c1">// false</span>
+</pre></div>
+</div>
+</li>
+<li><p>Pattern match:</p>
+<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="n">nums</span> <span class="k">match</span>
+    <span class="k">case</span> <span class="n">x</span> <span class="o">::</span> <span class="n">y</span> <span class="o">::</span> <span class="k">_</span> <span class="k">=&gt;</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span>
+</pre></div>
+</div>
+</li>
+<li><p>List methods:</p>
+<ul class="simple">
+<li><p>xs.length: The number of elements of xs.</p></li>
+<li><p>xs.last: The list’s last element, exception if xs is empty.</p></li>
+<li><p>xs.init: A list consisting of all elements of xs except the last one, exception if xs is empty</p></li>
+<li><p>xs.take(n): A list consisting of the first n elements of xs, or xs itself if it is shorter than n</p></li>
+<li><p>xs.drop(n): The rest of the collection after taking n elements</p></li>
+<li><p>xs(n): The element of xs at index n.</p></li>
+</ul>
+</li>
+<li><p>Creating new lists:</p>
+<ul class="simple">
+<li><p>xs ++ ys: The list consisting of all elements of xs followed by all elements of ys.</p></li>
+<li><p>xs.reverse: The list containing the elements of xs in reversed order.</p></li>
+<li><p>xs.updated(n, x): The list containing the same elements as xs, except at index n where it contains x.</p></li>
+</ul>
+</li>
+<li><p>Finding elements:</p>
+<ul class="simple">
+<li><p>xs.indexOf(x): The index of the first element in xs equal to x, or -1 if x does not appear in xs</p></li>
+<li><p>xs.contains(x): same as xs.indexOf(x) &gt;= 0</p></li>
+</ul>
+</li>
+<li><p>Complexity:</p>
+<ul class="simple">
+<li><p>head: O(1)</p></li>
+<li><p>last: O(n)</p></li>
+</ul>
+</li>
+<li><p>Example implementation of concat</p>
+<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="n">extension</span> <span class="o">[</span><span class="kt">T</span><span class="o">](</span><span class="n">xs</span><span class="k">:</span> <span class="kt">List</span><span class="o">[</span><span class="kt">T</span><span class="o">])</span>
+    <span class="k">def</span> <span class="o">++</span> <span class="o">(</span><span class="n">ys</span><span class="k">:</span> <span class="kt">List</span><span class="o">[</span><span class="kt">T</span><span class="o">])</span><span class="k">:</span> <span class="kt">List</span><span class="o">[</span><span class="kt">T</span><span class="o">]</span> <span class="k">=</span> <span class="n">xs</span> <span class="k">match</span>
+        <span class="k">case</span> <span class="nc">Nil</span> <span class="k">=&gt;</span> <span class="n">ys</span>
+        <span class="k">case</span> <span class="n">x</span> <span class="o">::</span> <span class="n">xs1</span> <span class="k">=&gt;</span> <span class="n">x</span> <span class="o">::</span> <span class="o">(</span><span class="n">xs1</span> <span class="o">++</span> <span class="n">ys</span><span class="o">)</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</div>
+<div class="section" id="tuples-and-generic-methods">
+<h2>5.2 Tuples and Generic Methods<a class="headerlink" href="#tuples-and-generic-methods" title="Permalink to this headline">¶</a></h2>
+<ul>
+<li><p>Insertion sort:</p>
+<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="n">msort</span><span class="o">(</span><span class="n">xs</span><span class="k">:</span> <span class="kt">List</span><span class="o">[</span><span class="kt">Int</span><span class="o">])</span><span class="k">:</span> <span class="kt">List</span><span class="o">[</span><span class="kt">Int</span><span class="o">]</span> <span class="k">=</span>
+    <span class="k">val</span> <span class="n">n</span> <span class="k">=</span> <span class="n">xs</span><span class="o">.</span><span class="n">length</span> <span class="o">/</span> <span class="mi">2</span>
+    <span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">0</span> <span class="n">then</span> <span class="n">xs</span>
+    <span class="k">else</span>
+        <span class="k">def</span> <span class="n">merge</span><span class="o">(</span><span class="n">xs</span><span class="k">:</span> <span class="kt">List</span><span class="o">[</span><span class="kt">Int</span><span class="o">],</span> <span class="n">ys</span><span class="k">:</span> <span class="kt">List</span><span class="o">[</span><span class="kt">Int</span><span class="o">])</span> <span class="k">=</span> <span class="o">(</span><span class="n">xs</span><span class="o">,</span> <span class="n">ys</span><span class="o">)</span> <span class="k">match</span>
+            <span class="k">case</span> <span class="o">(</span><span class="nc">Nil</span><span class="o">,</span> <span class="n">ys</span><span class="o">)</span> <span class="k">=&gt;</span> <span class="n">ys</span>
+            <span class="k">case</span> <span class="o">(</span><span class="n">xs</span><span class="o">,</span> <span class="nc">Nil</span><span class="o">)</span> <span class="k">=&gt;</span> <span class="n">xs</span>
+            <span class="k">case</span> <span class="o">(</span><span class="n">x</span> <span class="o">::</span> <span class="n">xs1</span><span class="o">,</span> <span class="n">y</span> <span class="o">::</span> <span class="n">ys1</span><span class="o">)</span> <span class="k">=&gt;</span>
+                <span class="k">if</span> <span class="n">x</span> <span class="o">&lt;</span> <span class="n">y</span> <span class="n">then</span> <span class="n">x</span> <span class="o">::</span> <span class="n">merge</span><span class="o">(</span><span class="n">xs1</span><span class="o">,</span> <span class="n">ys</span><span class="o">)</span>
+                <span class="k">else</span> <span class="n">y</span> <span class="o">::</span> <span class="n">merge</span><span class="o">(</span><span class="n">xs</span><span class="o">,</span> <span class="n">ys1</span><span class="o">)</span>
+        <span class="k">val</span> <span class="o">(</span><span class="n">fst</span><span class="o">,</span> <span class="n">snd</span><span class="o">)</span> <span class="k">=</span> <span class="n">xs</span><span class="o">.</span><span class="n">splitAt</span><span class="o">(</span><span class="n">n</span><span class="o">)</span>
+        <span class="n">merge</span><span class="o">(</span><span class="n">msort</span><span class="o">(</span><span class="n">fst</span><span class="o">),</span> <span class="n">msort</span><span class="o">(</span><span class="n">snd</span><span class="o">))</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Pattern matching can be done on generic tuples</p></li>
+</ul>
+</li>
+<li><p>Tuple construction:</p>
+<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="k">val</span> <span class="n">pair</span> <span class="k">=</span> <span class="o">(</span><span class="s">&quot;answer&quot;</span><span class="o">,</span> <span class="mi">42</span><span class="o">)</span>
+<span class="k">val</span> <span class="o">(</span><span class="n">label</span><span class="o">,</span> <span class="n">value</span><span class="o">)</span> <span class="k">=</span> <span class="n">pair</span> <span class="c1">// preferred</span>
+<span class="k">val</span> <span class="n">label</span> <span class="k">=</span> <span class="n">pair</span><span class="o">.</span><span class="n">_1</span> <span class="c1">// not preferred</span>
+<span class="k">val</span> <span class="n">value</span> <span class="k">=</span> <span class="n">pair</span><span class="o">.</span><span class="n">_2</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</div>
+<div class="section" id="higher-order-list-functions">
+<h2>5.3 Higher-Order List Functions<a class="headerlink" href="#higher-order-list-functions" title="Permalink to this headline">¶</a></h2>
+<ul>
+<li><p>Apply function to elements of list</p>
+<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="n">scaleList</span><span class="o">(</span><span class="n">xs</span><span class="k">:</span> <span class="kt">List</span><span class="o">[</span><span class="kt">Double</span><span class="o">],</span> <span class="n">factor</span><span class="k">:</span> <span class="kt">Double</span><span class="o">)</span><span class="k">:</span> <span class="kt">List</span><span class="o">[</span><span class="kt">Double</span><span class="o">]</span> <span class="k">=</span> <span class="n">xs</span> <span class="k">match</span>
+    <span class="k">case</span> <span class="nc">Nil</span> <span class="k">=&gt;</span> <span class="nc">Nil</span>
+    <span class="k">case</span> <span class="n">y</span> <span class="o">::</span> <span class="n">ys</span> <span class="k">=&gt;</span> <span class="n">y</span> <span class="o">*</span> <span class="n">factor</span> <span class="o">::</span> <span class="n">scaleList</span><span class="o">(</span><span class="n">ys</span><span class="o">,</span> <span class="n">factor</span><span class="o">)</span>
+</pre></div>
+</div>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">map</span></code> does just this</p>
+<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="n">scaleList</span><span class="o">(</span><span class="n">xs</span><span class="k">:</span> <span class="kt">List</span><span class="o">[</span><span class="kt">Double</span><span class="o">],</span> <span class="n">factor</span><span class="k">:</span> <span class="kt">Double</span><span class="o">)</span> <span class="k">=</span> 
+    <span class="n">xs</span><span class="o">.</span><span class="n">map</span><span class="o">(</span><span class="n">x</span> <span class="k">=&gt;</span> <span class="n">x</span> <span class="o">*</span> <span class="n">factor</span><span class="o">)</span>
+<span class="k">def</span> <span class="n">squareList</span><span class="o">(</span><span class="n">xs</span><span class="k">:</span> <span class="kt">List</span><span class="o">[</span><span class="kt">Int</span><span class="o">])</span><span class="k">:</span> <span class="kt">List</span><span class="o">[</span><span class="kt">Int</span><span class="o">]</span> <span class="k">=</span>
+    <span class="n">xs</span><span class="o">.</span><span class="n">map</span><span class="o">(</span><span class="n">x</span> <span class="k">=&gt;</span> <span class="n">x</span> <span class="o">*</span> <span class="n">x</span><span class="o">)</span>
+</pre></div>
+</div>
+</li>
+<li><p>Also common: select elements satisfying a given condition:</p>
+<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="n">posElems</span><span class="o">(</span><span class="n">xs</span><span class="k">:</span> <span class="kt">List</span><span class="o">[</span><span class="kt">Int</span><span class="o">])</span><span class="k">:</span> <span class="kt">List</span><span class="o">[</span><span class="kt">Int</span><span class="o">]</span><span class="k">:</span> <span class="kt">xs</span> <span class="kt">match</span>
+    <span class="k">case</span> <span class="nc">Nil</span> <span class="k">=&gt;</span> <span class="n">xs</span>
+    <span class="k">case</span> <span class="n">y</span> <span class="o">::</span> <span class="n">ys</span> <span class="k">=&gt;</span> <span class="k">if</span> <span class="n">y</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="n">then</span> <span class="n">y</span> <span class="o">::</span> <span class="n">posElems</span><span class="o">(</span><span class="n">ys</span><span class="o">)</span> <span class="k">else</span> <span class="n">posElems</span><span class="o">(</span><span class="n">ys</span><span class="o">)</span>
+</pre></div>
+</div>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">filter</span></code> does just this:</p>
+<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="n">posElems</span><span class="o">(</span><span class="n">xs</span><span class="k">:</span> <span class="kt">List</span><span class="o">[</span><span class="kt">Int</span><span class="o">])</span><span class="k">:</span> <span class="kt">List</span><span class="o">[</span><span class="kt">Int</span><span class="o">]</span> <span class="k">=</span>
+    <span class="n">xs</span><span class="o">.</span><span class="n">filter</span><span class="o">(</span><span class="n">x</span> <span class="k">=&gt;</span> <span class="n">x</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="o">)</span>
+</pre></div>
+</div>
+</li>
+<li><p>Variations of Filter</p>
+<ul class="simple">
+<li><p>xs.filterNot(p): The list consisting of those elements of xs that do not satisfy the predicate p.</p></li>
+<li><p>xs.partition(p): Same as <code class="docutils literal notranslate"><span class="pre">(xs.filter(p),</span> <span class="pre">xs.filterNot(p))</span></code>, but computed in a single traversal of the list xs</p></li>
+<li><p>xs.takeWhile(p): The longest prefix of list xs consisting of elements that all satisfy the predicate p</p></li>
+<li><p>xs.dropWhile(p): The remainder of the list xs after any leading elements satisfying p have been removed</p></li>
+<li><p>xs.span(p): Same as (xs.takeWhile(p), xs.dropWhile(p)) but computed in a single traversal of the list xs</p></li>
+</ul>
+</li>
+<li><p>Implement <code class="docutils literal notranslate"><span class="pre">pack(List(&quot;a&quot;,</span> <span class="pre">&quot;a&quot;,</span> <span class="pre">&quot;a&quot;,</span> <span class="pre">&quot;b&quot;,</span> <span class="pre">&quot;c&quot;,</span> <span class="pre">&quot;c&quot;,</span> <span class="pre">&quot;a&quot;))</span></code> that gives <code class="docutils literal notranslate"><span class="pre">List(List(&quot;a&quot;,</span> <span class="pre">&quot;a&quot;,</span> <span class="pre">&quot;a&quot;),</span> <span class="pre">List(&quot;b&quot;),</span> <span class="pre">List(&quot;c&quot;,</span> <span class="pre">&quot;c&quot;),</span> <span class="pre">List(&quot;a&quot;))</span></code></p>
+<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="n">pack</span><span class="o">[</span><span class="kt">T</span><span class="o">](</span><span class="n">xs</span><span class="k">:</span> <span class="kt">List</span><span class="o">[</span><span class="kt">T</span><span class="o">])</span><span class="k">:</span> <span class="kt">List</span><span class="o">[</span><span class="kt">List</span><span class="o">[</span><span class="kt">T</span><span class="o">]]</span> <span class="k">=</span> <span class="n">xs</span> <span class="k">match</span>
+    <span class="k">case</span> <span class="nc">Nil</span> <span class="k">=&gt;</span> <span class="nc">Nil</span>
+    <span class="k">case</span> <span class="n">x</span> <span class="o">::</span> <span class="n">xs1</span> <span class="k">=&gt;</span> 
+        <span class="k">val</span> <span class="o">(</span><span class="n">more</span><span class="o">,</span> <span class="n">rest</span><span class="o">)</span> <span class="k">=</span> <span class="n">xs1</span><span class="o">.</span><span class="n">span</span><span class="o">(</span><span class="n">y</span> <span class="k">=&gt;</span> <span class="n">y</span> <span class="o">==</span> <span class="n">x</span><span class="o">)</span>
+        <span class="o">(</span><span class="n">x</span> <span class="o">::</span> <span class="n">more</span><span class="o">)</span> <span class="o">::</span> <span class="n">pack</span><span class="o">(</span><span class="n">rest</span><span class="o">)</span>
+</pre></div>
+</div>
+</li>
+<li><p>Implement <code class="docutils literal notranslate"><span class="pre">encode(List(&quot;a&quot;,</span> <span class="pre">&quot;a&quot;,</span> <span class="pre">&quot;a&quot;,</span> <span class="pre">&quot;b&quot;,</span> <span class="pre">&quot;c&quot;,</span> <span class="pre">&quot;c&quot;,</span> <span class="pre">&quot;a&quot;))</span></code> that gives <code class="docutils literal notranslate"><span class="pre">List((”a”,</span> <span class="pre">3),</span> <span class="pre">(”b”,</span> <span class="pre">1),</span> <span class="pre">(”c”,</span> <span class="pre">2),</span> <span class="pre">(”a”,</span> <span class="pre">1))</span></code></p>
+<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="n">encode</span><span class="o">[</span><span class="kt">T</span><span class="o">](</span><span class="n">xs</span><span class="k">:</span> <span class="kt">List</span><span class="o">[</span><span class="kt">T</span><span class="o">])</span><span class="k">:</span> <span class="kt">List</span><span class="o">[(</span><span class="kt">T</span><span class="p">,</span> <span class="kt">Int</span><span class="o">)]</span> <span class="k">=</span> 
+    <span class="n">pack</span><span class="o">(</span><span class="n">xs</span><span class="o">).</span><span class="n">map</span><span class="o">(</span><span class="n">x</span> <span class="k">=&gt;</span> <span class="o">(</span><span class="n">x</span><span class="o">.</span><span class="n">head</span><span class="o">,</span> <span class="n">x</span><span class="o">.</span><span class="n">length</span><span class="o">))</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</div>
+<div class="section" id="reduction-of-lists">
+<h2>5.4 Reduction of Lists<a class="headerlink" href="#reduction-of-lists" title="Permalink to this headline">¶</a></h2>
+<ul>
+<li><p>Combine elements with an operator</p>
+<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="n">sum</span><span class="o">(</span><span class="n">xs</span><span class="k">:</span> <span class="kt">List</span><span class="o">[</span><span class="kt">Int</span><span class="o">])</span><span class="k">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="n">xs</span> <span class="k">match</span>
+    <span class="k">case</span> <span class="nc">Nil</span> <span class="k">=&gt;</span> <span class="mi">0</span>
+    <span class="k">case</span> <span class="n">y</span> <span class="o">::</span> <span class="n">ys</span> <span class="k">=&gt;</span> <span class="n">y</span> <span class="o">+</span> <span class="n">sum</span><span class="o">(</span><span class="n">ys</span><span class="o">)</span>
+</pre></div>
+</div>
+</li>
+<li><p>An abstraction of the above is <code class="docutils literal notranslate"><span class="pre">reduceLeft</span></code></p>
+<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="nc">List</span><span class="o">(</span><span class="n">x1</span><span class="o">,</span> <span class="o">...,</span> <span class="n">xn</span><span class="o">).</span><span class="n">reduceLeft</span><span class="o">(</span><span class="n">op</span><span class="o">)</span> <span class="k">=</span> <span class="n">x1</span><span class="o">.</span><span class="n">op</span><span class="o">(</span><span class="n">x2</span><span class="o">).</span> <span class="o">...</span> <span class="o">.</span><span class="n">op</span><span class="o">(</span><span class="n">xn</span><span class="o">)</span>
+</pre></div>
+</div>
+</li>
+<li><p>Examples:</p>
+<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="n">sum</span><span class="o">(</span><span class="n">xs</span><span class="k">:</span> <span class="kt">List</span><span class="o">[</span><span class="kt">Int</span><span class="o">])</span> <span class="k">=</span> <span class="o">(</span><span class="mi">0</span> <span class="o">::</span> <span class="n">xs</span><span class="o">).</span><span class="n">reduceLeft</span><span class="o">((</span><span class="n">x</span><span class="o">,</span> <span class="n">y</span><span class="o">)</span> <span class="k">=&gt;</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span><span class="o">)</span>
+<span class="k">def</span> <span class="n">product</span><span class="o">(</span><span class="n">xs</span><span class="k">:</span> <span class="kt">List</span><span class="o">[</span><span class="kt">Int</span><span class="o">])</span> <span class="k">=</span> <span class="o">(</span><span class="mi">1</span> <span class="o">::</span> <span class="n">xs</span><span class="o">).</span><span class="n">reduceLeft</span><span class="o">((</span><span class="n">x</span><span class="o">,</span> <span class="n">y</span><span class="o">)</span> <span class="k">=&gt;</span> <span class="n">x</span> <span class="o">*</span> <span class="n">y</span><span class="o">)</span>
+</pre></div>
+</div>
+</li>
+<li><p>Shorter alternatives</p>
+<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="n">sum</span><span class="o">(</span><span class="n">xs</span><span class="k">:</span> <span class="kt">List</span><span class="o">[</span><span class="kt">Int</span><span class="o">])</span> <span class="k">=</span> <span class="o">(</span><span class="mi">0</span> <span class="o">::</span> <span class="n">xs</span><span class="o">).</span><span class="n">reduceLeft</span><span class="o">(</span><span class="k">_</span> <span class="o">+</span> <span class="k">_</span><span class="o">)</span>
+<span class="k">def</span> <span class="n">product</span><span class="o">(</span><span class="n">xs</span><span class="k">:</span> <span class="kt">List</span><span class="o">[</span><span class="kt">Int</span><span class="o">])</span> <span class="k">=</span> <span class="o">(</span><span class="mi">1</span> <span class="o">::</span> <span class="n">xs</span><span class="o">).</span><span class="n">reduceLeft</span><span class="o">(</span><span class="k">_</span> <span class="o">*</span> <span class="k">_</span><span class="o">)</span>
+</pre></div>
+</div>
+</li>
+<li><p>A more general version of <code class="docutils literal notranslate"><span class="pre">reduceLeft</span></code> is <code class="docutils literal notranslate"><span class="pre">foldLeft</span></code> which also takes an accumulator <code class="docutils literal notranslate"><span class="pre">z</span></code></p>
+<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="nc">List</span><span class="o">(</span><span class="n">x1</span><span class="o">,</span> <span class="o">...,</span> <span class="n">xn</span><span class="o">).</span><span class="n">foldLeft</span><span class="o">(</span><span class="n">z</span><span class="o">)(</span><span class="n">op</span><span class="o">)</span> <span class="k">=</span> <span class="n">z</span><span class="o">.</span><span class="n">op</span><span class="o">(</span><span class="n">x1</span><span class="o">).</span><span class="n">op</span> <span class="o">...</span> <span class="o">.</span><span class="n">op</span><span class="o">(</span><span class="n">xn</span><span class="o">)</span>
+</pre></div>
+</div>
+</li>
+<li><p>Implementations:</p>
+<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span>abstract class List[T]:
+    
+    def reduceLeft(op: (T, T) =&gt; T): T = this match
+        case Nil =&gt; throw IllegalOperationException(”Nil.reduceLeft”)
+        case x :: xs =&gt; xs.foldLeft(x)(op)
+    
+    def foldLeft[U](z: U)(op: (U, T) =&gt; U): U = this match
+        case Nil =&gt; z
+        case x :: xs =&gt; xs.foldLeft(op(z, x))(op)
+</pre></div>
+</div>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">foldRight</span></code> and <code class="docutils literal notranslate"><span class="pre">reduceRight</span></code> also exist:</p>
+<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="nc">List</span><span class="o">(</span><span class="n">x1</span><span class="o">,</span> <span class="o">...,</span> <span class="n">x</span><span class="o">{</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="o">},</span> <span class="n">xn</span><span class="o">).</span><span class="n">reduceRight</span><span class="o">(</span><span class="n">op</span><span class="o">)</span> <span class="k">=</span> <span class="n">x1</span><span class="o">.</span><span class="n">op</span><span class="o">(</span><span class="n">x2</span><span class="o">.</span><span class="n">op</span><span class="o">(</span> <span class="o">...</span> <span class="n">x</span><span class="o">{</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="o">}.</span><span class="n">op</span><span class="o">(</span><span class="n">xn</span><span class="o">)</span> <span class="o">...</span> <span class="o">))</span>
+<span class="nc">List</span><span class="o">(</span><span class="n">x1</span><span class="o">,</span> <span class="o">...,</span> <span class="n">xn</span><span class="o">).</span><span class="n">foldRight</span><span class="o">(</span><span class="n">z</span><span class="o">)(</span><span class="n">op</span> <span class="o">)</span> <span class="k">=</span> <span class="n">x1</span><span class="o">.</span><span class="n">op</span><span class="o">(</span><span class="n">x2</span><span class="o">.</span><span class="n">op</span><span class="o">(</span> <span class="o">...</span> <span class="n">xn</span><span class="o">.</span><span class="n">op</span><span class="o">(</span><span class="n">z</span><span class="o">)</span> <span class="o">...))</span>
+</pre></div>
+</div>
+</li>
+<li><p>Better implementation of <code class="docutils literal notranslate"><span class="pre">reverse</span></code>:</p>
+<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="n">reverse</span><span class="o">[</span><span class="kt">T</span><span class="o">](</span><span class="n">xs</span><span class="k">:</span> <span class="kt">List</span><span class="o">[</span><span class="kt">T</span><span class="o">])</span><span class="k">:</span> <span class="kt">List</span><span class="o">[</span><span class="kt">T</span><span class="o">]</span> <span class="k">=</span> <span class="n">xs</span><span class="o">.</span><span class="n">foldLeft</span><span class="o">(</span><span class="n">z</span><span class="o">?)(</span><span class="n">op</span><span class="o">?)</span>
+</pre></div>
+</div>
+</li>
+<li><p>Deduction of <code class="docutils literal notranslate"><span class="pre">z</span></code> and <code class="docutils literal notranslate"><span class="pre">op</span></code>:</p>
+<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="nc">Nil</span>
+<span class="k">=</span> <span class="n">reverse</span><span class="o">(</span><span class="nc">Nil</span><span class="o">)</span>
+<span class="k">=</span> <span class="nc">Nil</span><span class="o">.</span><span class="n">foldLeft</span><span class="o">(</span><span class="n">z</span><span class="o">?)(</span><span class="n">op</span><span class="o">)</span>
+<span class="k">=</span> <span class="n">z</span><span class="o">?</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Thus <code class="docutils literal notranslate"><span class="pre">z</span></code> is Nil</p></li>
+</ul>
+<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="nc">List</span><span class="o">(</span><span class="n">x</span><span class="o">)</span>
+<span class="k">=</span> <span class="n">reverse</span><span class="o">(</span><span class="nc">List</span><span class="o">(</span><span class="n">x</span><span class="o">))</span>
+<span class="k">=</span> <span class="nc">List</span><span class="o">(</span><span class="n">x</span><span class="o">).</span><span class="n">foldLeft</span><span class="o">(</span><span class="nc">Nil</span><span class="o">)(</span><span class="n">op</span><span class="o">?)</span>
+<span class="k">=</span> <span class="n">op</span><span class="o">?(</span><span class="nc">Nil</span><span class="o">,</span> <span class="n">x</span><span class="o">)</span>
+</pre></div>
+</div>
+<p>which suggests <code class="docutils literal notranslate"><span class="pre">op</span></code> is a cons operator with reversed operands.</p>
+</li>
+<li><p>Thus,</p>
+<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="n">reverse</span><span class="o">[</span><span class="kt">a</span><span class="o">](</span><span class="n">xs</span><span class="k">:</span> <span class="kt">List</span><span class="o">[</span><span class="kt">T</span><span class="o">])</span><span class="k">:</span> <span class="kt">List</span><span class="o">[</span><span class="kt">T</span><span class="o">]</span> <span class="k">=</span>
+    <span class="n">xs</span><span class="o">.</span><span class="n">foldLeft</span><span class="o">(</span><span class="nc">List</span><span class="o">[</span><span class="kt">T</span><span class="o">]())((</span><span class="n">xs</span><span class="o">,</span> <span class="n">x</span><span class="o">)</span> <span class="k">=&gt;</span> <span class="n">x</span> <span class="o">::</span> <span class="n">xs</span><span class="o">)</span>
+</pre></div>
+</div>
+<p>Type parameter for <code class="docutils literal notranslate"><span class="pre">z</span></code>, <code class="docutils literal notranslate"><span class="pre">List[T]()</span></code>, is necessary for type inference</p>
+</li>
+<li><p>Some examples with <code class="docutils literal notranslate"><span class="pre">foldRight</span></code></p>
+<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="n">mapFun</span><span class="o">[</span><span class="kt">T</span><span class="p">,</span> <span class="kt">U</span><span class="o">](</span><span class="n">xs</span><span class="k">:</span> <span class="kt">List</span><span class="o">[</span><span class="kt">T</span><span class="o">],</span> <span class="n">f</span><span class="k">:</span> <span class="kt">T</span> <span class="o">=&gt;</span> <span class="n">U</span><span class="o">)</span><span class="k">:</span> <span class="kt">List</span><span class="o">[</span><span class="kt">U</span><span class="o">]</span> <span class="k">=</span>
+    <span class="n">xs</span><span class="o">.</span><span class="n">foldRight</span><span class="o">(</span><span class="nc">List</span><span class="o">[</span><span class="kt">U</span><span class="o">]())((</span><span class="n">y</span><span class="o">,</span> <span class="n">ys</span><span class="o">)</span> <span class="k">=&gt;</span> <span class="n">f</span><span class="o">(</span><span class="n">y</span><span class="o">)</span> <span class="o">::</span> <span class="n">ys</span><span class="o">)</span>
+
+<span class="k">def</span> <span class="n">lengthFun</span><span class="o">[</span><span class="kt">T</span><span class="o">](</span><span class="n">xs</span><span class="k">:</span> <span class="kt">List</span><span class="o">[</span><span class="kt">T</span><span class="o">])</span><span class="k">:</span> <span class="kt">Int</span> <span class="o">=</span>
+    <span class="n">xs</span><span class="o">.</span><span class="n">foldRight</span><span class="o">(</span><span class="mi">0</span><span class="o">)((</span><span class="n">y</span><span class="o">,</span> <span class="n">n</span><span class="o">)</span> <span class="k">=&gt;</span> <span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="o">)</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Notice the swap in the operands (y, ys) instead of (ys, y) compared to <code class="docutils literal notranslate"><span class="pre">foldLeft</span></code>.</p></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="reasoning-about-lists">
+<h2>5.5 Reasoning about lists<a class="headerlink" href="#reasoning-about-lists" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>Learned about structural induction</p></li>
+</ul>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        
+            
+
+
+
+<div class='prev-next-bottom'>
+    
+    <div id="prev">
+        <a class="left-prev" href="Week_4_Types_and_Pattern_Matching.html" title="previous page">
+            <i class="prevnext-label fas fa-angle-left"></i>
+            <div class="prevnext-info">
+                <p class="prevnext-label">previous</p>
+                <p class="prevnext-title">4 Types and Pattern Matching</p>
+            </div>
+        </a>
+    </div>
+     <div id="next">
+        <a class="right-next" href="Week_6_Collections.html" title="next page">
+            <div class="prevnext-info">
+                <p class="prevnext-label">next</p>
+                <p class="prevnext-title">6 Collections</p>
+            </div>
+            <i class="prevnext-label fas fa-angle-right"></i>
+        </a>
+     </div>
+
+</div>
+        
+        </div>
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Manasij Venkatesh<br/>
+        
+            &copy; Copyright 2021.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="_static/js/index.1c5a1a01449ed65a7b51.js"></script>
+
+  
+  </body>
+</html>

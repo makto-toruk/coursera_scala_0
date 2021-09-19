@@ -1,0 +1,614 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>4 Types and Pattern Matching &#8212; Lectures notes for Functional Programming Principles in Scala by Martin Odersky</title>
+    
+  <link href="_static/css/theme.css" rel="stylesheet" />
+  <link href="_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
+
+    
+  <link rel="stylesheet"
+    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/sphinx-book-theme.e8f53015daec13862f6db5e763c41738.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="_static/js/index.1c5a1a01449ed65a7b51.js">
+
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/togglebutton.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
+    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="5 Lists" href="Week_5_Lists.html" />
+    <link rel="prev" title="3 Data and Abstraction" href="Week_3_Data_and_Abstraction.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="index.html">
+      
+      
+      <h1 class="site-logo" id="site-title">Lectures notes for Functional Programming Principles in Scala by Martin Odersky</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="Week_1_Introduction.html">
+   1 Introduction
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Week_2_Higher_Order_Functions.html">
+   2 Higher Order Functions
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Week_3_Data_and_Abstraction.html">
+   3 Data and Abstraction
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   4 Types and Pattern Matching
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Week_5_Lists.html">
+   5 Lists
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Week_6_Collections.html">
+   6 Collections
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="_sources/Week_4_Types_and_Pattern_Matching.md"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.md</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/makto-toruk/coursera_scala_0"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/makto-toruk/coursera_scala_0/issues/new?title=Issue%20on%20page%20%2FWeek_4_Types_and_Pattern_Matching.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        <a class="edit-button" href="https://github.com/makto-toruk/coursera_scala_0/edit/master/Week_4_Types_and_Pattern_Matching.md"><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Edit this page"><i class="fas fa-pencil-alt"></i>suggest edit</button></a>
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#decomposition">
+   4.1 Decomposition
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#pattern-matching">
+   4.2 Pattern Matching
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#lists">
+   4.3 Lists
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#enums">
+   4.4 Enums
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#subtyping-and-generics">
+   4.5 Subtyping and Generics
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#variance">
+   4.6 Variance
+  </a>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="types-and-pattern-matching">
+<h1>4 Types and Pattern Matching<a class="headerlink" href="#types-and-pattern-matching" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="decomposition">
+<h2>4.1 Decomposition<a class="headerlink" href="#decomposition" title="Permalink to this headline">¶</a></h2>
+<ul>
+<li><p>How would we decompose an Expression?</p>
+<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="k">trait</span> <span class="nc">Expr</span><span class="k">:</span>
+    <span class="kt">def</span> <span class="kt">isNumber:</span> <span class="kt">Boolean</span>
+    <span class="k">def</span> <span class="n">isSum</span><span class="k">:</span> <span class="kt">Boolean</span>
+    <span class="k">def</span> <span class="n">numValue</span><span class="k">:</span> <span class="kt">Int</span>
+    <span class="k">def</span> <span class="n">leftOp</span><span class="k">:</span> <span class="kt">Expr</span>
+    <span class="k">def</span> <span class="n">rightOp</span><span class="k">:</span> <span class="kt">Expr</span>
+
+<span class="k">class</span> <span class="nc">Number</span><span class="o">(</span><span class="n">n</span><span class="k">:</span> <span class="kt">Int</span><span class="o">)</span> <span class="k">extends</span> <span class="nc">Expr</span><span class="k">:</span>
+    <span class="kt">def</span> <span class="kt">isNumber</span> <span class="o">=</span> <span class="kc">true</span>
+    <span class="k">def</span> <span class="n">isSum</span> <span class="k">=</span> <span class="kc">false</span>
+    <span class="k">def</span> <span class="n">numValue</span> <span class="k">=</span> <span class="n">n</span>
+    <span class="k">def</span> <span class="n">leftOp</span> <span class="k">=</span> <span class="k">throw</span> <span class="nc">Error</span><span class="o">(</span><span class="s">&quot;Number.leftOp&quot;</span><span class="o">)</span>
+    <span class="k">def</span> <span class="n">rightOp</span> <span class="k">=</span> <span class="k">throw</span> <span class="nc">Error</span><span class="o">(</span><span class="s">&quot;Number.rightOp&quot;</span><span class="o">)</span>
+
+<span class="k">class</span> <span class="nc">Sum</span><span class="o">(</span><span class="n">e1</span><span class="k">:</span> <span class="kt">Expr</span><span class="o">,</span> <span class="n">e2</span><span class="k">:</span> <span class="kt">Expr</span><span class="o">)</span> <span class="k">extends</span> <span class="nc">Expr</span><span class="k">:</span>
+    <span class="kt">def</span> <span class="kt">isNumber</span> <span class="o">=</span> <span class="kc">false</span>
+    <span class="k">def</span> <span class="n">isSum</span> <span class="k">=</span> <span class="kc">true</span>
+    <span class="k">def</span> <span class="n">numValue</span> <span class="k">=</span> <span class="k">throw</span> <span class="nc">Error</span><span class="o">(</span><span class="s">&quot;Sum.numValue&quot;</span><span class="o">)</span>
+    <span class="k">def</span> <span class="n">leftOp</span> <span class="k">=</span> <span class="n">e1</span>
+    <span class="k">def</span> <span class="n">rightOp</span> <span class="k">=</span> <span class="n">e2</span>
+
+<span class="k">def</span> <span class="n">eval</span><span class="o">(</span><span class="n">e</span><span class="k">:</span> <span class="kt">Expr</span><span class="o">)</span><span class="k">:</span> <span class="kt">Int</span> <span class="o">=</span>
+    <span class="k">if</span> <span class="n">e</span><span class="o">.</span><span class="n">isNumber</span> <span class="n">then</span> <span class="n">e</span><span class="o">.</span><span class="n">numValue</span>
+    <span class="k">else</span> <span class="k">if</span> <span class="n">e</span><span class="o">.</span><span class="n">isSum</span> <span class="n">then</span> <span class="n">eval</span><span class="o">(</span><span class="n">e</span><span class="o">.</span><span class="n">leftOp</span><span class="o">)</span> <span class="o">+</span> <span class="n">eval</span><span class="o">(</span><span class="n">e</span><span class="o">.</span><span class="n">rightOp</span><span class="o">)</span>
+    <span class="k">else</span> <span class="k">throw</span> <span class="nc">Error</span><span class="o">(</span><span class="s">&quot;Unknown expression &quot;</span> <span class="o">+</span> <span class="n">e</span><span class="o">)</span>
+</pre></div>
+</div>
+</li>
+<li><p>Object Oriented Decomposition</p>
+<ul class="simple">
+<li><p>Decomposition mixes “data” with “operations” on the data. Can be the right thing if we need encapsulation and data abstraction.</p></li>
+<li><p>But increases complexity and adds new dependencies to classes; hard to add new kinds of operations.</p></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="pattern-matching">
+<h2>4.2 Pattern Matching<a class="headerlink" href="#pattern-matching" title="Permalink to this headline">¶</a></h2>
+<ul>
+<li><p>Case Classes:</p>
+<ul>
+<li><p>Similar to a normal class definition, except that it is preceded by the modifier <code class="docutils literal notranslate"><span class="pre">case</span></code></p>
+<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="k">trait</span> <span class="nc">Expr</span>
+    <span class="k">case</span> <span class="k">class</span> <span class="nc">Number</span><span class="o">(</span><span class="n">n</span><span class="k">:</span> <span class="kt">Int</span><span class="o">)</span> <span class="k">extends</span> <span class="nc">Expr</span>
+    <span class="k">case</span> <span class="k">class</span> <span class="nc">Sum</span><span class="o">(</span><span class="n">e1</span><span class="k">:</span> <span class="kt">Expr</span><span class="o">,</span> <span class="n">e2</span><span class="k">:</span> <span class="kt">Expr</span><span class="o">)</span> <span class="k">extends</span> <span class="nc">Expr</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</li>
+<li><p>Pattern matching is a generalization of <code class="docutils literal notranslate"><span class="pre">switch</span></code> to class hierarchies. It’s expressed in Scala using <code class="docutils literal notranslate"><span class="pre">match</span></code></p>
+<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="n">eval</span><span class="o">(</span><span class="n">e</span><span class="k">:</span> <span class="kt">Expr</span><span class="o">)</span><span class="k">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="n">e</span> <span class="k">match</span>
+    <span class="k">case</span> <span class="nc">Number</span><span class="o">(</span><span class="n">n</span><span class="o">)</span> <span class="k">=&gt;</span> <span class="n">n</span>
+    <span class="k">case</span> <span class="nc">Sum</span><span class="o">(</span><span class="n">e1</span><span class="o">,</span> <span class="n">e2</span><span class="o">)</span> <span class="k">=&gt;</span> <span class="n">eval</span><span class="o">(</span><span class="n">e1</span><span class="o">)</span> <span class="o">+</span> <span class="n">eval</span><span class="o">(</span><span class="n">e2</span><span class="o">)</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">match</span></code>: preceded by a selector expression and followed by a sequence of <code class="docutils literal notranslate"><span class="pre">cases</span></code>, <code class="docutils literal notranslate"><span class="pre">pat</span> <span class="pre">=&gt;</span> <span class="pre">expr</span></code></p></li>
+<li><p>Each <code class="docutils literal notranslate"><span class="pre">case</span></code> associates an expression <code class="docutils literal notranslate"><span class="pre">expr</span></code> with a pattern <code class="docutils literal notranslate"><span class="pre">pat</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">MatchError</span></code> exception if no match.</p></li>
+</ul>
+</li>
+<li><p>Patterns are constructed from:</p>
+<ul class="simple">
+<li><p>constructors, e.g. Number, Sum,</p></li>
+<li><p>variables, e.g. n, e1, e2,</p></li>
+<li><p>wildcard patterns _,</p></li>
+<li><p>constants, e.g. 1, true.</p></li>
+<li><p>type tests, e.g. n: Number</p></li>
+</ul>
+</li>
+<li><p>Variables always begin with a lowercase letter.</p></li>
+<li><p>The same variable name can only appear once in a pattern. So, <code class="docutils literal notranslate"><span class="pre">Sum(x,</span> <span class="pre">x)</span></code> is not a legal pattern.</p></li>
+<li><p>Names of constants begin with a capital letter, with the exception of the reserved words <code class="docutils literal notranslate"><span class="pre">null</span></code>, <code class="docutils literal notranslate"><span class="pre">true</span></code>, <code class="docutils literal notranslate"><span class="pre">false</span></code>.</p></li>
+</ul>
+</div>
+<div class="section" id="lists">
+<h2>4.3 Lists<a class="headerlink" href="#lists" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="k">val</span> <span class="n">fruit</span> <span class="k">=</span> <span class="nc">List</span><span class="o">(</span><span class="s">&quot;apples&quot;</span><span class="o">,</span> <span class="s">&quot;oranges&quot;</span><span class="o">,</span> <span class="s">&quot;pears&quot;</span><span class="o">)</span>
+<span class="k">val</span> <span class="n">nums</span> <span class="k">=</span> <span class="nc">List</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span> <span class="mi">2</span><span class="o">,</span> <span class="mi">3</span><span class="o">,</span> <span class="mi">4</span><span class="o">)</span>
+<span class="k">val</span> <span class="n">diag3</span> <span class="k">=</span> <span class="nc">List</span><span class="o">(</span><span class="nc">List</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="mi">0</span><span class="o">),</span> <span class="nc">List</span><span class="o">(</span><span class="mi">0</span><span class="o">,</span> <span class="mi">1</span><span class="o">,</span> <span class="mi">0</span><span class="o">),</span> <span class="nc">List</span><span class="o">(</span><span class="mi">0</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="mi">1</span><span class="o">))</span>
+<span class="k">val</span> <span class="n">empty</span> <span class="k">=</span> <span class="nc">List</span><span class="o">()</span>
+</pre></div>
+</div>
+<ul>
+<li><p>Lists are immutable</p></li>
+<li><p>Lists are recursive, arrays are flat</p></li>
+<li><p>Lists are homogeneous: all elements must have same type</p>
+<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="k">val</span> <span class="n">fruit</span><span class="k">:</span> <span class="kt">List</span><span class="o">[</span><span class="kt">String</span><span class="o">]</span> <span class="k">=</span> <span class="nc">List</span><span class="o">(</span><span class="s">&quot;apples&quot;</span><span class="o">,</span> <span class="s">&quot;oranges&quot;</span><span class="o">,</span> <span class="s">&quot;pears&quot;</span><span class="o">)</span>
+<span class="k">val</span> <span class="n">nums</span> <span class="k">:</span> <span class="kt">List</span><span class="o">[</span><span class="kt">Int</span><span class="o">]</span> <span class="k">=</span> <span class="nc">List</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span> <span class="mi">2</span><span class="o">,</span> <span class="mi">3</span><span class="o">,</span> <span class="mi">4</span><span class="o">)</span>
+<span class="k">val</span> <span class="n">diag3</span><span class="k">:</span> <span class="kt">List</span><span class="o">[</span><span class="kt">List</span><span class="o">[</span><span class="kt">Int</span><span class="o">]]</span> <span class="k">=</span> <span class="nc">List</span><span class="o">(</span><span class="nc">List</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="mi">0</span><span class="o">),</span> <span class="nc">List</span><span class="o">(</span><span class="mi">0</span><span class="o">,</span> <span class="mi">1</span><span class="o">,</span> <span class="mi">0</span><span class="o">),</span> <span class="nc">List</span><span class="o">(</span><span class="mi">0</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="mi">1</span><span class="o">))</span>
+<span class="k">val</span> <span class="n">empty</span><span class="k">:</span> <span class="kt">List</span><span class="o">[</span><span class="kt">Nothing</span><span class="o">]</span> <span class="k">=</span> <span class="nc">List</span><span class="o">()</span>
+</pre></div>
+</div>
+</li>
+<li><p>All lists are constructed from the empty list <code class="docutils literal notranslate"><span class="pre">Nil</span></code> and construction operation <code class="docutils literal notranslate"><span class="pre">::</span></code> (Cons).</p>
+<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="k">val</span> <span class="n">nums</span> <span class="k">=</span> <span class="mi">1</span> <span class="o">::</span> <span class="mi">2</span> <span class="o">::</span> <span class="mi">3</span> <span class="o">::</span> <span class="mi">4</span> <span class="o">::</span> <span class="nc">Nil</span>
+</pre></div>
+</div>
+</li>
+<li><p>Fundamental operations: <code class="docutils literal notranslate"><span class="pre">head</span></code>, <code class="docutils literal notranslate"><span class="pre">tail</span></code>, and <code class="docutils literal notranslate"><span class="pre">isEmpty</span></code>.</p></li>
+<li><p>Pattern mathing on lists</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">p</span> <span class="pre">::</span> <span class="pre">ps</span></code> matches a list with a head matching <code class="docutils literal notranslate"><span class="pre">p</span></code> and a tail matching <code class="docutils literal notranslate"><span class="pre">ps</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">List(p1,</span> <span class="pre">...,</span> <span class="pre">pn)</span></code> same as <code class="docutils literal notranslate"><span class="pre">p1</span> <span class="pre">::</span> <span class="pre">...</span> <span class="pre">::</span> <span class="pre">pn</span> <span class="pre">::</span> <span class="pre">Nil</span></code></p></li>
+<li><p>Examples:</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">1</span> <span class="pre">::</span> <span class="pre">2</span> <span class="pre">::</span> <span class="pre">xs</span></code> Lists that start with 1 and then 2</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">::</span> <span class="pre">Nil</span></code> Lists of length 1</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">List(x)</span></code> Same as <code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">::</span> <span class="pre">Nil</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">List()</span></code> empty list</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">List(2</span> <span class="pre">::</span> <span class="pre">xs)</span></code> list that contains one element which is a list that starts with 2</p></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>Insertion Sort:</p></li>
+</ul>
+<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="n">isort</span><span class="o">(</span><span class="n">xs</span><span class="k">:</span> <span class="kt">List</span><span class="o">[</span><span class="kt">Int</span><span class="o">])</span><span class="k">:</span> <span class="kt">List</span><span class="o">[</span><span class="kt">Int</span><span class="o">]</span> <span class="k">=</span> <span class="n">xs</span> <span class="k">match</span>
+    <span class="k">case</span> <span class="nc">List</span><span class="o">()</span> <span class="k">=&gt;</span> <span class="nc">List</span><span class="o">()</span>
+    <span class="k">case</span> <span class="n">y</span> <span class="o">::</span> <span class="n">ys</span> <span class="k">=&gt;</span> <span class="n">insert</span><span class="o">(</span><span class="n">y</span><span class="o">,</span> <span class="n">isort</span><span class="o">(</span><span class="n">ys</span><span class="o">))</span>
+
+<span class="k">def</span> <span class="n">insert</span><span class="o">(</span><span class="n">x</span><span class="k">:</span> <span class="kt">Int</span><span class="o">,</span> <span class="n">xs</span><span class="k">:</span> <span class="kt">List</span><span class="o">[</span><span class="kt">Int</span><span class="o">])</span><span class="k">:</span> <span class="kt">List</span><span class="o">[</span><span class="kt">Int</span><span class="o">]</span> <span class="k">=</span> <span class="n">xs</span> <span class="k">match</span>
+    <span class="k">case</span> <span class="nc">List</span><span class="o">()</span> <span class="k">=&gt;</span> <span class="nc">List</span><span class="o">(</span><span class="n">x</span><span class="o">)</span>
+    <span class="k">case</span> <span class="n">y</span> <span class="o">::</span> <span class="n">ys</span> <span class="k">=&gt;</span> 
+        <span class="k">if</span> <span class="n">x</span> <span class="o">&lt;</span> <span class="n">y</span> <span class="n">then</span> <span class="n">x</span> <span class="o">::</span> <span class="n">xs</span> <span class="k">else</span> <span class="n">y</span> <span class="o">::</span> <span class="n">insert</span><span class="o">(</span><span class="n">x</span><span class="o">,</span> <span class="n">ys</span><span class="o">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="enums">
+<h2>4.4 Enums<a class="headerlink" href="#enums" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>To compose pure data without any associated functions.</p></li>
+</ul>
+<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="k">trait</span> <span class="nc">Expr</span>
+<span class="k">object</span> <span class="nc">Expr</span><span class="k">:</span>
+    <span class="kt">case</span> <span class="kt">class</span> <span class="kt">Var</span><span class="o">(</span><span class="kt">s:</span> <span class="kt">String</span><span class="o">)</span> <span class="kt">extends</span> <span class="kt">Expr</span>
+    <span class="k">case</span> <span class="k">class</span> <span class="nc">Number</span><span class="o">(</span><span class="n">n</span><span class="k">:</span> <span class="kt">Int</span><span class="o">)</span> <span class="k">extends</span> <span class="nc">Expr</span>
+    <span class="k">case</span> <span class="k">class</span> <span class="nc">Sum</span><span class="o">(</span><span class="n">e1</span><span class="k">:</span> <span class="kt">Expr</span><span class="o">,</span> <span class="n">e2</span><span class="k">:</span> <span class="kt">Expr</span><span class="o">)</span> <span class="k">extends</span> <span class="nc">Expr</span>
+    <span class="k">case</span> <span class="k">class</span> <span class="nc">Prod</span><span class="o">(</span><span class="n">e1</span><span class="k">:</span> <span class="kt">Expr</span><span class="o">,</span> <span class="n">e2</span><span class="k">:</span> <span class="kt">Expr</span><span class="o">)</span> <span class="k">extends</span> <span class="nc">Expr</span>
+</pre></div>
+</div>
+<ul>
+<li><p>Pure data definitions like these are called algebraic data types or ADTs.</p></li>
+<li><p>An alternative is to use <code class="docutils literal notranslate"><span class="pre">enum</span></code></p>
+<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="n">enum</span> <span class="nc">Expr</span><span class="k">:</span>
+    <span class="kt">case</span> <span class="kt">Var</span><span class="o">(</span><span class="kt">s:</span> <span class="kt">String</span><span class="o">)</span>
+    <span class="kt">case</span> <span class="kt">Number</span><span class="o">(</span><span class="kt">n:</span> <span class="kt">Int</span><span class="o">)</span>
+    <span class="kt">case</span> <span class="kt">Sum</span><span class="o">(</span><span class="kt">e1:</span> <span class="kt">Expr</span><span class="o">,</span> <span class="kt">e2:</span> <span class="kt">Expr</span><span class="o">)</span>
+    <span class="k">case</span> <span class="nc">Prod</span><span class="o">(</span><span class="n">e1</span><span class="k">:</span> <span class="kt">Expr</span><span class="o">,</span> <span class="n">e2</span><span class="k">:</span> <span class="kt">Expr</span><span class="o">)</span>
+</pre></div>
+</div>
+<p>equivalent to above but shorter.</p>
+</li>
+<li><p>Match expressions can still be used.</p>
+<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="n">show</span><span class="o">(</span><span class="n">e</span><span class="k">:</span> <span class="kt">Expr</span><span class="o">)</span><span class="k">:</span> <span class="kt">String</span> <span class="o">=</span> <span class="n">e</span> <span class="k">match</span>
+    <span class="k">case</span> <span class="nc">Expr</span><span class="o">.</span><span class="nc">Var</span><span class="o">(</span><span class="n">x</span><span class="o">)</span> <span class="k">=&gt;</span> <span class="n">x</span>
+    <span class="k">case</span> <span class="nc">Expr</span><span class="o">.</span><span class="nc">Number</span><span class="o">(</span><span class="n">n</span><span class="o">)</span> <span class="k">=&gt;</span> <span class="n">n</span><span class="o">.</span><span class="n">toString</span>
+    <span class="k">case</span> <span class="nc">Expr</span><span class="o">.</span><span class="nc">Sum</span><span class="o">(</span><span class="n">a</span><span class="o">,</span> <span class="n">b</span><span class="o">)</span> <span class="k">=&gt;</span> <span class="s">s&quot;</span><span class="si">${</span><span class="n">show</span><span class="o">(</span><span class="n">a</span><span class="o">)</span><span class="si">}</span><span class="s"> + </span><span class="si">${</span><span class="n">show</span><span class="o">(</span><span class="n">a</span><span class="o">)</span><span class="si">}</span><span class="s">}&quot;</span>
+    <span class="k">case</span> <span class="nc">Expr</span><span class="o">.</span><span class="nc">Prod</span><span class="o">(</span><span class="n">a</span><span class="o">,</span> <span class="n">b</span><span class="o">)</span> <span class="k">=&gt;</span> <span class="s">s&quot;</span><span class="si">${</span><span class="n">showP</span><span class="o">(</span><span class="n">a</span><span class="o">)</span><span class="si">}</span><span class="s"> * </span><span class="si">${</span><span class="n">showP</span><span class="o">(</span><span class="n">a</span><span class="o">)</span><span class="si">}</span><span class="s">&quot;</span>
+
+<span class="k">def</span> <span class="n">showP</span><span class="o">(</span><span class="n">e</span><span class="k">:</span> <span class="kt">Expr</span><span class="o">)</span><span class="k">:</span> <span class="kt">String</span> <span class="o">=</span> <span class="n">e</span> <span class="k">match</span>
+    <span class="k">case</span> <span class="n">e</span><span class="k">:</span> <span class="kt">Sum</span> <span class="o">=&gt;</span> <span class="s">s&quot;(</span><span class="si">${</span><span class="n">show</span><span class="o">(</span><span class="n">expr</span><span class="o">)</span><span class="si">}</span><span class="s">)&quot;</span>
+    <span class="k">case</span> <span class="k">_</span> <span class="k">=&gt;</span> <span class="n">show</span><span class="o">(</span><span class="n">expr</span><span class="o">)</span>
+</pre></div>
+</div>
+</li>
+<li><p>Can be even simpler</p>
+<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="n">enum</span> <span class="nc">DayOfWeek</span><span class="k">:</span>
+    <span class="kt">case</span> <span class="kt">Monday</span><span class="o">,</span> <span class="nc">Tuesday</span><span class="o">,</span> <span class="nc">Wednesday</span><span class="o">,</span> <span class="nc">Thursday</span><span class="o">,</span> <span class="nc">Friday</span><span class="o">,</span> <span class="nc">Saturday</span><span class="o">,</span> <span class="nc">Sunday</span>
+
+<span class="k">import</span> <span class="nn">DayOfWeek.</span><span class="o">*</span>
+
+<span class="k">def</span> <span class="n">isWeekend</span><span class="o">(</span><span class="n">day</span><span class="k">:</span> <span class="kt">DayOfWeek</span><span class="o">)</span> <span class="k">=</span> <span class="n">day</span> <span class="k">match</span>
+    <span class="k">case</span> <span class="nc">Saturday</span> <span class="o">|</span> <span class="nc">Sunday</span> <span class="k">=&gt;</span> <span class="kc">true</span>
+    <span class="k">case</span> <span class="k">_</span> <span class="k">=&gt;</span> <span class="kc">false</span>
+</pre></div>
+</div>
+</li>
+<li><p>Enums can take parameters and define methods</p>
+<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span>enum Direction(val dx: Int, val dy: Int):
+    case Right extends Direction( 1, 0)
+    case Up extends Direction( 0, 1)
+    case Left extends Direction(-1, 0)
+    case Down extends Direction( 0, -1)
+
+    def leftTurn = Direction.values((ordinal + 1) % 4)
+end Direction
+
+val r = Direction.Right
+val u = x.leftTurn // u = Up
+val v = (u.dx, u.dy) // v = (1, 0)
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>ordinal (order number in the case statements), values are auxiliary functions</p></li>
+<li><p>Enumeration cases that pass parameters have to use an explicit extends clause</p></li>
+<li><p>The expression <code class="docutils literal notranslate"><span class="pre">e.ordinal</span></code> gives the ordinal value of the enum case <code class="docutils literal notranslate"><span class="pre">e</span></code>. Cases start with zero and are numbered consecutively</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">values</span></code> is an immutable array in the companion object of an enum that contains all enum values</p></li>
+</ul>
+</li>
+<li><p>An enum for modeling payment methods:</p>
+<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="n">enum</span> <span class="nc">PaymentMethod</span><span class="k">:</span>
+    <span class="kt">case</span> <span class="kt">CreditCard</span><span class="o">(</span><span class="kt">kind:</span> <span class="kt">Card</span><span class="o">,</span> <span class="kt">holder:</span> <span class="kt">String</span><span class="o">,</span> <span class="n">number</span><span class="k">:</span> <span class="kt">Long</span><span class="o">,</span> <span class="n">expires</span><span class="k">:</span> <span class="kt">Date</span><span class="o">)</span>
+    <span class="k">case</span> <span class="nc">PayPal</span><span class="o">(</span><span class="n">email</span><span class="k">:</span> <span class="kt">String</span><span class="o">)</span>
+    <span class="k">case</span> <span class="nc">Cash</span>
+
+<span class="n">enum</span> <span class="nc">Card</span><span class="k">:</span>
+    <span class="kt">case</span> <span class="kt">Visa</span><span class="o">,</span> <span class="nc">Mastercard</span><span class="o">,</span> <span class="nc">Amex</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Enums are</p>
+<ul>
+<li><p>a shorthand for hierarchies of case classes</p></li>
+<li><p>a way to define data types accepting alternative values</p></li>
+</ul>
+</li>
+<li><p>An enum can comprise parametrized and simple cases (see <code class="docutils literal notranslate"><span class="pre">PaymentMethod</span></code>)</p></li>
+<li><p>Typically used for pure data, all operations on data are defined elsewhere.</p></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="subtyping-and-generics">
+<h2>4.5 Subtyping and Generics<a class="headerlink" href="#subtyping-and-generics" title="Permalink to this headline">¶</a></h2>
+<ul>
+<li><p>Two principal forms of polymorphism:</p>
+<ul class="simple">
+<li><p>Subtyping</p></li>
+<li><p>Generics.</p></li>
+</ul>
+</li>
+<li><p>Consider a method <code class="docutils literal notranslate"><span class="pre">assertAllPos</span></code> that</p>
+<ul class="simple">
+<li><p>takes an <code class="docutils literal notranslate"><span class="pre">IntSet</span></code></p></li>
+<li><p>returns the <code class="docutils literal notranslate"><span class="pre">IntSet</span></code> if all elements are positive</p></li>
+<li><p>throws an exception otherwise</p></li>
+</ul>
+</li>
+<li><p>What should be its type? <code class="docutils literal notranslate"><span class="pre">def</span> <span class="pre">assertAllPos(s:</span> <span class="pre">IntSet):</span> <span class="pre">IntSet</span></code>?</p>
+<ul class="simple">
+<li><p>Can we be more precise?</p></li>
+<li><p>For example one might want to express that this methods takes Empty sets to Empty and NonEmpty sets to NonEmpty.</p></li>
+</ul>
+<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="n">assertAllPos</span><span class="o">[</span><span class="kt">S</span> <span class="k">&lt;:</span> <span class="kt">IntSet</span><span class="o">](</span><span class="n">r</span><span class="k">:</span> <span class="kt">S</span><span class="o">)</span><span class="k">:</span> <span class="kt">S</span> <span class="o">=</span> <span class="o">...</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Here “&lt;: Intset” is an <em>upper bound</em> of the type parameter S. It means that S can be instantiated only to types that conform to IntSet.</p></li>
+<li><p>S &lt;: T means: S is a <em>subtype</em> of T</p></li>
+<li><p>S &gt;: T means: S is a <em>supertype</em> of T, or T is a <em>subtype</em> of S.</p></li>
+<li><p>This makes it clear “what kind” of IntSet will be returned.</p></li>
+<li><p>Supertypes form a lower bound.</p></li>
+</ul>
+</li>
+<li><p>Mixed bounds: <code class="docutils literal notranslate"><span class="pre">[S</span> <span class="pre">&gt;:</span> <span class="pre">NonEmpty</span> <span class="pre">&lt;:IntSet]</span></code></p></li>
+<li><p>Covariance:</p>
+<ul class="simple">
+<li><p>Does <code class="docutils literal notranslate"><span class="pre">NonEmpty</span> <span class="pre">&lt;:</span> <span class="pre">IntSet</span></code> imply <code class="docutils literal notranslate"><span class="pre">List[NonEmpty]</span> <span class="pre">&lt;:</span> <span class="pre">List[IntSet]</span></code>.</p></li>
+<li><p>If this is true, we say the relationship holds <em>covariant</em>.</p></li>
+<li><p>Does this make sense for all types, and not just for <code class="docutils literal notranslate"><span class="pre">List</span></code>?</p></li>
+</ul>
+</li>
+<li><p>Liskov Substitution Principle: When a type can be a subtype of another:</p>
+<ul class="simple">
+<li><p>Let <span class="math notranslate nohighlight">\(q(x)\)</span> be a property provable about objects <span class="math notranslate nohighlight">\(x\)</span> of type <span class="math notranslate nohighlight">\(B\)</span>. Then <span class="math notranslate nohighlight">\(q(y)\)</span> should be provable for objects <span class="math notranslate nohighlight">\(y\)</span> of type <span class="math notranslate nohighlight">\(A\)</span> where <span class="math notranslate nohighlight">\(A &lt;: B\)</span>.</p></li>
+</ul>
+</li>
+<li><p>Which line will lead to a type error?</p>
+<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="k">val</span> <span class="n">a</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">NonEmpty</span><span class="o">]</span> <span class="k">=</span> <span class="nc">Array</span><span class="o">(</span><span class="nc">NonEmpty</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span> <span class="nc">Empty</span><span class="o">(),</span> <span class="nc">Empty</span><span class="o">()))</span>
+<span class="k">val</span> <span class="n">b</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">IntSet</span><span class="o">]</span> <span class="k">=</span> <span class="n">a</span>
+<span class="n">b</span><span class="o">(</span><span class="mi">0</span><span class="o">)</span> <span class="k">=</span> <span class="nc">Empty</span><span class="o">()</span>
+<span class="k">val</span> <span class="n">s</span><span class="k">:</span> <span class="kt">NonEmpty</span> <span class="o">=</span> <span class="n">a</span><span class="o">(</span><span class="mi">0</span><span class="o">)</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Line 2! Because Arrays are not covariant and so an Array of nonempty cannot be assigned to an array of intset.</p></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="variance">
+<h2>4.6 Variance<a class="headerlink" href="#variance" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>Skipped</p></li>
+</ul>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        
+            
+
+
+
+<div class='prev-next-bottom'>
+    
+    <div id="prev">
+        <a class="left-prev" href="Week_3_Data_and_Abstraction.html" title="previous page">
+            <i class="prevnext-label fas fa-angle-left"></i>
+            <div class="prevnext-info">
+                <p class="prevnext-label">previous</p>
+                <p class="prevnext-title">3 Data and Abstraction</p>
+            </div>
+        </a>
+    </div>
+     <div id="next">
+        <a class="right-next" href="Week_5_Lists.html" title="next page">
+            <div class="prevnext-info">
+                <p class="prevnext-label">next</p>
+                <p class="prevnext-title">5 Lists</p>
+            </div>
+            <i class="prevnext-label fas fa-angle-right"></i>
+        </a>
+     </div>
+
+</div>
+        
+        </div>
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Manasij Venkatesh<br/>
+        
+            &copy; Copyright 2021.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="_static/js/index.1c5a1a01449ed65a7b51.js"></script>
+
+  
+  </body>
+</html>

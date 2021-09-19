@@ -1,0 +1,634 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>3 Data and Abstraction &#8212; Lectures notes for Functional Programming Principles in Scala by Martin Odersky</title>
+    
+  <link href="_static/css/theme.css" rel="stylesheet" />
+  <link href="_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
+
+    
+  <link rel="stylesheet"
+    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/sphinx-book-theme.e8f53015daec13862f6db5e763c41738.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="_static/js/index.1c5a1a01449ed65a7b51.js">
+
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/togglebutton.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="4 Types and Pattern Matching" href="Week_4_Types_and_Pattern_Matching.html" />
+    <link rel="prev" title="2 Higher Order Functions" href="Week_2_Higher_Order_Functions.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="index.html">
+      
+      
+      <h1 class="site-logo" id="site-title">Lectures notes for Functional Programming Principles in Scala by Martin Odersky</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="Week_1_Introduction.html">
+   1 Introduction
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Week_2_Higher_Order_Functions.html">
+   2 Higher Order Functions
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   3 Data and Abstraction
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Week_4_Types_and_Pattern_Matching.html">
+   4 Types and Pattern Matching
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Week_5_Lists.html">
+   5 Lists
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Week_6_Collections.html">
+   6 Collections
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="_sources/Week_3_Data_and_Abstraction.md"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.md</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/makto-toruk/coursera_scala_0"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/makto-toruk/coursera_scala_0/issues/new?title=Issue%20on%20page%20%2FWeek_3_Data_and_Abstraction.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        <a class="edit-button" href="https://github.com/makto-toruk/coursera_scala_0/edit/master/Week_3_Data_and_Abstraction.md"><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Edit this page"><i class="fas fa-pencil-alt"></i>suggest edit</button></a>
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#class-hierarchies">
+   3.1 Class Hierarchies
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#how-classes-are-organized">
+   3.2 How Classes are Organized
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#polymorphism">
+   3.3 Polymorphism
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#objects-everywhere">
+   3.4 Objects Everywhere
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#functions-as-objects">
+   3.5 Functions as Objects
+  </a>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="data-and-abstraction">
+<h1>3 Data and Abstraction<a class="headerlink" href="#data-and-abstraction" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="class-hierarchies">
+<h2>3.1 Class Hierarchies<a class="headerlink" href="#class-hierarchies" title="Permalink to this headline">¶</a></h2>
+<ul>
+<li><p>Abstract classes: can contain members which are missing an implementation.</p>
+<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="k">abstract</span> <span class="k">class</span> <span class="nc">IntSet</span><span class="k">:</span>
+    <span class="kt">def</span> <span class="kt">incl</span><span class="o">(</span><span class="kt">x:</span> <span class="kt">Int</span><span class="o">)</span><span class="kt">:</span> <span class="kt">IntSet</span>
+    <span class="k">def</span> <span class="n">contains</span><span class="o">(</span><span class="n">x</span><span class="k">:</span> <span class="kt">Int</span><span class="o">)</span><span class="k">:</span> <span class="kt">Boolean</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>No direct instances of an abstract class can be created. <code class="docutils literal notranslate"><span class="pre">IntSet()</span></code> call would be illegal.</p></li>
+</ul>
+</li>
+<li><p>Consider implementing sets as binary trees. Two types: a tree for the empty set and a tree consiting of an integer and two sub-trees.</p></li>
+<li><p>Example: {1, 2, 4, 5}</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>          <span class="mi">4</span>
+         <span class="o">/</span> \
+        <span class="o">/</span>   \
+       <span class="o">/</span>     \
+      <span class="o">/</span>       \
+     <span class="mi">1</span>         <span class="mi">5</span>
+    <span class="o">/</span> \       <span class="o">/</span> \
+   <span class="o">/</span>   \     <span class="o">/</span>   \
+  <span class="o">/</span>     \   <span class="n">e</span>     <span class="n">e</span>
+ <span class="n">e</span>       <span class="mi">2</span>  
+        <span class="o">/</span> \
+       <span class="n">e</span>   <span class="n">e</span>
+</pre></div>
+</div>
+</li>
+<li><p>Implementation:</p>
+<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Empty</span><span class="o">()</span> <span class="k">extends</span> <span class="nc">IntSet</span><span class="k">:</span>
+    <span class="kt">def</span> <span class="kt">contains</span><span class="o">(</span><span class="kt">x:</span> <span class="kt">Int</span><span class="o">)</span><span class="kt">:</span> <span class="kt">Boolean</span> <span class="o">=</span> <span class="kc">false</span>
+    <span class="k">def</span> <span class="n">incl</span><span class="o">(</span><span class="n">x</span><span class="k">:</span> <span class="kt">Int</span><span class="o">)</span><span class="k">:</span> <span class="kt">IntSet</span> <span class="o">=</span> <span class="nc">NonEmpty</span><span class="o">(</span><span class="n">x</span><span class="o">,</span> <span class="nc">Empty</span><span class="o">(),</span> <span class="nc">Empty</span><span class="o">())</span>
+
+  <span class="n">x</span>
+ <span class="o">/</span> <span class="o">\</span>
+<span class="n">e</span>   <span class="n">e</span>
+</pre></div>
+</div>
+<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">NonEmpty</span><span class="o">(</span><span class="n">elem</span><span class="k">:</span> <span class="kt">Int</span><span class="o">,</span> <span class="n">left</span><span class="k">:</span> <span class="kt">Intset</span><span class="o">,</span> <span class="n">right</span><span class="k">:</span> <span class="kt">IntSet</span><span class="o">)</span> <span class="k">extends</span> <span class="nc">IntSet</span><span class="k">:</span>
+    
+    <span class="kt">def</span> <span class="kt">contains</span><span class="o">(</span><span class="kt">x:</span> <span class="kt">Int</span><span class="o">)</span><span class="kt">:</span> <span class="kt">Boolean</span> <span class="o">=</span>
+        <span class="k">if</span> <span class="n">x</span> <span class="o">&lt;</span> <span class="n">elem</span> <span class="n">then</span> <span class="n">left</span><span class="o">.</span><span class="n">contains</span><span class="o">(</span><span class="n">x</span><span class="o">)</span>
+        <span class="k">else</span> <span class="k">if</span> <span class="n">x</span> <span class="o">&gt;</span> <span class="n">elem</span> <span class="n">then</span> <span class="n">right</span><span class="o">.</span><span class="n">contains</span><span class="o">(</span><span class="n">x</span><span class="o">)</span>
+        <span class="k">else</span> <span class="kc">true</span>
+    
+    <span class="k">def</span> <span class="n">incl</span><span class="o">(</span><span class="n">x</span><span class="k">:</span> <span class="kt">Int</span><span class="o">)</span><span class="k">:</span> <span class="kt">IntSet</span> <span class="o">=</span>
+        <span class="k">if</span> <span class="n">x</span> <span class="o">&lt;</span> <span class="n">elem</span> <span class="n">then</span> <span class="nc">NonEmpty</span><span class="o">(</span><span class="n">elem</span><span class="o">,</span> <span class="n">left</span><span class="o">.</span><span class="n">incl</span><span class="o">(</span><span class="n">x</span><span class="o">),</span> <span class="n">right</span><span class="o">)</span>
+        <span class="k">else</span> <span class="k">if</span> <span class="n">x</span> <span class="o">&gt;</span> <span class="n">elem</span> <span class="n">then</span> <span class="nc">NonEmpty</span><span class="o">(</span><span class="n">elem</span><span class="o">,</span> <span class="n">left</span><span class="o">,</span> <span class="n">right</span><span class="o">.</span><span class="n">incl</span><span class="o">(</span><span class="n">x</span><span class="o">))</span>
+        <span class="k">else</span> <span class="k">this</span>
+
+<span class="n">end</span> <span class="nc">NonEmpty</span>
+</pre></div>
+</div>
+</li>
+<li><p>Persistent data structures: we can create new data structures with elements of existing data structures. For example, in <code class="docutils literal notranslate"><span class="pre">incl</span></code> adding an <code class="docutils literal notranslate"><span class="pre">x</span></code> less than <code class="docutils literal notranslate"><span class="pre">elem</span></code> would result in a new <code class="docutils literal notranslate"><span class="pre">IntSet</span></code> where <code class="docutils literal notranslate"><span class="pre">right</span></code> would exist in both new and old sets.</p></li>
+<li><p>Empty and NonEmpty both extend the class IntSet. This implies that the types Empty and NonEmpty conform to the type IntSet.</p>
+<ul class="simple">
+<li><p>IntSet is called the <em>superclass</em> of Empty and NonEmpty. Empty and NonEmpty are <em>subclasses</em> of IntSet.</p></li>
+<li><p>In Scala, any user-defined class extends another class. If no superclass is given, the standard class Object in the Java package java.lang is assumed.</p></li>
+<li><p>The direct or indirect superclasses of a class C are called <em>base classes</em> of C. So, the base classes of NonEmpty include IntSet and Object.</p></li>
+</ul>
+</li>
+<li><p>Definitions of <code class="docutils literal notranslate"><span class="pre">contains</span></code> and <code class="docutils literal notranslate"><span class="pre">incl</span></code> in the classes <code class="docutils literal notranslate"><span class="pre">Empty</span></code> and <code class="docutils literal notranslate"><span class="pre">NonEmpty</span></code> <em>implement</em> the abstract functions in the base trait <code class="docutils literal notranslate"><span class="pre">IntSet</span></code>.</p></li>
+<li><p>One can <em>redefine</em> an existing, non-abstract definition in a subclass using <code class="docutils literal notranslate"><span class="pre">override</span></code>. Example:</p>
+<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="k">abstract</span> <span class="k">class</span> <span class="nc">Base</span><span class="k">:</span>
+    <span class="kt">def</span> <span class="kt">foo</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="k">def</span> <span class="n">bar</span><span class="k">:</span> <span class="kt">Int</span>
+
+<span class="k">class</span> <span class="nc">Sub</span> <span class="k">extends</span> <span class="nc">Base</span><span class="k">:</span>
+    <span class="kt">override</span> <span class="kt">def</span> <span class="kt">foo</span> <span class="o">=</span> <span class="mi">2</span>
+    <span class="k">def</span> <span class="n">bar</span> <span class="k">=</span> <span class="mi">3</span>
+</pre></div>
+</div>
+</li>
+<li><p>Object definitions: In <code class="docutils literal notranslate"><span class="pre">IntSet</span></code> example, there’s only a single empty <code class="docutils literal notranslate"><span class="pre">IntSet</span></code>; overkill to create many instances of it. Instead use an <em>object definition</em>.</p>
+<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="k">object</span> <span class="nc">Empty</span> <span class="k">extends</span> <span class="nc">IntSet</span><span class="k">:</span>
+    <span class="kt">def</span> <span class="kt">contains</span><span class="o">(</span><span class="kt">x:</span> <span class="kt">Int</span><span class="o">)</span><span class="kt">:</span> <span class="kt">Boolean</span> <span class="o">=</span> <span class="kc">false</span>
+    <span class="k">def</span> <span class="n">incl</span><span class="o">(</span><span class="n">x</span><span class="k">:</span> <span class="kt">Int</span><span class="o">)</span><span class="k">:</span> <span class="kt">IntSet</span> <span class="o">=</span> <span class="nc">NonEmpty</span><span class="o">(</span><span class="n">x</span><span class="o">,</span> <span class="nc">Empty</span><span class="o">,</span> <span class="nc">Empty</span><span class="o">)</span>
+<span class="n">end</span> <span class="nc">Empty</span>
+</pre></div>
+</div>
+<p>This defines a <strong>singleton object</strong> <code class="docutils literal notranslate"><span class="pre">Empty</span></code>. No other <code class="docutils literal notranslate"><span class="pre">Empty</span></code> instance can be created. Singleton objects are values.</p>
+</li>
+<li><p>An object and class can have the same name (since Scala has two global namespaces: one for types, another for values)</p>
+<ul class="simple">
+<li><p>Classes live in the type namespace, objects in value namespace.</p></li>
+</ul>
+</li>
+<li><p>Companions: class and object with the same name in the same sourcefile.</p></li>
+<li><p>Programs:</p>
+<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span>object Hello:
+    def main(args: Array[String]): Unit = println(”hello world!”)
+</pre></div>
+</div>
+<ul>
+<li><p>To run from the command line:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;</span> <span class="n">scala</span> <span class="n">Hello</span>
+</pre></div>
+</div>
+</li>
+<li><p>Main methods:</p>
+<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span>@main def birthday(name: String, age: Int) =
+    println(s”Happy birthday, $name! $age years old already!”)
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>&gt; scala birthday Peter 11
+Happy Birthday, Peter! 11 years old already!
+</pre></div>
+</div>
+</li>
+</ul>
+</li>
+<li><p>Exercise: implement a <code class="docutils literal notranslate"><span class="pre">union</span></code> method for <code class="docutils literal notranslate"><span class="pre">IntSet</span></code></p>
+<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Empty</span><span class="o">()</span> <span class="k">extends</span> <span class="nc">IntSet</span><span class="k">:</span>
+    <span class="kt">def</span> <span class="kt">contains</span><span class="o">(</span><span class="kt">x:</span> <span class="kt">Int</span><span class="o">)</span><span class="kt">:</span> <span class="kt">Boolean</span> <span class="o">=</span> <span class="kc">false</span>
+    <span class="k">def</span> <span class="n">incl</span><span class="o">(</span><span class="n">x</span><span class="k">:</span> <span class="kt">Int</span><span class="o">)</span><span class="k">:</span> <span class="kt">IntSet</span> <span class="o">=</span> <span class="nc">NonEmpty</span><span class="o">(</span><span class="n">x</span><span class="o">,</span> <span class="nc">Empty</span><span class="o">(),</span> <span class="nc">Empty</span><span class="o">())</span>
+    <span class="k">def</span> <span class="n">union</span><span class="o">(</span><span class="n">s</span><span class="k">:</span> <span class="kt">IntSet</span><span class="o">)</span><span class="k">:</span> <span class="kt">IntSet</span> <span class="o">=</span> <span class="n">s</span>
+
+<span class="k">class</span> <span class="nc">NonEmpty</span><span class="o">(</span><span class="n">elem</span><span class="k">:</span> <span class="kt">Int</span><span class="o">,</span> <span class="n">left</span><span class="k">:</span> <span class="kt">Intset</span><span class="o">,</span> <span class="n">right</span><span class="k">:</span> <span class="kt">IntSet</span><span class="o">)</span> <span class="k">extends</span> <span class="nc">IntSet</span><span class="k">:</span>
+    
+    <span class="kt">def</span> <span class="kt">contains</span><span class="o">(</span><span class="kt">x:</span> <span class="kt">Int</span><span class="o">)</span><span class="kt">:</span> <span class="kt">Boolean</span> <span class="o">=</span>
+        <span class="k">if</span> <span class="n">x</span> <span class="o">&lt;</span> <span class="n">elem</span> <span class="n">then</span> <span class="n">left</span><span class="o">.</span><span class="n">contains</span><span class="o">(</span><span class="n">x</span><span class="o">)</span>
+        <span class="k">else</span> <span class="k">if</span> <span class="n">x</span> <span class="o">&gt;</span> <span class="n">elem</span> <span class="n">then</span> <span class="n">right</span><span class="o">.</span><span class="n">contains</span><span class="o">(</span><span class="n">x</span><span class="o">)</span>
+        <span class="k">else</span> <span class="kc">true</span>
+    
+    <span class="k">def</span> <span class="n">incl</span><span class="o">(</span><span class="n">x</span><span class="k">:</span> <span class="kt">Int</span><span class="o">)</span><span class="k">:</span> <span class="kt">IntSet</span> <span class="o">=</span>
+        <span class="k">if</span> <span class="n">x</span> <span class="o">&lt;</span> <span class="n">elem</span> <span class="n">then</span> <span class="nc">NonEmpty</span><span class="o">(</span><span class="n">elem</span><span class="o">,</span> <span class="n">left</span><span class="o">.</span><span class="n">incl</span><span class="o">(</span><span class="n">x</span><span class="o">),</span> <span class="n">right</span><span class="o">)</span>
+        <span class="k">else</span> <span class="k">if</span> <span class="n">x</span> <span class="o">&gt;</span> <span class="n">elem</span> <span class="n">then</span> <span class="nc">NonEmpty</span><span class="o">(</span><span class="n">elem</span><span class="o">,</span> <span class="n">left</span><span class="o">,</span> <span class="n">right</span><span class="o">.</span><span class="n">incl</span><span class="o">(</span><span class="n">x</span><span class="o">))</span>
+        <span class="k">else</span> <span class="k">this</span>
+
+    <span class="k">def</span> <span class="n">union</span><span class="o">(</span><span class="n">s</span><span class="k">:</span> <span class="kt">IntSet</span><span class="o">)</span><span class="k">:</span> <span class="kt">IntSet</span> <span class="o">=</span> 
+        <span class="n">left</span><span class="o">.</span><span class="n">union</span><span class="o">(</span><span class="n">right</span><span class="o">).</span><span class="n">union</span><span class="o">(</span><span class="n">s</span><span class="o">).</span><span class="n">incl</span><span class="o">(</span><span class="n">elem</span><span class="o">)</span>
+
+<span class="n">end</span> <span class="nc">NonEmpty</span>
+</pre></div>
+</div>
+<p>The union definition decomposes left and right to smaller and smaller Intsets on which we can use <code class="docutils literal notranslate"><span class="pre">incl</span></code>.</p>
+</li>
+</ul>
+</div>
+<div class="section" id="how-classes-are-organized">
+<h2>3.2 How Classes are Organized<a class="headerlink" href="#how-classes-are-organized" title="Permalink to this headline">¶</a></h2>
+<ul>
+<li><p>Packages:</p>
+<ul>
+<li><p>Classes and objects are organized in packages.</p></li>
+<li><p>To place them inside a package, use a clause at the top of your source file</p>
+<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="k">package</span> <span class="nn">progfun.examples</span>
+
+<span class="k">object</span> <span class="nc">Hello</span>
+    <span class="o">...</span>
+</pre></div>
+</div>
+</li>
+<li><p>To refer to it: <code class="docutils literal notranslate"><span class="pre">progfun.examples.Hello</span></code></p></li>
+</ul>
+</li>
+<li><p>Imports</p>
+<ul>
+<li><p>Suppose a class <code class="docutils literal notranslate"><span class="pre">Rational</span></code> exists in package <code class="docutils literal notranslate"><span class="pre">week3</span></code></p>
+<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="k">val</span> <span class="n">r</span> <span class="k">=</span> <span class="n">week3</span><span class="o">.</span><span class="nc">Rational</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span> <span class="mi">2</span><span class="o">)</span>
+
+<span class="c1">// or</span>
+
+<span class="k">import</span> <span class="nn">week3.Rational</span>
+<span class="k">val</span> <span class="n">r</span> <span class="k">=</span> <span class="nc">Rational</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span> <span class="mi">2</span><span class="o">)</span>
+</pre></div>
+</div>
+</li>
+<li><p>Example imports</p>
+<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="k">import</span> <span class="nn">week3.Rational</span> <span class="c1">// imports just Rational</span>
+<span class="k">import</span> <span class="nn">week3.</span><span class="o">{</span><span class="nc">Rational</span><span class="o">,</span> <span class="nc">Hello</span><span class="o">}</span> <span class="c1">// imports both Rational and Hello</span>
+<span class="k">import</span> <span class="nn">week3._</span> <span class="c1">// imports everything in package week3</span>
+</pre></div>
+</div>
+</li>
+<li><p>Automatic imports:</p>
+<ul class="simple">
+<li><p>All members of package scala</p></li>
+<li><p>All members of package java.lang</p></li>
+<li><p>All members of the singleton object scala.Predef</p></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>Traits</p>
+<ul>
+<li><p>Similar to classes. A class can only have one superclass.</p></li>
+<li><p>Declared like an abstract class</p>
+<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="k">trait</span> <span class="nc">Planar</span><span class="k">:</span>
+    <span class="kt">def</span> <span class="kt">height:</span> <span class="kt">Int</span>
+    <span class="k">def</span> <span class="n">wigth</span><span class="k">:</span> <span class="kt">Int</span>
+    <span class="k">def</span> <span class="n">surface</span> <span class="k">=</span> <span class="n">height</span> <span class="o">*</span> <span class="n">width</span>
+</pre></div>
+</div>
+</li>
+<li><p>Classes, objects and traits can inherit from at most one class but arbitrary many traits.</p>
+<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Square</span> <span class="k">extends</span> <span class="nc">Shape</span><span class="o">,</span> <span class="nc">Planar</span><span class="o">,</span> <span class="nc">Movable</span> <span class="o">...</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</li>
+<li><p>Exceptions</p>
+<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="k">throw</span> <span class="nc">Exc</span>
+</pre></div>
+</div>
+<p>aborts evaluation with the exception Exc. The type of this expression is <code class="docutils literal notranslate"><span class="pre">Nothing</span></code></p>
+</li>
+</ul>
+</div>
+<div class="section" id="polymorphism">
+<h2>3.3 Polymorphism<a class="headerlink" href="#polymorphism" title="Permalink to this headline">¶</a></h2>
+<ul>
+<li><p>Linked Lists: constructed from two building blocks</p>
+<ul class="simple">
+<li><p>Nil: the empty list</p></li>
+<li><p>Cons: a cell containing an element and the remainder of the list</p></li>
+</ul>
+</li>
+<li><p>Outline of a class hierarchy for IntList</p>
+<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="k">package</span> <span class="nn">week3</span>
+
+<span class="k">trait</span> <span class="nc">IntList</span> <span class="o">...</span>
+<span class="k">class</span> <span class="nc">Cons</span><span class="o">(</span><span class="k">val</span> <span class="n">head</span><span class="k">:</span> <span class="kt">Int</span><span class="o">,</span> <span class="k">val</span> <span class="n">tail</span><span class="k">:</span> <span class="kt">IntList</span><span class="o">)</span> <span class="k">extends</span> <span class="nc">IntList</span> <span class="o">...</span>
+<span class="k">class</span> <span class="nc">Nil</span><span class="o">()</span> <span class="k">extends</span> <span class="nc">IntList</span> <span class="o">...</span>
+</pre></div>
+</div>
+<ul>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">Cons</span></code> class above is equivalent to</p>
+<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Cons</span><span class="o">(</span><span class="nc">_head</span><span class="k">:</span> <span class="kt">Int</span><span class="o">,</span> <span class="nc">_tail</span><span class="k">:</span> <span class="kt">IntList</span><span class="o">)</span> <span class="k">extends</span> <span class="nc">IntList</span><span class="k">:</span>
+    <span class="kt">val</span> <span class="kt">head</span> <span class="o">=</span> <span class="nc">_head</span>
+    <span class="k">val</span> <span class="n">tail</span> <span class="k">=</span> <span class="nc">_tail</span>
+</pre></div>
+</div>
+<p>where <code class="docutils literal notranslate"><span class="pre">_head</span></code> and <code class="docutils literal notranslate"><span class="pre">_tail</span></code> are otherwise unused names.</p>
+</li>
+</ul>
+</li>
+<li><p>We can generalize this to any type using a type parameter.</p>
+<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="k">package</span> <span class="nn">week3</span>
+
+<span class="k">trait</span> <span class="nc">List</span><span class="o">[</span><span class="kt">T</span><span class="o">]</span>
+<span class="k">class</span> <span class="nc">Cons</span><span class="o">[</span><span class="kt">T</span><span class="o">](</span><span class="k">val</span> <span class="n">head</span><span class="k">:</span> <span class="kt">T</span><span class="o">,</span> <span class="k">val</span> <span class="n">tail</span><span class="k">:</span> <span class="kt">List</span><span class="o">[</span><span class="kt">T</span><span class="o">])</span> <span class="k">extends</span> <span class="nc">List</span><span class="o">[</span><span class="kt">T</span><span class="o">]</span>
+<span class="k">class</span> <span class="nc">Nil</span><span class="o">[</span><span class="kt">T</span><span class="o">]</span> <span class="k">extends</span> <span class="nc">List</span><span class="o">[</span><span class="kt">T</span><span class="o">]</span>
+</pre></div>
+</div>
+<p>Type parameters are written in square brackets.</p>
+</li>
+<li><p>Complete Definition of List</p>
+<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="k">trait</span> <span class="nc">List</span><span class="o">[</span><span class="kt">T</span><span class="o">]</span><span class="k">:</span>
+    <span class="kt">def</span> <span class="kt">isEmpty:</span> <span class="kt">Boolean</span>
+    <span class="k">def</span> <span class="n">head</span><span class="k">:</span> <span class="kt">T</span>
+    <span class="k">def</span> <span class="n">tail</span><span class="k">:</span> <span class="kt">List</span><span class="o">[</span><span class="kt">T</span><span class="o">]</span>
+
+<span class="k">class</span> <span class="nc">Cons</span><span class="o">[</span><span class="kt">T</span><span class="o">](</span><span class="k">val</span> <span class="n">head</span><span class="k">:</span> <span class="kt">T</span><span class="o">,</span> <span class="k">val</span> <span class="n">tail</span><span class="k">:</span> <span class="kt">List</span><span class="o">[</span><span class="kt">T</span><span class="o">])</span> <span class="k">extends</span> <span class="nc">List</span><span class="o">[</span><span class="kt">T</span><span class="o">]</span><span class="k">:</span>
+    <span class="kt">def</span> <span class="kt">isEmpty</span> <span class="o">=</span> <span class="kc">false</span>
+
+<span class="k">class</span> <span class="nc">Nil</span><span class="o">[</span><span class="kt">T</span><span class="o">]</span> <span class="k">extends</span> <span class="nc">List</span><span class="o">[</span><span class="kt">T</span><span class="o">]</span><span class="k">:</span>
+    <span class="kt">def</span> <span class="kt">isEmpty</span> <span class="o">=</span> <span class="kc">true</span>
+    <span class="k">def</span> <span class="n">head</span> <span class="k">=</span> <span class="k">throw</span> <span class="k">new</span> <span class="nc">NoSuchElementException</span><span class="o">(</span><span class="s">&quot;Nil.head&quot;</span><span class="o">)</span>
+    <span class="k">def</span> <span class="n">tail</span> <span class="k">=</span> <span class="k">throw</span> <span class="k">new</span> <span class="nc">NoSuchElementException</span><span class="o">(</span><span class="s">&quot;Nil.tail&quot;</span><span class="o">)</span>
+</pre></div>
+</div>
+</li>
+<li><p>Functions can also have type parameters</p>
+<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="n">singleton</span><span class="o">[</span><span class="kt">T</span><span class="o">](</span><span class="n">elem</span><span class="k">:</span> <span class="kt">T</span><span class="o">)</span> <span class="k">=</span> <span class="nc">Cons</span><span class="o">[</span><span class="kt">T</span><span class="o">](</span><span class="n">elem</span><span class="o">,</span> <span class="nc">Nil</span><span class="o">[</span><span class="kt">T</span><span class="o">])</span>
+
+<span class="n">singleton</span><span class="o">[</span><span class="kt">Int</span><span class="o">](</span><span class="mi">1</span><span class="o">)</span>
+<span class="n">singleton</span><span class="o">[</span><span class="kt">Boolean</span><span class="o">](</span><span class="kc">true</span><span class="o">)</span>
+
+<span class="n">singleton</span><span class="o">(</span><span class="mi">1</span><span class="o">)</span>
+<span class="n">singleton</span><span class="o">(</span><span class="kc">true</span><span class="o">)</span> <span class="c1">// also work, compiler figures out the type</span>
+</pre></div>
+</div>
+</li>
+<li><p>Polymorphism: a function type that comes “in many forms”.</p>
+<ul class="simple">
+<li><p>function can be applied to arguments of many types, or</p></li>
+<li><p>type can have instances of many types</p></li>
+</ul>
+</li>
+<li><p>We have seen two forms of polymorpshism:</p>
+<ul class="simple">
+<li><p>subtyping: instances of a subclass can be passed to a base class (?)</p></li>
+<li><p>generics: instances of a function or class are created by type parametrization</p></li>
+</ul>
+</li>
+<li><p>Exercise: nth element of a list.</p></li>
+</ul>
+<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="n">nth</span><span class="o">[</span><span class="kt">T</span><span class="o">](</span><span class="n">xs</span><span class="k">:</span> <span class="kt">List</span><span class="o">[</span><span class="kt">T</span><span class="o">],</span> <span class="n">n</span><span class="k">:</span> <span class="kt">Int</span><span class="o">)</span><span class="k">:</span> <span class="kt">T</span> <span class="o">=</span> 
+    <span class="k">if</span> <span class="n">xs</span><span class="o">.</span><span class="n">isEmpty</span> <span class="n">then</span> <span class="k">throw</span> <span class="nc">IndexOutOfBoundsException</span><span class="o">()</span>
+    <span class="k">else</span> <span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">0</span> <span class="n">then</span> <span class="n">xs</span><span class="o">.</span><span class="n">head</span>
+    <span class="k">else</span> <span class="n">nth</span><span class="o">(</span><span class="n">xs</span><span class="o">.</span><span class="n">tail</span><span class="o">,</span> <span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="o">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="objects-everywhere">
+<h2>3.4 Objects Everywhere<a class="headerlink" href="#objects-everywhere" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>Pure object-oriented language: every value is an object.</p></li>
+</ul>
+<p>I didn’t take a lot of notes here. It was mostly references to Scala docs and implementation of Scala types from first principles.</p>
+</div>
+<div class="section" id="functions-as-objects">
+<h2>3.5 Functions as Objects<a class="headerlink" href="#functions-as-objects" title="Permalink to this headline">¶</a></h2>
+<ul>
+<li><p>Function values are treated as objects in Scala.</p></li>
+<li><p>The function type <code class="docutils literal notranslate"><span class="pre">A</span> <span class="pre">=&gt;</span> <span class="pre">B</span></code> is an abbreviation for the class <code class="docutils literal notranslate"><span class="pre">scala.Function1[A,</span> <span class="pre">B]</span></code> defined as</p>
+<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="k">package</span> <span class="nn">scala</span>
+<span class="k">trait</span> <span class="nc">Function1</span><span class="o">[</span><span class="kt">A</span><span class="p">,</span> <span class="kt">B</span><span class="o">]</span><span class="k">:</span>
+    <span class="kt">def</span> <span class="kt">apply</span><span class="o">(</span><span class="kt">x:</span> <span class="kt">A</span><span class="o">)</span><span class="kt">:</span> <span class="kt">B</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        
+            
+
+
+
+<div class='prev-next-bottom'>
+    
+    <div id="prev">
+        <a class="left-prev" href="Week_2_Higher_Order_Functions.html" title="previous page">
+            <i class="prevnext-label fas fa-angle-left"></i>
+            <div class="prevnext-info">
+                <p class="prevnext-label">previous</p>
+                <p class="prevnext-title">2 Higher Order Functions</p>
+            </div>
+        </a>
+    </div>
+     <div id="next">
+        <a class="right-next" href="Week_4_Types_and_Pattern_Matching.html" title="next page">
+            <div class="prevnext-info">
+                <p class="prevnext-label">next</p>
+                <p class="prevnext-title">4 Types and Pattern Matching</p>
+            </div>
+            <i class="prevnext-label fas fa-angle-right"></i>
+        </a>
+     </div>
+
+</div>
+        
+        </div>
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Manasij Venkatesh<br/>
+        
+            &copy; Copyright 2021.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="_static/js/index.1c5a1a01449ed65a7b51.js"></script>
+
+  
+  </body>
+</html>

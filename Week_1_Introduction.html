@@ -1,0 +1,686 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>1 Introduction &#8212; Lectures notes for Functional Programming Principles in Scala by Martin Odersky</title>
+    
+  <link href="_static/css/theme.css" rel="stylesheet" />
+  <link href="_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
+
+    
+  <link rel="stylesheet"
+    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/sphinx-book-theme.e8f53015daec13862f6db5e763c41738.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="_static/js/index.1c5a1a01449ed65a7b51.js">
+
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/togglebutton.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="2 Higher Order Functions" href="Week_2_Higher_Order_Functions.html" />
+    <link rel="prev" title="Lectures notes for Functional Programming Principles in Scala by Martin Odersky" href="README.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="index.html">
+      
+      
+      <h1 class="site-logo" id="site-title">Lectures notes for Functional Programming Principles in Scala by Martin Odersky</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="current nav bd-sidenav">
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   1 Introduction
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Week_2_Higher_Order_Functions.html">
+   2 Higher Order Functions
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Week_3_Data_and_Abstraction.html">
+   3 Data and Abstraction
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Week_4_Types_and_Pattern_Matching.html">
+   4 Types and Pattern Matching
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Week_5_Lists.html">
+   5 Lists
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Week_6_Collections.html">
+   6 Collections
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="_sources/Week_1_Introduction.md"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.md</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/makto-toruk/coursera_scala_0"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/makto-toruk/coursera_scala_0/issues/new?title=Issue%20on%20page%20%2FWeek_1_Introduction.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        <a class="edit-button" href="https://github.com/makto-toruk/coursera_scala_0/edit/master/Week_1_Introduction.md"><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Edit this page"><i class="fas fa-pencil-alt"></i>suggest edit</button></a>
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#elements-of-programming">
+   1.2 Elements of Programming
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#evaluation-strategies-and-termination">
+   1.3 Evaluation Strategies and Termination
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#conditionals-and-value-definitions">
+   1.4 Conditionals and Value Definitions
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#exammple-square-roots-with-newton-s-method">
+   1.5 Exammple: Square roots with Newton’s method
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#blocks-and-lexical-scope">
+   1.6 Blocks and Lexical Scope
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#tail-recursion">
+   1.7 Tail recursion
+  </a>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="introduction">
+<h1>1 Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="elements-of-programming">
+<h2>1.2 Elements of Programming<a class="headerlink" href="#elements-of-programming" title="Permalink to this headline">¶</a></h2>
+<ul>
+<li><p>What’s a REPL?</p>
+<ul class="simple">
+<li><p>Read-Eval-Print-Loop is an interactive shell where one can write expressions and the REPL responds with their value.</p></li>
+<li><p>In SBT, type <code class="docutils literal notranslate"><span class="pre">console</span></code> to start a Scala REPL in any direction with a <code class="docutils literal notranslate"><span class="pre">build.sbt</span></code> file.</p></li>
+</ul>
+</li>
+<li><p>How are non-primitive expressions evaluated?</p>
+<ol class="simple">
+<li><p>Take the leftmost operator</p></li>
+<li><p>Evaluate its operands (left before right)</p></li>
+<li><p>Apply the operator to the operands.</p></li>
+</ol>
+<p>Example:</p>
+<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="n">pi</span> <span class="k">=</span> <span class="mf">3.14159</span>
+<span class="k">def</span> <span class="n">radius</span> <span class="k">=</span> <span class="mi">10</span>
+<span class="o">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">pi</span> <span class="o">*</span> <span class="n">radius</span><span class="o">)</span>
+</pre></div>
+</div>
+<p>is evaluated as:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="mf">3.14159</span><span class="p">)</span> <span class="o">*</span> <span class="n">radius</span>
+<span class="mf">6.28318</span> <span class="o">*</span> <span class="n">radius</span>
+<span class="mf">6.28318</span> <span class="o">*</span> <span class="mi">10</span>
+<span class="mf">62.8318</span>
+</pre></div>
+</div>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">def</span></code></p>
+<ul>
+<li><p>Definitions can have parameters</p>
+<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="n">square</span><span class="o">(</span><span class="n">x</span><span class="k">:</span> <span class="kt">Double</span><span class="o">)</span> <span class="k">=</span> <span class="n">x</span> <span class="o">*</span> <span class="n">x</span>
+<span class="n">square</span><span class="o">(</span><span class="mi">2</span><span class="o">)</span>
+<span class="n">square</span><span class="o">(</span><span class="n">square</span><span class="o">(</span><span class="mi">4</span><span class="o">))</span>
+
+<span class="k">def</span> <span class="n">sumOfSquares</span><span class="o">(</span><span class="n">x</span><span class="k">:</span> <span class="kt">Double</span><span class="o">,</span> <span class="n">y</span><span class="k">:</span> <span class="kt">Double</span><span class="o">)</span> <span class="k">=</span> <span class="n">square</span><span class="o">(</span><span class="n">x</span><span class="o">)</span> <span class="o">+</span> <span class="n">square</span><span class="o">(</span><span class="n">y</span><span class="o">)</span>
+</pre></div>
+</div>
+</li>
+<li><p>Function types are specified following a colon</p></li>
+<li><p>If a return type is given, it follows the parameter list.</p></li>
+</ul>
+</li>
+<li><p>Primitive types are as in Java:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">Int</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Long</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Float</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Double</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Char</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Short</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Byte</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Boolean</span></code></p></li>
+</ul>
+</li>
+<li><p>Application of parameetrized functions:</p>
+<ol class="simple">
+<li><p>Evaluate all function arguments, from left to right.</p></li>
+<li><p>Replace the function application by the function’s right-hand side, and, at the same time</p></li>
+<li><p>Replace the formal parameters of the function by the actual arguments.</p></li>
+</ol>
+<p>Example:</p>
+<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="n">sumOfSquares</span><span class="o">(</span><span class="mi">3</span><span class="o">,</span> <span class="mi">2</span><span class="o">+</span><span class="mi">2</span><span class="o">)</span>
+<span class="n">sumOfSquares</span><span class="o">(</span><span class="mi">3</span><span class="o">,</span> <span class="mi">4</span><span class="o">)</span>
+<span class="n">square</span><span class="o">(</span><span class="mi">3</span><span class="o">)</span> <span class="o">+</span> <span class="n">square</span><span class="o">(</span><span class="mi">4</span><span class="o">)</span>
+<span class="mi">3</span> <span class="o">*</span> <span class="mi">3</span> <span class="o">+</span> <span class="n">square</span><span class="o">(</span><span class="mi">4</span><span class="o">)</span>
+<span class="mi">9</span> <span class="o">+</span> <span class="n">square</span><span class="o">(</span><span class="mi">4</span><span class="o">)</span>
+<span class="mi">9</span> <span class="o">+</span> <span class="mi">4</span> <span class="o">*</span> <span class="mi">4</span>
+<span class="mi">9</span> <span class="o">+</span> <span class="mi">16</span>
+<span class="mi">25</span>
+</pre></div>
+</div>
+</li>
+<li><p>The substitution model</p>
+<ul>
+<li><p>The scheme of expression evaluation.</p></li>
+<li><p>The idea: all evaluation does is reduce an expression to a value.</p></li>
+<li><p>Does every expression reduce to a value (in a finite number of steps?)</p>
+<ul>
+<li><p>No. Counter example</p>
+<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="n">loop</span><span class="k">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="n">loop</span>
+<span class="n">loop</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>An alternative evaluation strtegy.</p>
+<ul class="simple">
+<li><p>One could instead apply the function to unreduced arguments.</p></li>
+</ul>
+<p>Example:</p>
+<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="n">sumOfSquares</span><span class="o">(</span><span class="mi">3</span><span class="o">,</span> <span class="mi">2</span><span class="o">+</span><span class="mi">2</span><span class="o">)</span>
+<span class="n">square</span><span class="o">(</span><span class="mi">3</span><span class="o">)</span> <span class="o">+</span> <span class="n">square</span><span class="o">(</span><span class="mi">2</span><span class="o">+</span><span class="mi">2</span><span class="o">)</span>
+<span class="mi">3</span> <span class="o">*</span> <span class="mi">3</span> <span class="o">+</span> <span class="n">square</span><span class="o">(</span><span class="mi">2</span><span class="o">+</span><span class="mi">2</span><span class="o">)</span>
+<span class="mi">9</span> <span class="o">+</span> <span class="n">square</span><span class="o">(</span><span class="mi">2</span><span class="o">+</span><span class="mi">2</span><span class="o">)</span>
+<span class="mi">9</span> <span class="o">+</span> <span class="o">(</span><span class="mi">2</span><span class="o">+</span><span class="mi">2</span><span class="o">)</span> <span class="o">*</span> <span class="o">(</span><span class="mi">2</span><span class="o">+</span><span class="mi">2</span><span class="o">)</span>
+<span class="mi">9</span> <span class="o">+</span> <span class="mi">4</span> <span class="o">*</span> <span class="o">(</span><span class="mi">2</span><span class="o">+</span><span class="mi">2</span><span class="o">)</span>
+<span class="mi">9</span> <span class="o">+</span> <span class="mi">4</span> <span class="o">*</span> <span class="mi">4</span>
+<span class="mi">25</span>
+</pre></div>
+</div>
+</li>
+<li><p>The first evaluation strategy is known as <em>call-by-value</em>, the second is known as <em>call-by-name</em>.</p>
+<ul class="simple">
+<li><p>Both strategies reduce to the same final values when</p>
+<ul>
+<li><p>the reduced expression consists of pure functions, and</p></li>
+<li><p>both evaluations terminate.</p></li>
+</ul>
+</li>
+<li><p>Call-by-value’s advantage: evaluates every function argument only once.</p></li>
+<li><p>Call-by-name’s advantage: function argument is not evaluated if the corresponding parameter is unused in the evaluation of the function body.</p></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="evaluation-strategies-and-termination">
+<h2>1.3 Evaluation Strategies and Termination<a class="headerlink" href="#evaluation-strategies-and-termination" title="Permalink to this headline">¶</a></h2>
+<ul>
+<li><p>Do call-by-name and call-by-value strategies terminate in the same expression if termination is not guaranteed?</p>
+<ul>
+<li><p>if CNV evaluation terminates, so does CBN.</p></li>
+<li><p>the other direction is not true.</p>
+<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="n">first</span><span class="o">(</span><span class="n">x</span><span class="k">:</span> <span class="kt">Int</span><span class="o">,</span> <span class="n">y</span><span class="k">:</span> <span class="kt">Int</span><span class="o">)</span> <span class="k">=</span> <span class="n">x</span>
+<span class="n">first</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span> <span class="n">loop</span><span class="o">)</span> <span class="c1">// does not terminate</span>
+</pre></div>
+</div>
+<p>evaluates under CBN but not under CBV.</p>
+</li>
+<li><p>Scala normally uses CBV, unless type of a function parameter starts with <code class="docutils literal notranslate"><span class="pre">=&gt;</span></code></p>
+<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="n">constOne</span><span class="o">(</span><span class="n">x</span><span class="k">:</span> <span class="kt">Int</span><span class="o">,</span> <span class="n">y</span><span class="k">:</span> <span class="o">=&gt;</span> <span class="nc">Int</span><span class="o">)</span> <span class="k">=</span> <span class="mi">1</span>
+<span class="n">constOne</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span> <span class="n">loop</span><span class="o">)</span> <span class="c1">// terminates</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="conditionals-and-value-definitions">
+<h2>1.4 Conditionals and Value Definitions<a class="headerlink" href="#conditionals-and-value-definitions" title="Permalink to this headline">¶</a></h2>
+<ul>
+<li><p>Conditionals</p>
+<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="n">abs</span><span class="o">(</span><span class="n">x</span><span class="k">:</span> <span class="kt">Int</span><span class="o">)</span> <span class="k">=</span> <span class="k">if</span> <span class="n">x</span> <span class="o">&gt;=</span> <span class="mi">0</span> <span class="n">then</span> <span class="n">x</span> <span class="k">else</span> <span class="o">-</span><span class="n">x</span>
+</pre></div>
+</div>
+</li>
+<li><p>Boolean expressions</p>
+<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="kc">true</span> <span class="kc">false</span> <span class="c1">// constants</span>
+<span class="o">!</span><span class="n">b</span> <span class="c1">// negation</span>
+<span class="n">b</span> <span class="o">&amp;&amp;</span> <span class="n">b</span> <span class="c1">// conjunction</span>
+<span class="n">b</span> <span class="o">||</span> <span class="n">b</span> <span class="c1">// disjunction</span>
+</pre></div>
+</div>
+</li>
+<li><p>Comparisons: <code class="docutils literal notranslate"><span class="pre">e</span> <span class="pre">&lt;=</span> <span class="pre">e,</span> <span class="pre">e</span> <span class="pre">&gt;=</span> <span class="pre">e,</span> <span class="pre">e</span> <span class="pre">&lt;</span> <span class="pre">e,</span> <span class="pre">e</span> <span class="pre">&gt;</span> <span class="pre">e,</span> <span class="pre">e</span> <span class="pre">==</span> <span class="pre">e,</span> <span class="pre">e</span> <span class="pre">!=</span> <span class="pre">e</span></code></p></li>
+<li><p>Short-circuit evaluation:</p>
+<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="kc">true</span> <span class="o">||</span> <span class="n">e</span> <span class="o">--&gt;</span> <span class="kc">true</span>
+<span class="kc">false</span> <span class="o">&amp;&amp;</span> <span class="n">e</span> <span class="o">--&gt;</span> <span class="kc">false</span>
+</pre></div>
+</div>
+<p>The above don’t need their right operand to be evaluated. These expressions use “short-circuit evaluation”.</p>
+</li>
+<li><p>Value definitions</p>
+<ul>
+<li><p>the <code class="docutils literal notranslate"><span class="pre">def</span></code> form is “by-name”, its right hand side is evaluated on each use.</p></li>
+<li><p>the <code class="docutils literal notranslate"><span class="pre">val</span></code>form is “by-value”. Example:</p>
+<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="k">val</span> <span class="n">x</span> <span class="k">=</span> <span class="mi">2</span>
+<span class="k">val</span> <span class="n">y</span> <span class="k">=</span> <span class="n">square</span><span class="o">(</span><span class="n">x</span><span class="o">)</span>
+</pre></div>
+</div>
+<p>The RHS of a <code class="docutils literal notranslate"><span class="pre">val</span></code> definition is evaluated at the point of the definition.</p>
+</li>
+<li><p>Difference:</p>
+<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="n">x</span> <span class="k">=</span> <span class="n">loop</span> <span class="c1">// is OK</span>
+<span class="k">val</span> <span class="n">x</span> <span class="k">=</span> <span class="n">loop</span> <span class="c1">// not ok, infinite loop</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</li>
+<li><p>Exercise: implement <code class="docutils literal notranslate"><span class="pre">and(x,</span> <span class="pre">y)</span></code> and <code class="docutils literal notranslate"><span class="pre">or(x,</span> <span class="pre">y)</span></code></p>
+<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="n">and</span><span class="o">(</span><span class="n">x</span><span class="k">:</span> <span class="kt">Boolean</span><span class="o">,</span> <span class="n">y</span><span class="k">:</span> <span class="o">=&gt;</span> <span class="nc">Boolean</span><span class="o">)</span><span class="k">:</span> <span class="kt">Boolean</span> <span class="o">=</span> 
+    <span class="k">if</span> <span class="n">x</span> <span class="n">then</span> <span class="n">y</span> <span class="k">else</span> <span class="kc">false</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">y</span></code> needs to CBN for short-circuit evaluation.</p>
+</li>
+</ul>
+</div>
+<div class="section" id="exammple-square-roots-with-newton-s-method">
+<h2>1.5 Exammple: Square roots with Newton’s method<a class="headerlink" href="#exammple-square-roots-with-newton-s-method" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="n">sqrt</span><span class="o">(</span><span class="n">x</span><span class="k">:</span> <span class="kt">Double</span><span class="o">)</span><span class="k">:</span> <span class="kt">Double</span> <span class="o">=</span> <span class="o">...</span>
+
+<span class="cm">/*</span>
+<span class="cm">newton&#39;s method</span>
+<span class="cm">1. start with initial estimate `y` (pick `y` = 1)</span>
+<span class="cm">2. improve the estiamte by taking the mean of `y` and `x/y`</span>
+<span class="cm">*/</span>
+
+<span class="k">def</span> <span class="n">sqrtIter</span><span class="o">(</span><span class="n">guess</span><span class="k">:</span> <span class="kt">Double</span><span class="o">,</span> <span class="n">x</span><span class="k">:</span> <span class="kt">Double</span><span class="o">)</span><span class="k">:</span> <span class="kt">Double</span> <span class="o">=</span> 
+    <span class="k">if</span> <span class="n">isGoodEnough</span><span class="o">(</span><span class="n">guess</span><span class="o">,</span> <span class="n">x</span><span class="o">)</span> <span class="n">then</span> <span class="n">guess</span>
+    <span class="k">else</span> <span class="n">sqrtIter</span><span class="o">(</span><span class="n">improve</span><span class="o">(</span><span class="n">guess</span><span class="o">,</span> <span class="n">x</span><span class="o">),</span> <span class="n">x</span><span class="o">)</span>
+
+<span class="k">def</span> <span class="n">isGoodEnough</span><span class="o">(</span><span class="n">guess</span><span class="k">:</span> <span class="kt">Double</span><span class="o">,</span> <span class="n">x</span><span class="k">:</span> <span class="kt">Double</span><span class="o">)</span> <span class="k">=</span> 
+    <span class="n">abs</span><span class="o">(</span><span class="n">guess</span> <span class="o">*</span> <span class="n">guess</span> <span class="o">-</span> <span class="n">x</span><span class="o">)</span> <span class="o">&lt;</span> <span class="mf">0.001</span>
+
+<span class="k">def</span> <span class="n">improve</span><span class="o">(</span><span class="n">guess</span><span class="k">:</span> <span class="kt">Double</span><span class="o">,</span> <span class="n">x</span><span class="k">:</span><span class="kt">Double</span><span class="o">)</span> <span class="k">=</span> 
+    <span class="o">(</span><span class="n">guess</span> <span class="o">+</span> <span class="n">x</span> <span class="o">/</span> <span class="n">guess</span><span class="o">)</span> <span class="o">/</span> <span class="mi">2</span>
+
+<span class="k">def</span> <span class="n">sqrt</span><span class="o">(</span><span class="n">x</span><span class="k">:</span> <span class="kt">Double</span><span class="o">)</span><span class="k">:</span> <span class="kt">Double</span> <span class="o">=</span> <span class="n">sqrtIter</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span> <span class="n">x</span><span class="o">)</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Return type is required for recursive functions. For non-recursive, return type is optional.</p></li>
+</ul>
+</div>
+<div class="section" id="blocks-and-lexical-scope">
+<h2>1.6 Blocks and Lexical Scope<a class="headerlink" href="#blocks-and-lexical-scope" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="n">sqrt</span><span class="o">(</span><span class="n">x</span><span class="k">:</span> <span class="kt">Double</span><span class="o">)</span> <span class="k">=</span> <span class="o">{</span>
+    <span class="k">def</span> <span class="n">sqrtIter</span><span class="o">(</span><span class="n">guess</span><span class="k">:</span> <span class="kt">Double</span><span class="o">,</span> <span class="n">x</span><span class="k">:</span> <span class="kt">Double</span><span class="o">)</span><span class="k">:</span> <span class="kt">Double</span> <span class="o">=</span>
+        <span class="k">if</span> <span class="n">isGoodEnough</span><span class="o">(</span><span class="n">guess</span><span class="o">,</span> <span class="n">x</span><span class="o">)</span> <span class="n">then</span> <span class="n">guess</span>
+        <span class="k">else</span> <span class="n">sqrtIter</span><span class="o">(</span><span class="n">improve</span><span class="o">(</span><span class="n">guess</span><span class="o">,</span> <span class="n">x</span><span class="o">),</span> <span class="n">x</span><span class="o">)</span>
+
+    <span class="k">def</span> <span class="n">improve</span><span class="o">(</span><span class="n">guess</span><span class="k">:</span> <span class="kt">Double</span><span class="o">,</span> <span class="n">x</span><span class="k">:</span> <span class="kt">Double</span><span class="o">)</span> <span class="k">=</span>
+        <span class="o">(</span><span class="n">guess</span> <span class="o">+</span> <span class="n">x</span> <span class="o">/</span> <span class="n">guess</span><span class="o">)</span> <span class="o">/</span> <span class="mi">2</span>
+
+    <span class="k">def</span> <span class="n">isGoodEnough</span><span class="o">(</span><span class="n">guess</span><span class="k">:</span> <span class="kt">Double</span><span class="o">,</span> <span class="n">x</span><span class="k">:</span> <span class="kt">Double</span><span class="o">)</span> <span class="k">=</span>
+        <span class="n">abs</span><span class="o">(</span><span class="n">square</span><span class="o">(</span><span class="n">guess</span><span class="o">)</span> <span class="o">-</span> <span class="n">x</span><span class="o">)</span> <span class="o">&lt;</span> <span class="mf">0.001</span>
+    
+    <span class="n">sqrtIter</span><span class="o">(</span><span class="mf">1.0</span><span class="o">,</span> <span class="n">x</span><span class="o">)</span>
+<span class="o">}</span>
+</pre></div>
+</div>
+<ul>
+<li><p>A block is delimited by braces <code class="docutils literal notranslate"><span class="pre">{...}</span></code></p></li>
+<li><p>Contains a sequence of definitions or expressions</p></li>
+<li><p>The last element of a block is an expression that defines its value. This can be preceded by auxiliary definitions.</p></li>
+<li><p>Blocks are themselves expressions; a block may appear where an expression can.</p></li>
+<li><p>In Scala 3, braces are optional (i.e implied) around a correctly indented expression.</p></li>
+<li><p>Blocks and visibility</p>
+<ul>
+<li><p>Definitions inside a block are only visible within the block.</p></li>
+<li><p>Definitions inside a block <em>shadow</em> definitions of the same names outside the block. (i.e, outer definitions don’t have any impact inside the block if same name exists within the block)</p>
+<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="k">val</span> <span class="n">x</span> <span class="k">=</span> <span class="mi">0</span>
+<span class="k">def</span> <span class="n">f</span><span class="o">(</span><span class="n">y</span><span class="k">:</span> <span class="kt">Int</span><span class="o">)</span> <span class="k">=</span> <span class="n">y</span> <span class="o">+</span> <span class="mi">1</span>
+<span class="k">val</span> <span class="n">y</span> <span class="k">=</span>
+    <span class="k">val</span> <span class="n">x</span> <span class="k">=</span> <span class="n">f</span><span class="o">(</span><span class="mi">3</span><span class="o">)</span>
+    <span class="n">x</span> <span class="o">*</span> <span class="n">x</span>
+<span class="k">val</span> <span class="n">result</span> <span class="k">=</span> <span class="n">y</span> <span class="o">+</span> <span class="n">x</span>
+</pre></div>
+</div>
+<p>result = 16</p>
+</li>
+<li><p>Definitions of outer blocks are visible inside a block unless they are shadowed. So cleaner sqrt function</p>
+<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="n">sqrt</span><span class="o">(</span><span class="n">x</span><span class="k">:</span> <span class="kt">Double</span><span class="o">)</span> <span class="k">=</span>
+    <span class="k">def</span> <span class="n">sqrtIter</span><span class="o">(</span><span class="n">guess</span><span class="k">:</span> <span class="kt">Double</span><span class="o">)</span><span class="k">:</span> <span class="kt">Double</span> <span class="o">=</span>
+        <span class="k">if</span> <span class="n">isGoodEnough</span><span class="o">(</span><span class="n">guess</span><span class="o">)</span> <span class="n">then</span> <span class="n">guess</span>
+        <span class="k">else</span> <span class="n">sqrtIter</span><span class="o">(</span><span class="n">improve</span><span class="o">(</span><span class="n">guess</span><span class="o">))</span>
+    
+    <span class="k">def</span> <span class="n">improve</span><span class="o">(</span><span class="n">guess</span><span class="k">:</span> <span class="kt">Double</span><span class="o">)</span> <span class="k">=</span>
+        <span class="o">(</span><span class="n">guess</span> <span class="o">+</span> <span class="n">x</span> <span class="o">/</span> <span class="n">guess</span><span class="o">)</span> <span class="o">/</span> <span class="mi">2</span>
+    
+    <span class="k">def</span> <span class="n">isGoodEnough</span><span class="o">(</span><span class="n">guess</span><span class="k">:</span> <span class="kt">Double</span><span class="o">)</span> <span class="k">=</span>
+        <span class="n">abs</span><span class="o">(</span><span class="n">square</span><span class="o">(</span><span class="n">guess</span><span class="o">)</span> <span class="o">-</span> <span class="n">x</span><span class="o">)</span> <span class="o">&lt;</span> <span class="mf">0.001</span>
+    
+    <span class="n">sqrtIter</span><span class="o">(</span><span class="mf">1.0</span><span class="o">)</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</li>
+<li><p>Semicolons</p>
+<ul>
+<li><p>if there are more than one statments on a line, they need to be separated by semicolons.</p>
+<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="k">val</span> <span class="n">y</span> <span class="k">=</span> <span class="n">x</span> <span class="o">+</span> <span class="mi">1</span><span class="o">;</span> <span class="n">y</span> <span class="o">*</span> <span class="n">y</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="tail-recursion">
+<h2>1.7 Tail recursion<a class="headerlink" href="#tail-recursion" title="Permalink to this headline">¶</a></h2>
+<ul>
+<li><p>Evaluation a function application:</p>
+<ul class="simple">
+<li><p>One simple rule: One evaluates a function application f(e1, …, en)</p>
+<ul>
+<li><p>by evaluating the expressions e1, … , en resulting in the values v1, …, vn, then</p></li>
+<li><p>by replacing the application with the body of the function f, in which</p></li>
+<li><p>the actual parameters v1, …, vn replace the formal parameters of f</p></li>
+</ul>
+</li>
+</ul>
+<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="n">f</span><span class="o">(</span><span class="n">x1</span><span class="o">,</span> <span class="o">...,</span> <span class="n">xn</span><span class="o">)</span> <span class="k">=</span> <span class="n">B</span><span class="o">;</span> <span class="o">...</span> <span class="n">f</span><span class="o">(</span><span class="n">v1</span><span class="o">,</span> <span class="o">...,</span> <span class="n">vn</span><span class="o">)</span>
+</pre></div>
+</div>
+<p>is the same as</p>
+<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="n">f</span><span class="o">(</span><span class="n">x1</span><span class="o">,</span> <span class="o">...,</span> <span class="n">xn</span><span class="o">)</span> <span class="k">=</span> <span class="n">B</span><span class="o">;</span> <span class="o">...</span> <span class="o">[</span><span class="kt">v1/x1</span><span class="p">,</span> <span class="kt">...</span><span class="p">,</span> <span class="kt">vn/xn</span><span class="o">]</span> <span class="n">B</span>
+</pre></div>
+</div>
+<p>where <code class="docutils literal notranslate"><span class="pre">[v1/x1,</span> <span class="pre">...,</span> <span class="pre">vn/xn]</span> <span class="pre">B</span></code> means the expression <code class="docutils literal notranslate"><span class="pre">B</span></code> in which all occurrences of <code class="docutils literal notranslate"><span class="pre">xi</span></code> have been repaced by <code class="docutils literal notranslate"><span class="pre">vi</span></code>. This is called a <strong>substitution</strong>.</p>
+</li>
+<li><p>Example:</p>
+<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="n">gcd</span><span class="o">(</span><span class="n">a</span><span class="k">:</span> <span class="kt">Int</span><span class="o">,</span> <span class="n">b</span><span class="k">:</span> <span class="kt">Int</span><span class="o">)</span><span class="k">:</span> <span class="kt">Int</span> <span class="o">=</span>
+    <span class="k">if</span> <span class="n">b</span> <span class="o">==</span> <span class="mi">0</span> <span class="n">then</span> <span class="n">a</span> <span class="k">else</span> <span class="n">gcd</span><span class="o">(</span><span class="n">b</span><span class="o">,</span> <span class="n">a</span> <span class="o">%</span> <span class="n">b</span><span class="o">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">gcd(14,</span> <span class="pre">21)</span></code> is evaluated as</p>
+<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="o">→</span> <span class="k">if</span> <span class="mi">21</span> <span class="o">==</span> <span class="mi">0</span> <span class="n">then</span> <span class="mi">14</span> <span class="k">else</span> <span class="n">gcd</span><span class="o">(</span><span class="mi">21</span><span class="o">,</span> <span class="mi">14</span> <span class="o">%</span> <span class="mi">21</span><span class="o">)</span>
+<span class="o">→</span> <span class="k">if</span> <span class="kc">false</span> <span class="n">then</span> <span class="mi">14</span> <span class="k">else</span> <span class="n">gcd</span><span class="o">(</span><span class="mi">21</span><span class="o">,</span> <span class="mi">14</span> <span class="o">%</span> <span class="mi">21</span><span class="o">)</span>
+<span class="o">→</span> <span class="n">gcd</span><span class="o">(</span><span class="mi">21</span><span class="o">,</span> <span class="mi">14</span> <span class="o">%</span> <span class="mi">21</span><span class="o">)</span>
+<span class="o">→</span> <span class="n">gcd</span><span class="o">(</span><span class="mi">21</span><span class="o">,</span> <span class="mi">14</span><span class="o">)</span>
+<span class="o">→</span> <span class="k">if</span> <span class="mi">14</span> <span class="o">==</span> <span class="mi">0</span> <span class="n">then</span> <span class="mi">21</span> <span class="k">else</span> <span class="n">gcd</span><span class="o">(</span><span class="mi">14</span><span class="o">,</span> <span class="mi">21</span> <span class="o">%</span> <span class="mi">14</span><span class="o">)</span>
+<span class="o">→→</span> <span class="n">gcd</span><span class="o">(</span><span class="mi">14</span><span class="o">,</span> <span class="mi">7</span><span class="o">)</span>
+<span class="o">→→</span> <span class="n">gcd</span><span class="o">(</span><span class="mi">7</span><span class="o">,</span> <span class="mi">0</span><span class="o">)</span>
+<span class="o">→</span> <span class="k">if</span> <span class="mi">0</span> <span class="o">==</span> <span class="mi">0</span> <span class="n">then</span> <span class="mi">7</span> <span class="k">else</span> <span class="n">gcd</span><span class="o">(</span><span class="mi">0</span><span class="o">,</span> <span class="mi">7</span> <span class="o">%</span> <span class="mi">0</span><span class="o">)</span>
+</pre></div>
+</div>
+</li>
+<li><p>Another example:</p>
+<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="n">factorial</span><span class="o">(</span><span class="n">n</span><span class="k">:</span> <span class="kt">Int</span><span class="o">)</span><span class="k">:</span> <span class="kt">Int</span> <span class="o">=</span>
+    <span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">0</span> <span class="n">then</span> <span class="mi">1</span> <span class="k">else</span> <span class="n">n</span> <span class="o">*</span> <span class="n">factorial</span><span class="o">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="o">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">factorial(4)</span></code> is evaluated as</p>
+<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="o">→</span> <span class="k">if</span> <span class="mi">4</span> <span class="o">==</span> <span class="mi">0</span> <span class="n">then</span> <span class="mi">1</span> <span class="k">else</span> <span class="mi">4</span> <span class="o">*</span> <span class="n">factorial</span><span class="o">(</span><span class="mi">4</span> <span class="o">-</span> <span class="mi">1</span><span class="o">)</span> <span class="mi">3</span><span class="o">-&gt;</span> <span class="o">→→</span> <span class="mi">4</span> <span class="o">*</span> <span class="n">factorial</span><span class="o">(</span><span class="mi">3</span><span class="o">)</span>
+<span class="o">→→</span> <span class="mi">4</span> <span class="o">*</span> <span class="o">(</span><span class="mi">3</span> <span class="o">*</span> <span class="n">factorial</span><span class="o">(</span><span class="mi">2</span><span class="o">))</span>
+<span class="o">→→</span> <span class="mi">4</span> <span class="o">*</span> <span class="o">(</span><span class="mi">3</span> <span class="o">*</span> <span class="o">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">factorial</span><span class="o">(</span><span class="mi">1</span><span class="o">)))</span>
+<span class="o">→→</span> <span class="mi">4</span> <span class="o">*</span> <span class="o">(</span><span class="mi">3</span> <span class="o">*</span> <span class="o">(</span><span class="mi">2</span> <span class="o">*</span> <span class="o">(</span><span class="mi">1</span> <span class="o">*</span> <span class="n">factorial</span><span class="o">(</span><span class="mi">0</span><span class="o">)))</span>
+<span class="o">→→</span> <span class="mi">4</span> <span class="o">*</span> <span class="o">(</span><span class="mi">3</span> <span class="o">*</span> <span class="o">(</span><span class="mi">2</span> <span class="o">*</span> <span class="o">(</span><span class="mi">1</span> <span class="o">*</span> <span class="mi">1</span><span class="o">)))</span>
+<span class="o">→→</span> <span class="mi">24</span>
+</pre></div>
+</div>
+<p>What’s the difference between the two?</p>
+</li>
+<li><p>If a function calls itself as its last action, the function’s stack frame can be reused. This is called <em>tail recursion</em>. (Implementation consideration)</p>
+<ul class="simple">
+<li><p>Tail recursive functions are iterative processes.</p></li>
+</ul>
+</li>
+<li><p>In scala one can require that a function is tail-recursive using <code class="docutils literal notranslate"><span class="pre">&#64;tailrec</span></code> annotation</p>
+<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="k">import</span> <span class="nn">scala.annotation.tailrec</span>
+
+<span class="nd">@tailrec</span>
+<span class="k">def</span> <span class="n">gcd</span><span class="o">(</span><span class="n">a</span><span class="k">:</span> <span class="kt">Int</span><span class="o">,</span> <span class="n">b</span><span class="k">:</span> <span class="kt">Int</span><span class="o">)</span><span class="k">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="o">...</span>
+</pre></div>
+</div>
+</li>
+<li><p>Exercise: Tail-recursive version of <code class="docutils literal notranslate"><span class="pre">factorial</span></code></p>
+<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="n">fact</span><span class="o">(</span><span class="n">n</span><span class="k">:</span> <span class="kt">Int</span><span class="o">)</span> <span class="k">=</span> 
+    <span class="k">def</span> <span class="n">factIter</span><span class="o">(</span><span class="n">n</span><span class="k">:</span> <span class="kt">Int</span><span class="o">,</span> <span class="n">mult</span><span class="k">:</span> <span class="kt">Int</span><span class="o">)</span><span class="k">:</span> <span class="kt">Int</span> <span class="o">=</span> 
+        <span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">1</span> <span class="n">then</span> <span class="n">mult</span> <span class="k">else</span> <span class="n">factIter</span><span class="o">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="o">,</span> <span class="n">mult</span> <span class="o">*</span> <span class="n">n</span><span class="o">)</span>
+
+    <span class="n">factIter</span><span class="o">(</span><span class="n">n</span><span class="o">,</span> <span class="mi">1</span><span class="o">)</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        
+            
+
+
+
+<div class='prev-next-bottom'>
+    
+    <div id="prev">
+        <a class="left-prev" href="README.html" title="previous page">
+            <i class="prevnext-label fas fa-angle-left"></i>
+            <div class="prevnext-info">
+                <p class="prevnext-label">previous</p>
+                <p class="prevnext-title">Lectures notes for Functional Programming Principles in Scala by Martin Odersky</p>
+            </div>
+        </a>
+    </div>
+     <div id="next">
+        <a class="right-next" href="Week_2_Higher_Order_Functions.html" title="next page">
+            <div class="prevnext-info">
+                <p class="prevnext-label">next</p>
+                <p class="prevnext-title">2 Higher Order Functions</p>
+            </div>
+            <i class="prevnext-label fas fa-angle-right"></i>
+        </a>
+     </div>
+
+</div>
+        
+        </div>
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Manasij Venkatesh<br/>
+        
+            &copy; Copyright 2021.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="_static/js/index.1c5a1a01449ed65a7b51.js"></script>
+
+  
+  </body>
+</html>
