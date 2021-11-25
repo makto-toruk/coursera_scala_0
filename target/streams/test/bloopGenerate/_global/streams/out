@@ -1,0 +1,4 @@
+[debug] [coursera_scala_0-test] Classpath dependencies List()
+[debug] [coursera_scala_0-test] Dependencies from configurations List(coursera_scala_0)
+[debug] Bloop wrote the configuration of project 'coursera_scala_0-test' to '/home/toruk-makto/manasij/coursera_scala_0/.bloop/coursera_scala_0-test.json'
+[success] Generated .bloop/coursera_scala_0-test.json

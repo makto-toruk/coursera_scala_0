@@ -1,0 +1,22 @@
+#######################################################################################
+# Book settings
+title: Lectures notes for Functional Programming Principles in Scala by Martin Odersky
+author: Manasij Venkatesh
+
+#######################################################################################
+# Execution settings
+execute:
+  execute_notebooks: off
+
+#######################################################################################
+# HTML-specific settings
+html:
+  home_page_in_navbar: false
+  use_repository_button: true
+  use_issues_button: true
+  use_edit_page_button: true
+
+#######################################################################################
+# Launch button settings
+repository:
+  url: https://github.com/makto-toruk/coursera_scala_0

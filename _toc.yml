@@ -1,0 +1,9 @@
+format: jb-article
+root: README
+sections:
+- file: Week_1_Introduction
+- file: Week_2_Higher_Order_Functions
+- file: Week_3_Data_and_Abstraction
+- file: Week_4_Types_and_Pattern_Matching
+- file: Week_5_Lists
+- file: Week_6_Collections
