@@ -4,11 +4,12 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>4 Types and Pattern Matching &#8212; Lectures notes for Functional Programming Principles in Scala by Martin Odersky</title>
     
-  <link href="_static/css/theme.css" rel="stylesheet" />
-  <link href="_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
+  <link href="_static/css/theme.css" rel="stylesheet">
+  <link href="_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
 
     
   <link rel="stylesheet"
@@ -22,8 +23,8 @@
       
 
     
-    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="_static/sphinx-book-theme.e8f53015daec13862f6db5e763c41738.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
     <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
@@ -31,21 +32,21 @@
     <link rel="stylesheet" type="text/css" href="_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
     <link rel="stylesheet" type="text/css" href="_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
     
-  <link rel="preload" as="script" href="_static/js/index.1c5a1a01449ed65a7b51.js">
+  <link rel="preload" as="script" href="_static/js/index.be7d3bbb2ef33a8344ce.js">
 
-    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
     <script src="_static/jquery.js"></script>
     <script src="_static/underscore.js"></script>
     <script src="_static/doctools.js"></script>
     <script src="_static/togglebutton.js"></script>
     <script src="_static/clipboard.min.js"></script>
     <script src="_static/copybutton.js"></script>
-    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-    <script src="_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
-    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
-    <script >
+    <script>
         const thebe_selector = ".thebe"
         const thebe_selector_input = "pre"
         const thebe_selector_output = ".output"
@@ -56,7 +57,10 @@
     <link rel="next" title="5 Lists" href="Week_5_Lists.html" />
     <link rel="prev" title="3 Data and Abstraction" href="Week_3_Data_and_Abstraction.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="docsearch:language" content="en" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
     
   </head>
   <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
@@ -72,6 +76,7 @@
     
         <div class="navbar-brand-box">
     <a class="navbar-brand text-wrap" href="index.html">
+      
       
       
       <h1 class="site-logo" id="site-title">Lectures notes for Functional Programming Principles in Scala by Martin Odersky</h1>
@@ -159,7 +164,7 @@
                 data-placement="left">.md</button></a>
         <!-- Download PDF via print -->
         <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
-            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
     </div>
 </div>
 
@@ -195,7 +200,7 @@
         </div>
 
         <!-- Table of contents -->
-        <div class="d-none d-md-block col-md-2 bd-toc show">
+        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
             
             <div class="tocsection onthispage pt-5 pb-3">
                 <i class="fas fa-list"></i> Contents
@@ -240,40 +245,88 @@
 </div>
     <div id="main-content" class="row">
         <div class="col-12 col-md-9 pl-md-3 pr-md-0">
-        
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>4 Types and Pattern Matching</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#decomposition">
+   4.1 Decomposition
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#pattern-matching">
+   4.2 Pattern Matching
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#lists">
+   4.3 Lists
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#enums">
+   4.4 Enums
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#subtyping-and-generics">
+   4.5 Subtyping and Generics
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#variance">
+   4.6 Variance
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            
               <div>
                 
-  <div class="section" id="types-and-pattern-matching">
+  <section class="tex2jax_ignore mathjax_ignore" id="types-and-pattern-matching">
 <h1>4 Types and Pattern Matching<a class="headerlink" href="#types-and-pattern-matching" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="decomposition">
+<section id="decomposition">
 <h2>4.1 Decomposition<a class="headerlink" href="#decomposition" title="Permalink to this headline">¶</a></h2>
 <ul>
 <li><p>How would we decompose an Expression?</p>
-<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="k">trait</span> <span class="nc">Expr</span><span class="k">:</span>
-    <span class="kt">def</span> <span class="kt">isNumber:</span> <span class="kt">Boolean</span>
-    <span class="k">def</span> <span class="n">isSum</span><span class="k">:</span> <span class="kt">Boolean</span>
-    <span class="k">def</span> <span class="n">numValue</span><span class="k">:</span> <span class="kt">Int</span>
-    <span class="k">def</span> <span class="n">leftOp</span><span class="k">:</span> <span class="kt">Expr</span>
-    <span class="k">def</span> <span class="n">rightOp</span><span class="k">:</span> <span class="kt">Expr</span>
+<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="k">trait</span> <span class="nc">Expr</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">isNumber</span><span class="p">:</span> <span class="nc">Boolean</span>
+    <span class="k">def</span> <span class="nf">isSum</span><span class="p">:</span> <span class="nc">Boolean</span>
+    <span class="k">def</span> <span class="nf">numValue</span><span class="p">:</span> <span class="nc">Int</span>
+    <span class="k">def</span> <span class="nf">leftOp</span><span class="p">:</span> <span class="nc">Expr</span>
+    <span class="k">def</span> <span class="nf">rightOp</span><span class="p">:</span> <span class="nc">Expr</span>
 
-<span class="k">class</span> <span class="nc">Number</span><span class="o">(</span><span class="n">n</span><span class="k">:</span> <span class="kt">Int</span><span class="o">)</span> <span class="k">extends</span> <span class="nc">Expr</span><span class="k">:</span>
-    <span class="kt">def</span> <span class="kt">isNumber</span> <span class="o">=</span> <span class="kc">true</span>
-    <span class="k">def</span> <span class="n">isSum</span> <span class="k">=</span> <span class="kc">false</span>
-    <span class="k">def</span> <span class="n">numValue</span> <span class="k">=</span> <span class="n">n</span>
-    <span class="k">def</span> <span class="n">leftOp</span> <span class="k">=</span> <span class="k">throw</span> <span class="nc">Error</span><span class="o">(</span><span class="s">&quot;Number.leftOp&quot;</span><span class="o">)</span>
-    <span class="k">def</span> <span class="n">rightOp</span> <span class="k">=</span> <span class="k">throw</span> <span class="nc">Error</span><span class="o">(</span><span class="s">&quot;Number.rightOp&quot;</span><span class="o">)</span>
+<span class="k">class</span> <span class="nc">Number</span><span class="p">(</span><span class="n">n</span><span class="p">:</span> <span class="nc">Int</span><span class="p">)</span> <span class="k">extends</span> <span class="nc">Expr</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">isNumber</span> <span class="o">=</span> <span class="kc">true</span>
+    <span class="k">def</span> <span class="nf">isSum</span> <span class="o">=</span> <span class="kc">false</span>
+    <span class="k">def</span> <span class="nf">numValue</span> <span class="o">=</span> <span class="n">n</span>
+    <span class="k">def</span> <span class="nf">leftOp</span> <span class="o">=</span> <span class="k">throw</span> <span class="nc">Error</span><span class="p">(</span><span class="s">&quot;Number.leftOp&quot;</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">rightOp</span> <span class="o">=</span> <span class="k">throw</span> <span class="nc">Error</span><span class="p">(</span><span class="s">&quot;Number.rightOp&quot;</span><span class="p">)</span>
 
-<span class="k">class</span> <span class="nc">Sum</span><span class="o">(</span><span class="n">e1</span><span class="k">:</span> <span class="kt">Expr</span><span class="o">,</span> <span class="n">e2</span><span class="k">:</span> <span class="kt">Expr</span><span class="o">)</span> <span class="k">extends</span> <span class="nc">Expr</span><span class="k">:</span>
-    <span class="kt">def</span> <span class="kt">isNumber</span> <span class="o">=</span> <span class="kc">false</span>
-    <span class="k">def</span> <span class="n">isSum</span> <span class="k">=</span> <span class="kc">true</span>
-    <span class="k">def</span> <span class="n">numValue</span> <span class="k">=</span> <span class="k">throw</span> <span class="nc">Error</span><span class="o">(</span><span class="s">&quot;Sum.numValue&quot;</span><span class="o">)</span>
-    <span class="k">def</span> <span class="n">leftOp</span> <span class="k">=</span> <span class="n">e1</span>
-    <span class="k">def</span> <span class="n">rightOp</span> <span class="k">=</span> <span class="n">e2</span>
+<span class="k">class</span> <span class="nc">Sum</span><span class="p">(</span><span class="n">e1</span><span class="p">:</span> <span class="nc">Expr</span><span class="p">,</span> <span class="n">e2</span><span class="p">:</span> <span class="nc">Expr</span><span class="p">)</span> <span class="k">extends</span> <span class="nc">Expr</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">isNumber</span> <span class="o">=</span> <span class="kc">false</span>
+    <span class="k">def</span> <span class="nf">isSum</span> <span class="o">=</span> <span class="kc">true</span>
+    <span class="k">def</span> <span class="nf">numValue</span> <span class="o">=</span> <span class="k">throw</span> <span class="nc">Error</span><span class="p">(</span><span class="s">&quot;Sum.numValue&quot;</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">leftOp</span> <span class="o">=</span> <span class="n">e1</span>
+    <span class="k">def</span> <span class="nf">rightOp</span> <span class="o">=</span> <span class="n">e2</span>
 
-<span class="k">def</span> <span class="n">eval</span><span class="o">(</span><span class="n">e</span><span class="k">:</span> <span class="kt">Expr</span><span class="o">)</span><span class="k">:</span> <span class="kt">Int</span> <span class="o">=</span>
-    <span class="k">if</span> <span class="n">e</span><span class="o">.</span><span class="n">isNumber</span> <span class="n">then</span> <span class="n">e</span><span class="o">.</span><span class="n">numValue</span>
-    <span class="k">else</span> <span class="k">if</span> <span class="n">e</span><span class="o">.</span><span class="n">isSum</span> <span class="n">then</span> <span class="n">eval</span><span class="o">(</span><span class="n">e</span><span class="o">.</span><span class="n">leftOp</span><span class="o">)</span> <span class="o">+</span> <span class="n">eval</span><span class="o">(</span><span class="n">e</span><span class="o">.</span><span class="n">rightOp</span><span class="o">)</span>
-    <span class="k">else</span> <span class="k">throw</span> <span class="nc">Error</span><span class="o">(</span><span class="s">&quot;Unknown expression &quot;</span> <span class="o">+</span> <span class="n">e</span><span class="o">)</span>
+<span class="k">def</span> <span class="nf">eval</span><span class="p">(</span><span class="n">e</span><span class="p">:</span> <span class="nc">Expr</span><span class="p">):</span> <span class="nc">Int</span> <span class="o">=</span>
+    <span class="k">if</span> <span class="n">e</span><span class="p">.</span><span class="n">isNumber</span> <span class="k">then</span> <span class="n">e</span><span class="p">.</span><span class="n">numValue</span>
+    <span class="k">else</span> <span class="k">if</span> <span class="n">e</span><span class="p">.</span><span class="n">isSum</span> <span class="k">then</span> <span class="n">eval</span><span class="p">(</span><span class="n">e</span><span class="p">.</span><span class="n">leftOp</span><span class="p">)</span> <span class="o">+</span> <span class="n">eval</span><span class="p">(</span><span class="n">e</span><span class="p">.</span><span class="n">rightOp</span><span class="p">)</span>
+    <span class="k">else</span> <span class="k">throw</span> <span class="nc">Error</span><span class="p">(</span><span class="s">&quot;Unknown expression &quot;</span> <span class="o">+</span> <span class="n">e</span><span class="p">)</span>
 </pre></div>
 </div>
 </li>
@@ -284,25 +337,25 @@
 </ul>
 </li>
 </ul>
-</div>
-<div class="section" id="pattern-matching">
+</section>
+<section id="pattern-matching">
 <h2>4.2 Pattern Matching<a class="headerlink" href="#pattern-matching" title="Permalink to this headline">¶</a></h2>
 <ul>
 <li><p>Case Classes:</p>
 <ul>
 <li><p>Similar to a normal class definition, except that it is preceded by the modifier <code class="docutils literal notranslate"><span class="pre">case</span></code></p>
 <div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="k">trait</span> <span class="nc">Expr</span>
-    <span class="k">case</span> <span class="k">class</span> <span class="nc">Number</span><span class="o">(</span><span class="n">n</span><span class="k">:</span> <span class="kt">Int</span><span class="o">)</span> <span class="k">extends</span> <span class="nc">Expr</span>
-    <span class="k">case</span> <span class="k">class</span> <span class="nc">Sum</span><span class="o">(</span><span class="n">e1</span><span class="k">:</span> <span class="kt">Expr</span><span class="o">,</span> <span class="n">e2</span><span class="k">:</span> <span class="kt">Expr</span><span class="o">)</span> <span class="k">extends</span> <span class="nc">Expr</span>
+    <span class="k">case</span> <span class="k">class</span> <span class="nc">Number</span><span class="p">(</span><span class="n">n</span><span class="p">:</span> <span class="nc">Int</span><span class="p">)</span> <span class="k">extends</span> <span class="nc">Expr</span>
+    <span class="k">case</span> <span class="k">class</span> <span class="nc">Sum</span><span class="p">(</span><span class="n">e1</span><span class="p">:</span> <span class="nc">Expr</span><span class="p">,</span> <span class="n">e2</span><span class="p">:</span> <span class="nc">Expr</span><span class="p">)</span> <span class="k">extends</span> <span class="nc">Expr</span>
 </pre></div>
 </div>
 </li>
 </ul>
 </li>
 <li><p>Pattern matching is a generalization of <code class="docutils literal notranslate"><span class="pre">switch</span></code> to class hierarchies. It’s expressed in Scala using <code class="docutils literal notranslate"><span class="pre">match</span></code></p>
-<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="n">eval</span><span class="o">(</span><span class="n">e</span><span class="k">:</span> <span class="kt">Expr</span><span class="o">)</span><span class="k">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="n">e</span> <span class="k">match</span>
-    <span class="k">case</span> <span class="nc">Number</span><span class="o">(</span><span class="n">n</span><span class="o">)</span> <span class="k">=&gt;</span> <span class="n">n</span>
-    <span class="k">case</span> <span class="nc">Sum</span><span class="o">(</span><span class="n">e1</span><span class="o">,</span> <span class="n">e2</span><span class="o">)</span> <span class="k">=&gt;</span> <span class="n">eval</span><span class="o">(</span><span class="n">e1</span><span class="o">)</span> <span class="o">+</span> <span class="n">eval</span><span class="o">(</span><span class="n">e2</span><span class="o">)</span>
+<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">eval</span><span class="p">(</span><span class="n">e</span><span class="p">:</span> <span class="nc">Expr</span><span class="p">):</span> <span class="nc">Int</span> <span class="o">=</span> <span class="n">e</span> <span class="k">match</span>
+    <span class="k">case</span> <span class="nc">Number</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="n">n</span>
+    <span class="k">case</span> <span class="nc">Sum</span><span class="p">(</span><span class="n">e1</span><span class="p">,</span> <span class="n">e2</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="n">eval</span><span class="p">(</span><span class="n">e1</span><span class="p">)</span> <span class="o">+</span> <span class="n">eval</span><span class="p">(</span><span class="n">e2</span><span class="p">)</span>
 </pre></div>
 </div>
 <ul class="simple">
@@ -324,28 +377,28 @@
 <li><p>The same variable name can only appear once in a pattern. So, <code class="docutils literal notranslate"><span class="pre">Sum(x,</span> <span class="pre">x)</span></code> is not a legal pattern.</p></li>
 <li><p>Names of constants begin with a capital letter, with the exception of the reserved words <code class="docutils literal notranslate"><span class="pre">null</span></code>, <code class="docutils literal notranslate"><span class="pre">true</span></code>, <code class="docutils literal notranslate"><span class="pre">false</span></code>.</p></li>
 </ul>
-</div>
-<div class="section" id="lists">
+</section>
+<section id="lists">
 <h2>4.3 Lists<a class="headerlink" href="#lists" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="k">val</span> <span class="n">fruit</span> <span class="k">=</span> <span class="nc">List</span><span class="o">(</span><span class="s">&quot;apples&quot;</span><span class="o">,</span> <span class="s">&quot;oranges&quot;</span><span class="o">,</span> <span class="s">&quot;pears&quot;</span><span class="o">)</span>
-<span class="k">val</span> <span class="n">nums</span> <span class="k">=</span> <span class="nc">List</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span> <span class="mi">2</span><span class="o">,</span> <span class="mi">3</span><span class="o">,</span> <span class="mi">4</span><span class="o">)</span>
-<span class="k">val</span> <span class="n">diag3</span> <span class="k">=</span> <span class="nc">List</span><span class="o">(</span><span class="nc">List</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="mi">0</span><span class="o">),</span> <span class="nc">List</span><span class="o">(</span><span class="mi">0</span><span class="o">,</span> <span class="mi">1</span><span class="o">,</span> <span class="mi">0</span><span class="o">),</span> <span class="nc">List</span><span class="o">(</span><span class="mi">0</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="mi">1</span><span class="o">))</span>
-<span class="k">val</span> <span class="n">empty</span> <span class="k">=</span> <span class="nc">List</span><span class="o">()</span>
+<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="kd">val</span> <span class="n">fruit</span> <span class="o">=</span> <span class="nc">List</span><span class="p">(</span><span class="s">&quot;apples&quot;</span><span class="p">,</span> <span class="s">&quot;oranges&quot;</span><span class="p">,</span> <span class="s">&quot;pears&quot;</span><span class="p">)</span>
+<span class="kd">val</span> <span class="n">nums</span> <span class="o">=</span> <span class="nc">List</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+<span class="kd">val</span> <span class="n">diag3</span> <span class="o">=</span> <span class="nc">List</span><span class="p">(</span><span class="nc">List</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="nc">List</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="nc">List</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+<span class="kd">val</span> <span class="n">empty</span> <span class="o">=</span> <span class="nc">List</span><span class="p">()</span>
 </pre></div>
 </div>
 <ul>
 <li><p>Lists are immutable</p></li>
 <li><p>Lists are recursive, arrays are flat</p></li>
 <li><p>Lists are homogeneous: all elements must have same type</p>
-<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="k">val</span> <span class="n">fruit</span><span class="k">:</span> <span class="kt">List</span><span class="o">[</span><span class="kt">String</span><span class="o">]</span> <span class="k">=</span> <span class="nc">List</span><span class="o">(</span><span class="s">&quot;apples&quot;</span><span class="o">,</span> <span class="s">&quot;oranges&quot;</span><span class="o">,</span> <span class="s">&quot;pears&quot;</span><span class="o">)</span>
-<span class="k">val</span> <span class="n">nums</span> <span class="k">:</span> <span class="kt">List</span><span class="o">[</span><span class="kt">Int</span><span class="o">]</span> <span class="k">=</span> <span class="nc">List</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span> <span class="mi">2</span><span class="o">,</span> <span class="mi">3</span><span class="o">,</span> <span class="mi">4</span><span class="o">)</span>
-<span class="k">val</span> <span class="n">diag3</span><span class="k">:</span> <span class="kt">List</span><span class="o">[</span><span class="kt">List</span><span class="o">[</span><span class="kt">Int</span><span class="o">]]</span> <span class="k">=</span> <span class="nc">List</span><span class="o">(</span><span class="nc">List</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="mi">0</span><span class="o">),</span> <span class="nc">List</span><span class="o">(</span><span class="mi">0</span><span class="o">,</span> <span class="mi">1</span><span class="o">,</span> <span class="mi">0</span><span class="o">),</span> <span class="nc">List</span><span class="o">(</span><span class="mi">0</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="mi">1</span><span class="o">))</span>
-<span class="k">val</span> <span class="n">empty</span><span class="k">:</span> <span class="kt">List</span><span class="o">[</span><span class="kt">Nothing</span><span class="o">]</span> <span class="k">=</span> <span class="nc">List</span><span class="o">()</span>
+<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="kd">val</span> <span class="n">fruit</span><span class="p">:</span> <span class="nc">List</span><span class="p">[</span><span class="nc">String</span><span class="p">]</span> <span class="o">=</span> <span class="nc">List</span><span class="p">(</span><span class="s">&quot;apples&quot;</span><span class="p">,</span> <span class="s">&quot;oranges&quot;</span><span class="p">,</span> <span class="s">&quot;pears&quot;</span><span class="p">)</span>
+<span class="kd">val</span> <span class="n">nums</span> <span class="p">:</span> <span class="nc">List</span><span class="p">[</span><span class="nc">Int</span><span class="p">]</span> <span class="o">=</span> <span class="nc">List</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+<span class="kd">val</span> <span class="n">diag3</span><span class="p">:</span> <span class="nc">List</span><span class="p">[</span><span class="nc">List</span><span class="p">[</span><span class="nc">Int</span><span class="p">]]</span> <span class="o">=</span> <span class="nc">List</span><span class="p">(</span><span class="nc">List</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="nc">List</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="nc">List</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+<span class="kd">val</span> <span class="n">empty</span><span class="p">:</span> <span class="nc">List</span><span class="p">[</span><span class="nc">Nothing</span><span class="p">]</span> <span class="o">=</span> <span class="nc">List</span><span class="p">()</span>
 </pre></div>
 </div>
 </li>
 <li><p>All lists are constructed from the empty list <code class="docutils literal notranslate"><span class="pre">Nil</span></code> and construction operation <code class="docutils literal notranslate"><span class="pre">::</span></code> (Cons).</p>
-<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="k">val</span> <span class="n">nums</span> <span class="k">=</span> <span class="mi">1</span> <span class="o">::</span> <span class="mi">2</span> <span class="o">::</span> <span class="mi">3</span> <span class="o">::</span> <span class="mi">4</span> <span class="o">::</span> <span class="nc">Nil</span>
+<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="kd">val</span> <span class="n">nums</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">::</span> <span class="mi">2</span> <span class="o">::</span> <span class="mi">3</span> <span class="o">::</span> <span class="mi">4</span> <span class="o">::</span> <span class="nc">Nil</span>
 </pre></div>
 </div>
 </li>
@@ -367,80 +420,80 @@
 </li>
 <li><p>Insertion Sort:</p></li>
 </ul>
-<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="n">isort</span><span class="o">(</span><span class="n">xs</span><span class="k">:</span> <span class="kt">List</span><span class="o">[</span><span class="kt">Int</span><span class="o">])</span><span class="k">:</span> <span class="kt">List</span><span class="o">[</span><span class="kt">Int</span><span class="o">]</span> <span class="k">=</span> <span class="n">xs</span> <span class="k">match</span>
-    <span class="k">case</span> <span class="nc">List</span><span class="o">()</span> <span class="k">=&gt;</span> <span class="nc">List</span><span class="o">()</span>
-    <span class="k">case</span> <span class="n">y</span> <span class="o">::</span> <span class="n">ys</span> <span class="k">=&gt;</span> <span class="n">insert</span><span class="o">(</span><span class="n">y</span><span class="o">,</span> <span class="n">isort</span><span class="o">(</span><span class="n">ys</span><span class="o">))</span>
+<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">isort</span><span class="p">(</span><span class="n">xs</span><span class="p">:</span> <span class="nc">List</span><span class="p">[</span><span class="nc">Int</span><span class="p">]):</span> <span class="nc">List</span><span class="p">[</span><span class="nc">Int</span><span class="p">]</span> <span class="o">=</span> <span class="n">xs</span> <span class="k">match</span>
+    <span class="k">case</span> <span class="nc">List</span><span class="p">()</span> <span class="o">=&gt;</span> <span class="nc">List</span><span class="p">()</span>
+    <span class="k">case</span> <span class="n">y</span> <span class="o">::</span> <span class="n">ys</span> <span class="o">=&gt;</span> <span class="n">insert</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">isort</span><span class="p">(</span><span class="n">ys</span><span class="p">))</span>
 
-<span class="k">def</span> <span class="n">insert</span><span class="o">(</span><span class="n">x</span><span class="k">:</span> <span class="kt">Int</span><span class="o">,</span> <span class="n">xs</span><span class="k">:</span> <span class="kt">List</span><span class="o">[</span><span class="kt">Int</span><span class="o">])</span><span class="k">:</span> <span class="kt">List</span><span class="o">[</span><span class="kt">Int</span><span class="o">]</span> <span class="k">=</span> <span class="n">xs</span> <span class="k">match</span>
-    <span class="k">case</span> <span class="nc">List</span><span class="o">()</span> <span class="k">=&gt;</span> <span class="nc">List</span><span class="o">(</span><span class="n">x</span><span class="o">)</span>
-    <span class="k">case</span> <span class="n">y</span> <span class="o">::</span> <span class="n">ys</span> <span class="k">=&gt;</span> 
-        <span class="k">if</span> <span class="n">x</span> <span class="o">&lt;</span> <span class="n">y</span> <span class="n">then</span> <span class="n">x</span> <span class="o">::</span> <span class="n">xs</span> <span class="k">else</span> <span class="n">y</span> <span class="o">::</span> <span class="n">insert</span><span class="o">(</span><span class="n">x</span><span class="o">,</span> <span class="n">ys</span><span class="o">)</span>
+<span class="k">def</span> <span class="nf">insert</span><span class="p">(</span><span class="n">x</span><span class="p">:</span> <span class="nc">Int</span><span class="p">,</span> <span class="n">xs</span><span class="p">:</span> <span class="nc">List</span><span class="p">[</span><span class="nc">Int</span><span class="p">]):</span> <span class="nc">List</span><span class="p">[</span><span class="nc">Int</span><span class="p">]</span> <span class="o">=</span> <span class="n">xs</span> <span class="k">match</span>
+    <span class="k">case</span> <span class="nc">List</span><span class="p">()</span> <span class="o">=&gt;</span> <span class="nc">List</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+    <span class="k">case</span> <span class="n">y</span> <span class="o">::</span> <span class="n">ys</span> <span class="o">=&gt;</span> 
+        <span class="k">if</span> <span class="n">x</span> <span class="o">&lt;</span> <span class="n">y</span> <span class="k">then</span> <span class="n">x</span> <span class="o">::</span> <span class="n">xs</span> <span class="k">else</span> <span class="n">y</span> <span class="o">::</span> <span class="n">insert</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">ys</span><span class="p">)</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="enums">
+</section>
+<section id="enums">
 <h2>4.4 Enums<a class="headerlink" href="#enums" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li><p>To compose pure data without any associated functions.</p></li>
 </ul>
 <div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="k">trait</span> <span class="nc">Expr</span>
-<span class="k">object</span> <span class="nc">Expr</span><span class="k">:</span>
-    <span class="kt">case</span> <span class="kt">class</span> <span class="kt">Var</span><span class="o">(</span><span class="kt">s:</span> <span class="kt">String</span><span class="o">)</span> <span class="kt">extends</span> <span class="kt">Expr</span>
-    <span class="k">case</span> <span class="k">class</span> <span class="nc">Number</span><span class="o">(</span><span class="n">n</span><span class="k">:</span> <span class="kt">Int</span><span class="o">)</span> <span class="k">extends</span> <span class="nc">Expr</span>
-    <span class="k">case</span> <span class="k">class</span> <span class="nc">Sum</span><span class="o">(</span><span class="n">e1</span><span class="k">:</span> <span class="kt">Expr</span><span class="o">,</span> <span class="n">e2</span><span class="k">:</span> <span class="kt">Expr</span><span class="o">)</span> <span class="k">extends</span> <span class="nc">Expr</span>
-    <span class="k">case</span> <span class="k">class</span> <span class="nc">Prod</span><span class="o">(</span><span class="n">e1</span><span class="k">:</span> <span class="kt">Expr</span><span class="o">,</span> <span class="n">e2</span><span class="k">:</span> <span class="kt">Expr</span><span class="o">)</span> <span class="k">extends</span> <span class="nc">Expr</span>
+<span class="k">object</span> <span class="nc">Expr</span><span class="p">:</span>
+    <span class="k">case</span> <span class="k">class</span> <span class="nc">Var</span><span class="p">(</span><span class="n">s</span><span class="p">:</span> <span class="nc">String</span><span class="p">)</span> <span class="k">extends</span> <span class="nc">Expr</span>
+    <span class="k">case</span> <span class="k">class</span> <span class="nc">Number</span><span class="p">(</span><span class="n">n</span><span class="p">:</span> <span class="nc">Int</span><span class="p">)</span> <span class="k">extends</span> <span class="nc">Expr</span>
+    <span class="k">case</span> <span class="k">class</span> <span class="nc">Sum</span><span class="p">(</span><span class="n">e1</span><span class="p">:</span> <span class="nc">Expr</span><span class="p">,</span> <span class="n">e2</span><span class="p">:</span> <span class="nc">Expr</span><span class="p">)</span> <span class="k">extends</span> <span class="nc">Expr</span>
+    <span class="k">case</span> <span class="k">class</span> <span class="nc">Prod</span><span class="p">(</span><span class="n">e1</span><span class="p">:</span> <span class="nc">Expr</span><span class="p">,</span> <span class="n">e2</span><span class="p">:</span> <span class="nc">Expr</span><span class="p">)</span> <span class="k">extends</span> <span class="nc">Expr</span>
 </pre></div>
 </div>
 <ul>
 <li><p>Pure data definitions like these are called algebraic data types or ADTs.</p></li>
 <li><p>An alternative is to use <code class="docutils literal notranslate"><span class="pre">enum</span></code></p>
-<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="n">enum</span> <span class="nc">Expr</span><span class="k">:</span>
-    <span class="kt">case</span> <span class="kt">Var</span><span class="o">(</span><span class="kt">s:</span> <span class="kt">String</span><span class="o">)</span>
-    <span class="kt">case</span> <span class="kt">Number</span><span class="o">(</span><span class="kt">n:</span> <span class="kt">Int</span><span class="o">)</span>
-    <span class="kt">case</span> <span class="kt">Sum</span><span class="o">(</span><span class="kt">e1:</span> <span class="kt">Expr</span><span class="o">,</span> <span class="kt">e2:</span> <span class="kt">Expr</span><span class="o">)</span>
-    <span class="k">case</span> <span class="nc">Prod</span><span class="o">(</span><span class="n">e1</span><span class="k">:</span> <span class="kt">Expr</span><span class="o">,</span> <span class="n">e2</span><span class="k">:</span> <span class="kt">Expr</span><span class="o">)</span>
+<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="k">enum</span> <span class="nc">Expr</span><span class="p">:</span>
+    <span class="k">case</span> <span class="nc">Var</span><span class="p">(</span><span class="n">s</span><span class="p">:</span> <span class="nc">String</span><span class="p">)</span>
+    <span class="k">case</span> <span class="nc">Number</span><span class="p">(</span><span class="n">n</span><span class="p">:</span> <span class="nc">Int</span><span class="p">)</span>
+    <span class="k">case</span> <span class="nc">Sum</span><span class="p">(</span><span class="n">e1</span><span class="p">:</span> <span class="nc">Expr</span><span class="p">,</span> <span class="n">e2</span><span class="p">:</span> <span class="nc">Expr</span><span class="p">)</span>
+    <span class="k">case</span> <span class="nc">Prod</span><span class="p">(</span><span class="n">e1</span><span class="p">:</span> <span class="nc">Expr</span><span class="p">,</span> <span class="n">e2</span><span class="p">:</span> <span class="nc">Expr</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>equivalent to above but shorter.</p>
 </li>
 <li><p>Match expressions can still be used.</p>
-<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="n">show</span><span class="o">(</span><span class="n">e</span><span class="k">:</span> <span class="kt">Expr</span><span class="o">)</span><span class="k">:</span> <span class="kt">String</span> <span class="o">=</span> <span class="n">e</span> <span class="k">match</span>
-    <span class="k">case</span> <span class="nc">Expr</span><span class="o">.</span><span class="nc">Var</span><span class="o">(</span><span class="n">x</span><span class="o">)</span> <span class="k">=&gt;</span> <span class="n">x</span>
-    <span class="k">case</span> <span class="nc">Expr</span><span class="o">.</span><span class="nc">Number</span><span class="o">(</span><span class="n">n</span><span class="o">)</span> <span class="k">=&gt;</span> <span class="n">n</span><span class="o">.</span><span class="n">toString</span>
-    <span class="k">case</span> <span class="nc">Expr</span><span class="o">.</span><span class="nc">Sum</span><span class="o">(</span><span class="n">a</span><span class="o">,</span> <span class="n">b</span><span class="o">)</span> <span class="k">=&gt;</span> <span class="s">s&quot;</span><span class="si">${</span><span class="n">show</span><span class="o">(</span><span class="n">a</span><span class="o">)</span><span class="si">}</span><span class="s"> + </span><span class="si">${</span><span class="n">show</span><span class="o">(</span><span class="n">a</span><span class="o">)</span><span class="si">}</span><span class="s">}&quot;</span>
-    <span class="k">case</span> <span class="nc">Expr</span><span class="o">.</span><span class="nc">Prod</span><span class="o">(</span><span class="n">a</span><span class="o">,</span> <span class="n">b</span><span class="o">)</span> <span class="k">=&gt;</span> <span class="s">s&quot;</span><span class="si">${</span><span class="n">showP</span><span class="o">(</span><span class="n">a</span><span class="o">)</span><span class="si">}</span><span class="s"> * </span><span class="si">${</span><span class="n">showP</span><span class="o">(</span><span class="n">a</span><span class="o">)</span><span class="si">}</span><span class="s">&quot;</span>
+<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">show</span><span class="p">(</span><span class="n">e</span><span class="p">:</span> <span class="nc">Expr</span><span class="p">):</span> <span class="nc">String</span> <span class="o">=</span> <span class="n">e</span> <span class="k">match</span>
+    <span class="k">case</span> <span class="nc">Expr</span><span class="p">.</span><span class="nc">Var</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="n">x</span>
+    <span class="k">case</span> <span class="nc">Expr</span><span class="p">.</span><span class="nc">Number</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="n">n</span><span class="p">.</span><span class="n">toString</span>
+    <span class="k">case</span> <span class="nc">Expr</span><span class="p">.</span><span class="nc">Sum</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="s">s&quot;</span><span class="si">${</span><span class="n">show</span><span class="p">(</span><span class="n">a</span><span class="p">)</span><span class="si">}</span><span class="s"> + </span><span class="si">${</span><span class="n">show</span><span class="p">(</span><span class="n">a</span><span class="p">)</span><span class="si">}</span><span class="s">}&quot;</span>
+    <span class="k">case</span> <span class="nc">Expr</span><span class="p">.</span><span class="nc">Prod</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="s">s&quot;</span><span class="si">${</span><span class="n">showP</span><span class="p">(</span><span class="n">a</span><span class="p">)</span><span class="si">}</span><span class="s"> * </span><span class="si">${</span><span class="n">showP</span><span class="p">(</span><span class="n">a</span><span class="p">)</span><span class="si">}</span><span class="s">&quot;</span>
 
-<span class="k">def</span> <span class="n">showP</span><span class="o">(</span><span class="n">e</span><span class="k">:</span> <span class="kt">Expr</span><span class="o">)</span><span class="k">:</span> <span class="kt">String</span> <span class="o">=</span> <span class="n">e</span> <span class="k">match</span>
-    <span class="k">case</span> <span class="n">e</span><span class="k">:</span> <span class="kt">Sum</span> <span class="o">=&gt;</span> <span class="s">s&quot;(</span><span class="si">${</span><span class="n">show</span><span class="o">(</span><span class="n">expr</span><span class="o">)</span><span class="si">}</span><span class="s">)&quot;</span>
-    <span class="k">case</span> <span class="k">_</span> <span class="k">=&gt;</span> <span class="n">show</span><span class="o">(</span><span class="n">expr</span><span class="o">)</span>
+<span class="k">def</span> <span class="nf">showP</span><span class="p">(</span><span class="n">e</span><span class="p">:</span> <span class="nc">Expr</span><span class="p">):</span> <span class="nc">String</span> <span class="o">=</span> <span class="n">e</span> <span class="k">match</span>
+    <span class="k">case</span> <span class="n">e</span><span class="p">:</span> <span class="nc">Sum</span> <span class="o">=&gt;</span> <span class="s">s&quot;(</span><span class="si">${</span><span class="n">show</span><span class="p">(</span><span class="n">expr</span><span class="p">)</span><span class="si">}</span><span class="s">)&quot;</span>
+    <span class="k">case</span> <span class="n">_</span> <span class="o">=&gt;</span> <span class="n">show</span><span class="p">(</span><span class="n">expr</span><span class="p">)</span>
 </pre></div>
 </div>
 </li>
 <li><p>Can be even simpler</p>
-<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="n">enum</span> <span class="nc">DayOfWeek</span><span class="k">:</span>
-    <span class="kt">case</span> <span class="kt">Monday</span><span class="o">,</span> <span class="nc">Tuesday</span><span class="o">,</span> <span class="nc">Wednesday</span><span class="o">,</span> <span class="nc">Thursday</span><span class="o">,</span> <span class="nc">Friday</span><span class="o">,</span> <span class="nc">Saturday</span><span class="o">,</span> <span class="nc">Sunday</span>
+<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="k">enum</span> <span class="nc">DayOfWeek</span><span class="p">:</span>
+    <span class="k">case</span> <span class="nc">Monday</span><span class="p">,</span> <span class="nc">Tuesday</span><span class="p">,</span> <span class="nc">Wednesday</span><span class="p">,</span> <span class="nc">Thursday</span><span class="p">,</span> <span class="nc">Friday</span><span class="p">,</span> <span class="nc">Saturday</span><span class="p">,</span> <span class="nc">Sunday</span>
 
-<span class="k">import</span> <span class="nn">DayOfWeek.</span><span class="o">*</span>
+<span class="k">import</span> <span class="nc">DayOfWeek</span><span class="p">.</span><span class="n">*</span>
 
-<span class="k">def</span> <span class="n">isWeekend</span><span class="o">(</span><span class="n">day</span><span class="k">:</span> <span class="kt">DayOfWeek</span><span class="o">)</span> <span class="k">=</span> <span class="n">day</span> <span class="k">match</span>
-    <span class="k">case</span> <span class="nc">Saturday</span> <span class="o">|</span> <span class="nc">Sunday</span> <span class="k">=&gt;</span> <span class="kc">true</span>
-    <span class="k">case</span> <span class="k">_</span> <span class="k">=&gt;</span> <span class="kc">false</span>
+<span class="k">def</span> <span class="nf">isWeekend</span><span class="p">(</span><span class="n">day</span><span class="p">:</span> <span class="nc">DayOfWeek</span><span class="p">)</span> <span class="o">=</span> <span class="n">day</span> <span class="k">match</span>
+    <span class="k">case</span> <span class="nc">Saturday</span> <span class="o">|</span> <span class="nc">Sunday</span> <span class="o">=&gt;</span> <span class="kc">true</span>
+    <span class="k">case</span> <span class="n">_</span> <span class="o">=&gt;</span> <span class="kc">false</span>
 </pre></div>
 </div>
 </li>
 <li><p>Enums can take parameters and define methods</p>
-<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span>enum Direction(val dx: Int, val dy: Int):
-    case Right extends Direction( 1, 0)
-    case Up extends Direction( 0, 1)
-    case Left extends Direction(-1, 0)
-    case Down extends Direction( 0, -1)
+<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="k">enum</span> <span class="nc">Direction</span><span class="p">(</span><span class="kd">val</span> <span class="n">dx</span><span class="p">:</span> <span class="nc">Int</span><span class="p">,</span> <span class="kd">val</span> <span class="n">dy</span><span class="p">:</span> <span class="nc">Int</span><span class="p">):</span>
+    <span class="k">case</span> <span class="nc">Right</span> <span class="k">extends</span> <span class="nc">Direction</span><span class="p">(</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="k">case</span> <span class="nc">Up</span> <span class="k">extends</span> <span class="nc">Direction</span><span class="p">(</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="k">case</span> <span class="nc">Left</span> <span class="k">extends</span> <span class="nc">Direction</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="k">case</span> <span class="nc">Down</span> <span class="k">extends</span> <span class="nc">Direction</span><span class="p">(</span> <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
 
-    def leftTurn = Direction.values((ordinal + 1) % 4)
-end Direction
+    <span class="k">def</span> <span class="nf">leftTurn</span> <span class="o">=</span> <span class="nc">Direction</span><span class="p">.</span><span class="n">values</span><span class="p">((</span><span class="n">ordinal</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">%</span> <span class="mi">4</span><span class="p">)</span>
+<span class="k">end</span> <span class="nc">Direction</span>
 
-val r = Direction.Right
-val u = x.leftTurn // u = Up
-val v = (u.dx, u.dy) // v = (1, 0)
+<span class="kd">val</span> <span class="n">r</span> <span class="o">=</span> <span class="nc">Direction</span><span class="p">.</span><span class="nc">Right</span>
+<span class="kd">val</span> <span class="n">u</span> <span class="o">=</span> <span class="n">x</span><span class="p">.</span><span class="n">leftTurn</span> <span class="c1">// u = Up</span>
+<span class="kd">val</span> <span class="n">v</span> <span class="o">=</span> <span class="p">(</span><span class="n">u</span><span class="p">.</span><span class="n">dx</span><span class="p">,</span> <span class="n">u</span><span class="p">.</span><span class="n">dy</span><span class="p">)</span> <span class="c1">// v = (1, 0)</span>
 </pre></div>
 </div>
 <ul class="simple">
@@ -451,13 +504,13 @@ val v = (u.dx, u.dy) // v = (1, 0)
 </ul>
 </li>
 <li><p>An enum for modeling payment methods:</p>
-<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="n">enum</span> <span class="nc">PaymentMethod</span><span class="k">:</span>
-    <span class="kt">case</span> <span class="kt">CreditCard</span><span class="o">(</span><span class="kt">kind:</span> <span class="kt">Card</span><span class="o">,</span> <span class="kt">holder:</span> <span class="kt">String</span><span class="o">,</span> <span class="n">number</span><span class="k">:</span> <span class="kt">Long</span><span class="o">,</span> <span class="n">expires</span><span class="k">:</span> <span class="kt">Date</span><span class="o">)</span>
-    <span class="k">case</span> <span class="nc">PayPal</span><span class="o">(</span><span class="n">email</span><span class="k">:</span> <span class="kt">String</span><span class="o">)</span>
+<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="k">enum</span> <span class="nc">PaymentMethod</span><span class="p">:</span>
+    <span class="k">case</span> <span class="nc">CreditCard</span><span class="p">(</span><span class="n">kind</span><span class="p">:</span> <span class="nc">Card</span><span class="p">,</span> <span class="n">holder</span><span class="p">:</span> <span class="nc">String</span><span class="p">,</span> <span class="n">number</span><span class="p">:</span> <span class="nc">Long</span><span class="p">,</span> <span class="n">expires</span><span class="p">:</span> <span class="nc">Date</span><span class="p">)</span>
+    <span class="k">case</span> <span class="nc">PayPal</span><span class="p">(</span><span class="n">email</span><span class="p">:</span> <span class="nc">String</span><span class="p">)</span>
     <span class="k">case</span> <span class="nc">Cash</span>
 
-<span class="n">enum</span> <span class="nc">Card</span><span class="k">:</span>
-    <span class="kt">case</span> <span class="kt">Visa</span><span class="o">,</span> <span class="nc">Mastercard</span><span class="o">,</span> <span class="nc">Amex</span>
+<span class="k">enum</span> <span class="nc">Card</span><span class="p">:</span>
+    <span class="k">case</span> <span class="nc">Visa</span><span class="p">,</span> <span class="nc">Mastercard</span><span class="p">,</span> <span class="nc">Amex</span>
 </pre></div>
 </div>
 <ul class="simple">
@@ -472,8 +525,8 @@ val v = (u.dx, u.dy) // v = (1, 0)
 </ul>
 </li>
 </ul>
-</div>
-<div class="section" id="subtyping-and-generics">
+</section>
+<section id="subtyping-and-generics">
 <h2>4.5 Subtyping and Generics<a class="headerlink" href="#subtyping-and-generics" title="Permalink to this headline">¶</a></h2>
 <ul>
 <li><p>Two principal forms of polymorphism:</p>
@@ -494,7 +547,7 @@ val v = (u.dx, u.dy) // v = (1, 0)
 <li><p>Can we be more precise?</p></li>
 <li><p>For example one might want to express that this methods takes Empty sets to Empty and NonEmpty sets to NonEmpty.</p></li>
 </ul>
-<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="n">assertAllPos</span><span class="o">[</span><span class="kt">S</span> <span class="k">&lt;:</span> <span class="kt">IntSet</span><span class="o">](</span><span class="n">r</span><span class="k">:</span> <span class="kt">S</span><span class="o">)</span><span class="k">:</span> <span class="kt">S</span> <span class="o">=</span> <span class="o">...</span>
+<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">assertAllPos</span><span class="p">[</span><span class="nc">S</span> <span class="o">&lt;:</span> <span class="nc">IntSet</span><span class="p">](</span><span class="n">r</span><span class="p">:</span> <span class="nc">S</span><span class="p">):</span> <span class="nc">S</span> <span class="o">=</span> <span class="p">...</span>
 </pre></div>
 </div>
 <ul class="simple">
@@ -519,10 +572,10 @@ val v = (u.dx, u.dy) // v = (1, 0)
 </ul>
 </li>
 <li><p>Which line will lead to a type error?</p>
-<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="k">val</span> <span class="n">a</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">NonEmpty</span><span class="o">]</span> <span class="k">=</span> <span class="nc">Array</span><span class="o">(</span><span class="nc">NonEmpty</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span> <span class="nc">Empty</span><span class="o">(),</span> <span class="nc">Empty</span><span class="o">()))</span>
-<span class="k">val</span> <span class="n">b</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">IntSet</span><span class="o">]</span> <span class="k">=</span> <span class="n">a</span>
-<span class="n">b</span><span class="o">(</span><span class="mi">0</span><span class="o">)</span> <span class="k">=</span> <span class="nc">Empty</span><span class="o">()</span>
-<span class="k">val</span> <span class="n">s</span><span class="k">:</span> <span class="kt">NonEmpty</span> <span class="o">=</span> <span class="n">a</span><span class="o">(</span><span class="mi">0</span><span class="o">)</span>
+<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="kd">val</span> <span class="n">a</span><span class="p">:</span> <span class="nc">Array</span><span class="p">[</span><span class="nc">NonEmpty</span><span class="p">]</span> <span class="o">=</span> <span class="nc">Array</span><span class="p">(</span><span class="nc">NonEmpty</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nc">Empty</span><span class="p">(),</span> <span class="nc">Empty</span><span class="p">()))</span>
+<span class="kd">val</span> <span class="n">b</span><span class="p">:</span> <span class="nc">Array</span><span class="p">[</span><span class="nc">IntSet</span><span class="p">]</span> <span class="o">=</span> <span class="n">a</span>
+<span class="n">b</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="o">=</span> <span class="nc">Empty</span><span class="p">()</span>
+<span class="kd">val</span> <span class="n">s</span><span class="p">:</span> <span class="nc">NonEmpty</span> <span class="o">=</span> <span class="n">a</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
 </pre></div>
 </div>
 <ul class="simple">
@@ -530,14 +583,14 @@ val v = (u.dx, u.dy) // v = (1, 0)
 </ul>
 </li>
 </ul>
-</div>
-<div class="section" id="variance">
+</section>
+<section id="variance">
 <h2>4.6 Variance<a class="headerlink" href="#variance" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li><p>Skipped</p></li>
 </ul>
-</div>
-</div>
+</section>
+</section>
 
     <script type="text/x-thebe-config">
     {
@@ -561,54 +614,42 @@ val v = (u.dx, u.dy) // v = (1, 0)
 
               </div>
               
-        
             
-
-
-
-<div class='prev-next-bottom'>
-    
-    <div id="prev">
-        <a class="left-prev" href="Week_3_Data_and_Abstraction.html" title="previous page">
-            <i class="prevnext-label fas fa-angle-left"></i>
-            <div class="prevnext-info">
-                <p class="prevnext-label">previous</p>
-                <p class="prevnext-title">3 Data and Abstraction</p>
-            </div>
-        </a>
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'> 
+    <a class='left-prev' id="prev-link" href="Week_3_Data_and_Abstraction.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">3 Data and Abstraction</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="Week_5_Lists.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">5 Lists</p>
     </div>
-     <div id="next">
-        <a class="right-next" href="Week_5_Lists.html" title="next page">
-            <div class="prevnext-info">
-                <p class="prevnext-label">next</p>
-                <p class="prevnext-title">5 Lists</p>
-            </div>
-            <i class="prevnext-label fas fa-angle-right"></i>
-        </a>
-     </div>
-
+    <i class="fas fa-angle-right"></i>
+    </a>
 </div>
-        
+            
         </div>
     </div>
-    <footer class="footer mt-5 mt-md-0">
-    <div class="container">
-      <p>
-        
-          By Manasij Venkatesh<br/>
-        
-            &copy; Copyright 2021.<br/>
-      </p>
-    </div>
-  </footer>
+    <footer class="footer">
+  <p>
+    
+      By Manasij Venkatesh<br/>
+    
+        &copy; Copyright 2021.<br/>
+  </p>
+</footer>
 </main>
 
 
       </div>
     </div>
   
-  <script src="_static/js/index.1c5a1a01449ed65a7b51.js"></script>
+  <script src="_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
 
-  
   </body>
 </html>

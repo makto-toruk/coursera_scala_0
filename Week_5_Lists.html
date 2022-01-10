@@ -4,11 +4,12 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>5 Lists &#8212; Lectures notes for Functional Programming Principles in Scala by Martin Odersky</title>
     
-  <link href="_static/css/theme.css" rel="stylesheet" />
-  <link href="_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
+  <link href="_static/css/theme.css" rel="stylesheet">
+  <link href="_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
 
     
   <link rel="stylesheet"
@@ -22,8 +23,8 @@
       
 
     
-    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="_static/sphinx-book-theme.e8f53015daec13862f6db5e763c41738.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
     <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
@@ -31,19 +32,19 @@
     <link rel="stylesheet" type="text/css" href="_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
     <link rel="stylesheet" type="text/css" href="_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
     
-  <link rel="preload" as="script" href="_static/js/index.1c5a1a01449ed65a7b51.js">
+  <link rel="preload" as="script" href="_static/js/index.be7d3bbb2ef33a8344ce.js">
 
-    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
     <script src="_static/jquery.js"></script>
     <script src="_static/underscore.js"></script>
     <script src="_static/doctools.js"></script>
     <script src="_static/togglebutton.js"></script>
     <script src="_static/clipboard.min.js"></script>
     <script src="_static/copybutton.js"></script>
-    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-    <script src="_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
     <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
-    <script >
+    <script>
         const thebe_selector = ".thebe"
         const thebe_selector_input = "pre"
         const thebe_selector_output = ".output"
@@ -54,7 +55,10 @@
     <link rel="next" title="6 Collections" href="Week_6_Collections.html" />
     <link rel="prev" title="4 Types and Pattern Matching" href="Week_4_Types_and_Pattern_Matching.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="docsearch:language" content="en" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
     
   </head>
   <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
@@ -70,6 +74,7 @@
     
         <div class="navbar-brand-box">
     <a class="navbar-brand text-wrap" href="index.html">
+      
       
       
       <h1 class="site-logo" id="site-title">Lectures notes for Functional Programming Principles in Scala by Martin Odersky</h1>
@@ -157,7 +162,7 @@
                 data-placement="left">.md</button></a>
         <!-- Download PDF via print -->
         <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
-            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
     </div>
 </div>
 
@@ -193,7 +198,7 @@
         </div>
 
         <!-- Table of contents -->
-        <div class="d-none d-md-block col-md-2 bd-toc show">
+        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
             
             <div class="tocsection onthispage pt-5 pb-3">
                 <i class="fas fa-list"></i> Contents
@@ -233,30 +238,73 @@
 </div>
     <div id="main-content" class="row">
         <div class="col-12 col-md-9 pl-md-3 pr-md-0">
-        
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>5 Lists</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#a-closer-look-at-lists">
+   5.1 A Closer Look At Lists
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#tuples-and-generic-methods">
+   5.2 Tuples and Generic Methods
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#higher-order-list-functions">
+   5.3 Higher-Order List Functions
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#reduction-of-lists">
+   5.4 Reduction of Lists
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#reasoning-about-lists">
+   5.5 Reasoning about lists
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            
               <div>
                 
-  <div class="section" id="lists">
+  <section class="tex2jax_ignore mathjax_ignore" id="lists">
 <h1>5 Lists<a class="headerlink" href="#lists" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="a-closer-look-at-lists">
+<section id="a-closer-look-at-lists">
 <h2>5.1 A Closer Look At Lists<a class="headerlink" href="#a-closer-look-at-lists" title="Permalink to this headline">¶</a></h2>
 <ul>
 <li><p>Construction:</p>
-<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="k">val</span> <span class="n">fruits</span> <span class="k">=</span> <span class="n">list</span><span class="o">(</span><span class="s">&quot;Apple&quot;</span><span class="o">,</span> <span class="s">&quot;Orange&quot;</span><span class="o">,</span> <span class="s">&quot;Banana&quot;</span><span class="o">)</span>
-<span class="k">val</span> <span class="n">nums</span> <span class="k">=</span> <span class="mi">1</span> <span class="o">::</span> <span class="mi">2</span> <span class="o">::</span> <span class="nc">Nil</span>
+<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="kd">val</span> <span class="n">fruits</span> <span class="o">=</span> <span class="n">list</span><span class="p">(</span><span class="s">&quot;Apple&quot;</span><span class="p">,</span> <span class="s">&quot;Orange&quot;</span><span class="p">,</span> <span class="s">&quot;Banana&quot;</span><span class="p">)</span>
+<span class="kd">val</span> <span class="n">nums</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">::</span> <span class="mi">2</span> <span class="o">::</span> <span class="nc">Nil</span>
 </pre></div>
 </div>
 </li>
 <li><p>Decomposition:</p>
-<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="n">fruits</span><span class="o">.</span><span class="n">head</span> <span class="c1">// &quot;Apple&quot;</span>
-<span class="n">nums</span><span class="o">.</span><span class="n">tail</span> <span class="c1">// 2 :: Nil</span>
-<span class="n">nums</span><span class="o">.</span><span class="n">isEmpty</span> <span class="c1">// false</span>
+<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="n">fruits</span><span class="p">.</span><span class="n">head</span> <span class="c1">// &quot;Apple&quot;</span>
+<span class="n">nums</span><span class="p">.</span><span class="n">tail</span> <span class="c1">// 2 :: Nil</span>
+<span class="n">nums</span><span class="p">.</span><span class="n">isEmpty</span> <span class="c1">// false</span>
 </pre></div>
 </div>
 </li>
 <li><p>Pattern match:</p>
 <div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="n">nums</span> <span class="k">match</span>
-    <span class="k">case</span> <span class="n">x</span> <span class="o">::</span> <span class="n">y</span> <span class="o">::</span> <span class="k">_</span> <span class="k">=&gt;</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span>
+    <span class="k">case</span> <span class="n">x</span> <span class="o">::</span> <span class="n">y</span> <span class="o">::</span> <span class="n">_</span> <span class="o">=&gt;</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span>
 </pre></div>
 </div>
 </li>
@@ -290,31 +338,31 @@
 </ul>
 </li>
 <li><p>Example implementation of concat</p>
-<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="n">extension</span> <span class="o">[</span><span class="kt">T</span><span class="o">](</span><span class="n">xs</span><span class="k">:</span> <span class="kt">List</span><span class="o">[</span><span class="kt">T</span><span class="o">])</span>
-    <span class="k">def</span> <span class="o">++</span> <span class="o">(</span><span class="n">ys</span><span class="k">:</span> <span class="kt">List</span><span class="o">[</span><span class="kt">T</span><span class="o">])</span><span class="k">:</span> <span class="kt">List</span><span class="o">[</span><span class="kt">T</span><span class="o">]</span> <span class="k">=</span> <span class="n">xs</span> <span class="k">match</span>
-        <span class="k">case</span> <span class="nc">Nil</span> <span class="k">=&gt;</span> <span class="n">ys</span>
-        <span class="k">case</span> <span class="n">x</span> <span class="o">::</span> <span class="n">xs1</span> <span class="k">=&gt;</span> <span class="n">x</span> <span class="o">::</span> <span class="o">(</span><span class="n">xs1</span> <span class="o">++</span> <span class="n">ys</span><span class="o">)</span>
+<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="k">extension</span> <span class="p">[</span><span class="nc">T</span><span class="p">](</span><span class="n">xs</span><span class="p">:</span> <span class="nc">List</span><span class="p">[</span><span class="nc">T</span><span class="p">])</span>
+    <span class="k">def</span> <span class="nf">++</span> <span class="p">(</span><span class="n">ys</span><span class="p">:</span> <span class="nc">List</span><span class="p">[</span><span class="nc">T</span><span class="p">]):</span> <span class="nc">List</span><span class="p">[</span><span class="nc">T</span><span class="p">]</span> <span class="o">=</span> <span class="n">xs</span> <span class="k">match</span>
+        <span class="k">case</span> <span class="nc">Nil</span> <span class="o">=&gt;</span> <span class="n">ys</span>
+        <span class="k">case</span> <span class="n">x</span> <span class="o">::</span> <span class="n">xs1</span> <span class="o">=&gt;</span> <span class="n">x</span> <span class="o">::</span> <span class="p">(</span><span class="n">xs1</span> <span class="o">++</span> <span class="n">ys</span><span class="p">)</span>
 </pre></div>
 </div>
 </li>
 </ul>
-</div>
-<div class="section" id="tuples-and-generic-methods">
+</section>
+<section id="tuples-and-generic-methods">
 <h2>5.2 Tuples and Generic Methods<a class="headerlink" href="#tuples-and-generic-methods" title="Permalink to this headline">¶</a></h2>
 <ul>
 <li><p>Insertion sort:</p>
-<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="n">msort</span><span class="o">(</span><span class="n">xs</span><span class="k">:</span> <span class="kt">List</span><span class="o">[</span><span class="kt">Int</span><span class="o">])</span><span class="k">:</span> <span class="kt">List</span><span class="o">[</span><span class="kt">Int</span><span class="o">]</span> <span class="k">=</span>
-    <span class="k">val</span> <span class="n">n</span> <span class="k">=</span> <span class="n">xs</span><span class="o">.</span><span class="n">length</span> <span class="o">/</span> <span class="mi">2</span>
-    <span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">0</span> <span class="n">then</span> <span class="n">xs</span>
+<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">msort</span><span class="p">(</span><span class="n">xs</span><span class="p">:</span> <span class="nc">List</span><span class="p">[</span><span class="nc">Int</span><span class="p">]):</span> <span class="nc">List</span><span class="p">[</span><span class="nc">Int</span><span class="p">]</span> <span class="o">=</span>
+    <span class="kd">val</span> <span class="n">n</span> <span class="o">=</span> <span class="n">xs</span><span class="p">.</span><span class="n">length</span> <span class="o">/</span> <span class="mi">2</span>
+    <span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">0</span> <span class="k">then</span> <span class="n">xs</span>
     <span class="k">else</span>
-        <span class="k">def</span> <span class="n">merge</span><span class="o">(</span><span class="n">xs</span><span class="k">:</span> <span class="kt">List</span><span class="o">[</span><span class="kt">Int</span><span class="o">],</span> <span class="n">ys</span><span class="k">:</span> <span class="kt">List</span><span class="o">[</span><span class="kt">Int</span><span class="o">])</span> <span class="k">=</span> <span class="o">(</span><span class="n">xs</span><span class="o">,</span> <span class="n">ys</span><span class="o">)</span> <span class="k">match</span>
-            <span class="k">case</span> <span class="o">(</span><span class="nc">Nil</span><span class="o">,</span> <span class="n">ys</span><span class="o">)</span> <span class="k">=&gt;</span> <span class="n">ys</span>
-            <span class="k">case</span> <span class="o">(</span><span class="n">xs</span><span class="o">,</span> <span class="nc">Nil</span><span class="o">)</span> <span class="k">=&gt;</span> <span class="n">xs</span>
-            <span class="k">case</span> <span class="o">(</span><span class="n">x</span> <span class="o">::</span> <span class="n">xs1</span><span class="o">,</span> <span class="n">y</span> <span class="o">::</span> <span class="n">ys1</span><span class="o">)</span> <span class="k">=&gt;</span>
-                <span class="k">if</span> <span class="n">x</span> <span class="o">&lt;</span> <span class="n">y</span> <span class="n">then</span> <span class="n">x</span> <span class="o">::</span> <span class="n">merge</span><span class="o">(</span><span class="n">xs1</span><span class="o">,</span> <span class="n">ys</span><span class="o">)</span>
-                <span class="k">else</span> <span class="n">y</span> <span class="o">::</span> <span class="n">merge</span><span class="o">(</span><span class="n">xs</span><span class="o">,</span> <span class="n">ys1</span><span class="o">)</span>
-        <span class="k">val</span> <span class="o">(</span><span class="n">fst</span><span class="o">,</span> <span class="n">snd</span><span class="o">)</span> <span class="k">=</span> <span class="n">xs</span><span class="o">.</span><span class="n">splitAt</span><span class="o">(</span><span class="n">n</span><span class="o">)</span>
-        <span class="n">merge</span><span class="o">(</span><span class="n">msort</span><span class="o">(</span><span class="n">fst</span><span class="o">),</span> <span class="n">msort</span><span class="o">(</span><span class="n">snd</span><span class="o">))</span>
+        <span class="k">def</span> <span class="nf">merge</span><span class="p">(</span><span class="n">xs</span><span class="p">:</span> <span class="nc">List</span><span class="p">[</span><span class="nc">Int</span><span class="p">],</span> <span class="n">ys</span><span class="p">:</span> <span class="nc">List</span><span class="p">[</span><span class="nc">Int</span><span class="p">])</span> <span class="o">=</span> <span class="p">(</span><span class="n">xs</span><span class="p">,</span> <span class="n">ys</span><span class="p">)</span> <span class="k">match</span>
+            <span class="k">case</span> <span class="p">(</span><span class="nc">Nil</span><span class="p">,</span> <span class="n">ys</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="n">ys</span>
+            <span class="k">case</span> <span class="p">(</span><span class="n">xs</span><span class="p">,</span> <span class="nc">Nil</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="n">xs</span>
+            <span class="k">case</span> <span class="p">(</span><span class="n">x</span> <span class="o">::</span> <span class="n">xs1</span><span class="p">,</span> <span class="n">y</span> <span class="o">::</span> <span class="n">ys1</span><span class="p">)</span> <span class="o">=&gt;</span>
+                <span class="k">if</span> <span class="n">x</span> <span class="o">&lt;</span> <span class="n">y</span> <span class="k">then</span> <span class="n">x</span> <span class="o">::</span> <span class="n">merge</span><span class="p">(</span><span class="n">xs1</span><span class="p">,</span> <span class="n">ys</span><span class="p">)</span>
+                <span class="k">else</span> <span class="n">y</span> <span class="o">::</span> <span class="n">merge</span><span class="p">(</span><span class="n">xs</span><span class="p">,</span> <span class="n">ys1</span><span class="p">)</span>
+        <span class="kd">val</span> <span class="p">(</span><span class="n">fst</span><span class="p">,</span> <span class="n">snd</span><span class="p">)</span> <span class="o">=</span> <span class="n">xs</span><span class="p">.</span><span class="n">splitAt</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+        <span class="n">merge</span><span class="p">(</span><span class="n">msort</span><span class="p">(</span><span class="n">fst</span><span class="p">),</span> <span class="n">msort</span><span class="p">(</span><span class="n">snd</span><span class="p">))</span>
 </pre></div>
 </div>
 <ul class="simple">
@@ -322,43 +370,43 @@
 </ul>
 </li>
 <li><p>Tuple construction:</p>
-<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="k">val</span> <span class="n">pair</span> <span class="k">=</span> <span class="o">(</span><span class="s">&quot;answer&quot;</span><span class="o">,</span> <span class="mi">42</span><span class="o">)</span>
-<span class="k">val</span> <span class="o">(</span><span class="n">label</span><span class="o">,</span> <span class="n">value</span><span class="o">)</span> <span class="k">=</span> <span class="n">pair</span> <span class="c1">// preferred</span>
-<span class="k">val</span> <span class="n">label</span> <span class="k">=</span> <span class="n">pair</span><span class="o">.</span><span class="n">_1</span> <span class="c1">// not preferred</span>
-<span class="k">val</span> <span class="n">value</span> <span class="k">=</span> <span class="n">pair</span><span class="o">.</span><span class="n">_2</span>
+<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="kd">val</span> <span class="n">pair</span> <span class="o">=</span> <span class="p">(</span><span class="s">&quot;answer&quot;</span><span class="p">,</span> <span class="mi">42</span><span class="p">)</span>
+<span class="kd">val</span> <span class="p">(</span><span class="n">label</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span> <span class="o">=</span> <span class="n">pair</span> <span class="c1">// preferred</span>
+<span class="kd">val</span> <span class="n">label</span> <span class="o">=</span> <span class="n">pair</span><span class="p">.</span><span class="n">_1</span> <span class="c1">// not preferred</span>
+<span class="kd">val</span> <span class="n">value</span> <span class="o">=</span> <span class="n">pair</span><span class="p">.</span><span class="n">_2</span>
 </pre></div>
 </div>
 </li>
 </ul>
-</div>
-<div class="section" id="higher-order-list-functions">
+</section>
+<section id="higher-order-list-functions">
 <h2>5.3 Higher-Order List Functions<a class="headerlink" href="#higher-order-list-functions" title="Permalink to this headline">¶</a></h2>
 <ul>
 <li><p>Apply function to elements of list</p>
-<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="n">scaleList</span><span class="o">(</span><span class="n">xs</span><span class="k">:</span> <span class="kt">List</span><span class="o">[</span><span class="kt">Double</span><span class="o">],</span> <span class="n">factor</span><span class="k">:</span> <span class="kt">Double</span><span class="o">)</span><span class="k">:</span> <span class="kt">List</span><span class="o">[</span><span class="kt">Double</span><span class="o">]</span> <span class="k">=</span> <span class="n">xs</span> <span class="k">match</span>
-    <span class="k">case</span> <span class="nc">Nil</span> <span class="k">=&gt;</span> <span class="nc">Nil</span>
-    <span class="k">case</span> <span class="n">y</span> <span class="o">::</span> <span class="n">ys</span> <span class="k">=&gt;</span> <span class="n">y</span> <span class="o">*</span> <span class="n">factor</span> <span class="o">::</span> <span class="n">scaleList</span><span class="o">(</span><span class="n">ys</span><span class="o">,</span> <span class="n">factor</span><span class="o">)</span>
+<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">scaleList</span><span class="p">(</span><span class="n">xs</span><span class="p">:</span> <span class="nc">List</span><span class="p">[</span><span class="nc">Double</span><span class="p">],</span> <span class="n">factor</span><span class="p">:</span> <span class="nc">Double</span><span class="p">):</span> <span class="nc">List</span><span class="p">[</span><span class="nc">Double</span><span class="p">]</span> <span class="o">=</span> <span class="n">xs</span> <span class="k">match</span>
+    <span class="k">case</span> <span class="nc">Nil</span> <span class="o">=&gt;</span> <span class="nc">Nil</span>
+    <span class="k">case</span> <span class="n">y</span> <span class="o">::</span> <span class="n">ys</span> <span class="o">=&gt;</span> <span class="n">y</span> <span class="o">*</span> <span class="n">factor</span> <span class="o">::</span> <span class="n">scaleList</span><span class="p">(</span><span class="n">ys</span><span class="p">,</span> <span class="n">factor</span><span class="p">)</span>
 </pre></div>
 </div>
 </li>
 <li><p><code class="docutils literal notranslate"><span class="pre">map</span></code> does just this</p>
-<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="n">scaleList</span><span class="o">(</span><span class="n">xs</span><span class="k">:</span> <span class="kt">List</span><span class="o">[</span><span class="kt">Double</span><span class="o">],</span> <span class="n">factor</span><span class="k">:</span> <span class="kt">Double</span><span class="o">)</span> <span class="k">=</span> 
-    <span class="n">xs</span><span class="o">.</span><span class="n">map</span><span class="o">(</span><span class="n">x</span> <span class="k">=&gt;</span> <span class="n">x</span> <span class="o">*</span> <span class="n">factor</span><span class="o">)</span>
-<span class="k">def</span> <span class="n">squareList</span><span class="o">(</span><span class="n">xs</span><span class="k">:</span> <span class="kt">List</span><span class="o">[</span><span class="kt">Int</span><span class="o">])</span><span class="k">:</span> <span class="kt">List</span><span class="o">[</span><span class="kt">Int</span><span class="o">]</span> <span class="k">=</span>
-    <span class="n">xs</span><span class="o">.</span><span class="n">map</span><span class="o">(</span><span class="n">x</span> <span class="k">=&gt;</span> <span class="n">x</span> <span class="o">*</span> <span class="n">x</span><span class="o">)</span>
+<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">scaleList</span><span class="p">(</span><span class="n">xs</span><span class="p">:</span> <span class="nc">List</span><span class="p">[</span><span class="nc">Double</span><span class="p">],</span> <span class="n">factor</span><span class="p">:</span> <span class="nc">Double</span><span class="p">)</span> <span class="o">=</span> 
+    <span class="n">xs</span><span class="p">.</span><span class="n">map</span><span class="p">(</span><span class="n">x</span> <span class="o">=&gt;</span> <span class="n">x</span> <span class="o">*</span> <span class="n">factor</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">squareList</span><span class="p">(</span><span class="n">xs</span><span class="p">:</span> <span class="nc">List</span><span class="p">[</span><span class="nc">Int</span><span class="p">]):</span> <span class="nc">List</span><span class="p">[</span><span class="nc">Int</span><span class="p">]</span> <span class="o">=</span>
+    <span class="n">xs</span><span class="p">.</span><span class="n">map</span><span class="p">(</span><span class="n">x</span> <span class="o">=&gt;</span> <span class="n">x</span> <span class="o">*</span> <span class="n">x</span><span class="p">)</span>
 </pre></div>
 </div>
 </li>
 <li><p>Also common: select elements satisfying a given condition:</p>
-<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="n">posElems</span><span class="o">(</span><span class="n">xs</span><span class="k">:</span> <span class="kt">List</span><span class="o">[</span><span class="kt">Int</span><span class="o">])</span><span class="k">:</span> <span class="kt">List</span><span class="o">[</span><span class="kt">Int</span><span class="o">]</span><span class="k">:</span> <span class="kt">xs</span> <span class="kt">match</span>
-    <span class="k">case</span> <span class="nc">Nil</span> <span class="k">=&gt;</span> <span class="n">xs</span>
-    <span class="k">case</span> <span class="n">y</span> <span class="o">::</span> <span class="n">ys</span> <span class="k">=&gt;</span> <span class="k">if</span> <span class="n">y</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="n">then</span> <span class="n">y</span> <span class="o">::</span> <span class="n">posElems</span><span class="o">(</span><span class="n">ys</span><span class="o">)</span> <span class="k">else</span> <span class="n">posElems</span><span class="o">(</span><span class="n">ys</span><span class="o">)</span>
+<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">posElems</span><span class="p">(</span><span class="n">xs</span><span class="p">:</span> <span class="nc">List</span><span class="p">[</span><span class="nc">Int</span><span class="p">]):</span> <span class="nc">List</span><span class="p">[</span><span class="nc">Int</span><span class="p">]:</span> <span class="n">xs</span> <span class="k">match</span>
+    <span class="k">case</span> <span class="nc">Nil</span> <span class="o">=&gt;</span> <span class="n">xs</span>
+    <span class="k">case</span> <span class="n">y</span> <span class="o">::</span> <span class="n">ys</span> <span class="o">=&gt;</span> <span class="k">if</span> <span class="n">y</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="k">then</span> <span class="n">y</span> <span class="o">::</span> <span class="n">posElems</span><span class="p">(</span><span class="n">ys</span><span class="p">)</span> <span class="k">else</span> <span class="n">posElems</span><span class="p">(</span><span class="n">ys</span><span class="p">)</span>
 </pre></div>
 </div>
 </li>
 <li><p><code class="docutils literal notranslate"><span class="pre">filter</span></code> does just this:</p>
-<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="n">posElems</span><span class="o">(</span><span class="n">xs</span><span class="k">:</span> <span class="kt">List</span><span class="o">[</span><span class="kt">Int</span><span class="o">])</span><span class="k">:</span> <span class="kt">List</span><span class="o">[</span><span class="kt">Int</span><span class="o">]</span> <span class="k">=</span>
-    <span class="n">xs</span><span class="o">.</span><span class="n">filter</span><span class="o">(</span><span class="n">x</span> <span class="k">=&gt;</span> <span class="n">x</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="o">)</span>
+<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">posElems</span><span class="p">(</span><span class="n">xs</span><span class="p">:</span> <span class="nc">List</span><span class="p">[</span><span class="nc">Int</span><span class="p">]):</span> <span class="nc">List</span><span class="p">[</span><span class="nc">Int</span><span class="p">]</span> <span class="o">=</span>
+    <span class="n">xs</span><span class="p">.</span><span class="n">filter</span><span class="p">(</span><span class="n">x</span> <span class="o">=&gt;</span> <span class="n">x</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span>
 </pre></div>
 </div>
 </li>
@@ -372,51 +420,51 @@
 </ul>
 </li>
 <li><p>Implement <code class="docutils literal notranslate"><span class="pre">pack(List(&quot;a&quot;,</span> <span class="pre">&quot;a&quot;,</span> <span class="pre">&quot;a&quot;,</span> <span class="pre">&quot;b&quot;,</span> <span class="pre">&quot;c&quot;,</span> <span class="pre">&quot;c&quot;,</span> <span class="pre">&quot;a&quot;))</span></code> that gives <code class="docutils literal notranslate"><span class="pre">List(List(&quot;a&quot;,</span> <span class="pre">&quot;a&quot;,</span> <span class="pre">&quot;a&quot;),</span> <span class="pre">List(&quot;b&quot;),</span> <span class="pre">List(&quot;c&quot;,</span> <span class="pre">&quot;c&quot;),</span> <span class="pre">List(&quot;a&quot;))</span></code></p>
-<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="n">pack</span><span class="o">[</span><span class="kt">T</span><span class="o">](</span><span class="n">xs</span><span class="k">:</span> <span class="kt">List</span><span class="o">[</span><span class="kt">T</span><span class="o">])</span><span class="k">:</span> <span class="kt">List</span><span class="o">[</span><span class="kt">List</span><span class="o">[</span><span class="kt">T</span><span class="o">]]</span> <span class="k">=</span> <span class="n">xs</span> <span class="k">match</span>
-    <span class="k">case</span> <span class="nc">Nil</span> <span class="k">=&gt;</span> <span class="nc">Nil</span>
-    <span class="k">case</span> <span class="n">x</span> <span class="o">::</span> <span class="n">xs1</span> <span class="k">=&gt;</span> 
-        <span class="k">val</span> <span class="o">(</span><span class="n">more</span><span class="o">,</span> <span class="n">rest</span><span class="o">)</span> <span class="k">=</span> <span class="n">xs1</span><span class="o">.</span><span class="n">span</span><span class="o">(</span><span class="n">y</span> <span class="k">=&gt;</span> <span class="n">y</span> <span class="o">==</span> <span class="n">x</span><span class="o">)</span>
-        <span class="o">(</span><span class="n">x</span> <span class="o">::</span> <span class="n">more</span><span class="o">)</span> <span class="o">::</span> <span class="n">pack</span><span class="o">(</span><span class="n">rest</span><span class="o">)</span>
+<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">pack</span><span class="p">[</span><span class="nc">T</span><span class="p">](</span><span class="n">xs</span><span class="p">:</span> <span class="nc">List</span><span class="p">[</span><span class="nc">T</span><span class="p">]):</span> <span class="nc">List</span><span class="p">[</span><span class="nc">List</span><span class="p">[</span><span class="nc">T</span><span class="p">]]</span> <span class="o">=</span> <span class="n">xs</span> <span class="k">match</span>
+    <span class="k">case</span> <span class="nc">Nil</span> <span class="o">=&gt;</span> <span class="nc">Nil</span>
+    <span class="k">case</span> <span class="n">x</span> <span class="o">::</span> <span class="n">xs1</span> <span class="o">=&gt;</span> 
+        <span class="kd">val</span> <span class="p">(</span><span class="n">more</span><span class="p">,</span> <span class="n">rest</span><span class="p">)</span> <span class="o">=</span> <span class="n">xs1</span><span class="p">.</span><span class="n">span</span><span class="p">(</span><span class="n">y</span> <span class="o">=&gt;</span> <span class="n">y</span> <span class="o">==</span> <span class="n">x</span><span class="p">)</span>
+        <span class="p">(</span><span class="n">x</span> <span class="o">::</span> <span class="n">more</span><span class="p">)</span> <span class="o">::</span> <span class="n">pack</span><span class="p">(</span><span class="n">rest</span><span class="p">)</span>
 </pre></div>
 </div>
 </li>
 <li><p>Implement <code class="docutils literal notranslate"><span class="pre">encode(List(&quot;a&quot;,</span> <span class="pre">&quot;a&quot;,</span> <span class="pre">&quot;a&quot;,</span> <span class="pre">&quot;b&quot;,</span> <span class="pre">&quot;c&quot;,</span> <span class="pre">&quot;c&quot;,</span> <span class="pre">&quot;a&quot;))</span></code> that gives <code class="docutils literal notranslate"><span class="pre">List((”a”,</span> <span class="pre">3),</span> <span class="pre">(”b”,</span> <span class="pre">1),</span> <span class="pre">(”c”,</span> <span class="pre">2),</span> <span class="pre">(”a”,</span> <span class="pre">1))</span></code></p>
-<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="n">encode</span><span class="o">[</span><span class="kt">T</span><span class="o">](</span><span class="n">xs</span><span class="k">:</span> <span class="kt">List</span><span class="o">[</span><span class="kt">T</span><span class="o">])</span><span class="k">:</span> <span class="kt">List</span><span class="o">[(</span><span class="kt">T</span><span class="p">,</span> <span class="kt">Int</span><span class="o">)]</span> <span class="k">=</span> 
-    <span class="n">pack</span><span class="o">(</span><span class="n">xs</span><span class="o">).</span><span class="n">map</span><span class="o">(</span><span class="n">x</span> <span class="k">=&gt;</span> <span class="o">(</span><span class="n">x</span><span class="o">.</span><span class="n">head</span><span class="o">,</span> <span class="n">x</span><span class="o">.</span><span class="n">length</span><span class="o">))</span>
+<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">encode</span><span class="p">[</span><span class="nc">T</span><span class="p">](</span><span class="n">xs</span><span class="p">:</span> <span class="nc">List</span><span class="p">[</span><span class="nc">T</span><span class="p">]):</span> <span class="nc">List</span><span class="p">[(</span><span class="nc">T</span><span class="p">,</span> <span class="nc">Int</span><span class="p">)]</span> <span class="o">=</span> 
+    <span class="n">pack</span><span class="p">(</span><span class="n">xs</span><span class="p">).</span><span class="n">map</span><span class="p">(</span><span class="n">x</span> <span class="o">=&gt;</span> <span class="p">(</span><span class="n">x</span><span class="p">.</span><span class="n">head</span><span class="p">,</span> <span class="n">x</span><span class="p">.</span><span class="n">length</span><span class="p">))</span>
 </pre></div>
 </div>
 </li>
 </ul>
-</div>
-<div class="section" id="reduction-of-lists">
+</section>
+<section id="reduction-of-lists">
 <h2>5.4 Reduction of Lists<a class="headerlink" href="#reduction-of-lists" title="Permalink to this headline">¶</a></h2>
 <ul>
 <li><p>Combine elements with an operator</p>
-<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="n">sum</span><span class="o">(</span><span class="n">xs</span><span class="k">:</span> <span class="kt">List</span><span class="o">[</span><span class="kt">Int</span><span class="o">])</span><span class="k">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="n">xs</span> <span class="k">match</span>
-    <span class="k">case</span> <span class="nc">Nil</span> <span class="k">=&gt;</span> <span class="mi">0</span>
-    <span class="k">case</span> <span class="n">y</span> <span class="o">::</span> <span class="n">ys</span> <span class="k">=&gt;</span> <span class="n">y</span> <span class="o">+</span> <span class="n">sum</span><span class="o">(</span><span class="n">ys</span><span class="o">)</span>
+<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">sum</span><span class="p">(</span><span class="n">xs</span><span class="p">:</span> <span class="nc">List</span><span class="p">[</span><span class="nc">Int</span><span class="p">]):</span> <span class="nc">Int</span> <span class="o">=</span> <span class="n">xs</span> <span class="k">match</span>
+    <span class="k">case</span> <span class="nc">Nil</span> <span class="o">=&gt;</span> <span class="mi">0</span>
+    <span class="k">case</span> <span class="n">y</span> <span class="o">::</span> <span class="n">ys</span> <span class="o">=&gt;</span> <span class="n">y</span> <span class="o">+</span> <span class="n">sum</span><span class="p">(</span><span class="n">ys</span><span class="p">)</span>
 </pre></div>
 </div>
 </li>
 <li><p>An abstraction of the above is <code class="docutils literal notranslate"><span class="pre">reduceLeft</span></code></p>
-<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="nc">List</span><span class="o">(</span><span class="n">x1</span><span class="o">,</span> <span class="o">...,</span> <span class="n">xn</span><span class="o">).</span><span class="n">reduceLeft</span><span class="o">(</span><span class="n">op</span><span class="o">)</span> <span class="k">=</span> <span class="n">x1</span><span class="o">.</span><span class="n">op</span><span class="o">(</span><span class="n">x2</span><span class="o">).</span> <span class="o">...</span> <span class="o">.</span><span class="n">op</span><span class="o">(</span><span class="n">xn</span><span class="o">)</span>
+<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="nc">List</span><span class="p">(</span><span class="n">x1</span><span class="p">,</span> <span class="p">...,</span> <span class="n">xn</span><span class="p">).</span><span class="n">reduceLeft</span><span class="p">(</span><span class="n">op</span><span class="p">)</span> <span class="o">=</span> <span class="n">x1</span><span class="p">.</span><span class="n">op</span><span class="p">(</span><span class="n">x2</span><span class="p">).</span> <span class="p">...</span> <span class="p">.</span><span class="n">op</span><span class="p">(</span><span class="n">xn</span><span class="p">)</span>
 </pre></div>
 </div>
 </li>
 <li><p>Examples:</p>
-<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="n">sum</span><span class="o">(</span><span class="n">xs</span><span class="k">:</span> <span class="kt">List</span><span class="o">[</span><span class="kt">Int</span><span class="o">])</span> <span class="k">=</span> <span class="o">(</span><span class="mi">0</span> <span class="o">::</span> <span class="n">xs</span><span class="o">).</span><span class="n">reduceLeft</span><span class="o">((</span><span class="n">x</span><span class="o">,</span> <span class="n">y</span><span class="o">)</span> <span class="k">=&gt;</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span><span class="o">)</span>
-<span class="k">def</span> <span class="n">product</span><span class="o">(</span><span class="n">xs</span><span class="k">:</span> <span class="kt">List</span><span class="o">[</span><span class="kt">Int</span><span class="o">])</span> <span class="k">=</span> <span class="o">(</span><span class="mi">1</span> <span class="o">::</span> <span class="n">xs</span><span class="o">).</span><span class="n">reduceLeft</span><span class="o">((</span><span class="n">x</span><span class="o">,</span> <span class="n">y</span><span class="o">)</span> <span class="k">=&gt;</span> <span class="n">x</span> <span class="o">*</span> <span class="n">y</span><span class="o">)</span>
+<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">sum</span><span class="p">(</span><span class="n">xs</span><span class="p">:</span> <span class="nc">List</span><span class="p">[</span><span class="nc">Int</span><span class="p">])</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span> <span class="o">::</span> <span class="n">xs</span><span class="p">).</span><span class="n">reduceLeft</span><span class="p">((</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">product</span><span class="p">(</span><span class="n">xs</span><span class="p">:</span> <span class="nc">List</span><span class="p">[</span><span class="nc">Int</span><span class="p">])</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">::</span> <span class="n">xs</span><span class="p">).</span><span class="n">reduceLeft</span><span class="p">((</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="n">x</span> <span class="o">*</span> <span class="n">y</span><span class="p">)</span>
 </pre></div>
 </div>
 </li>
 <li><p>Shorter alternatives</p>
-<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="n">sum</span><span class="o">(</span><span class="n">xs</span><span class="k">:</span> <span class="kt">List</span><span class="o">[</span><span class="kt">Int</span><span class="o">])</span> <span class="k">=</span> <span class="o">(</span><span class="mi">0</span> <span class="o">::</span> <span class="n">xs</span><span class="o">).</span><span class="n">reduceLeft</span><span class="o">(</span><span class="k">_</span> <span class="o">+</span> <span class="k">_</span><span class="o">)</span>
-<span class="k">def</span> <span class="n">product</span><span class="o">(</span><span class="n">xs</span><span class="k">:</span> <span class="kt">List</span><span class="o">[</span><span class="kt">Int</span><span class="o">])</span> <span class="k">=</span> <span class="o">(</span><span class="mi">1</span> <span class="o">::</span> <span class="n">xs</span><span class="o">).</span><span class="n">reduceLeft</span><span class="o">(</span><span class="k">_</span> <span class="o">*</span> <span class="k">_</span><span class="o">)</span>
+<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">sum</span><span class="p">(</span><span class="n">xs</span><span class="p">:</span> <span class="nc">List</span><span class="p">[</span><span class="nc">Int</span><span class="p">])</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span> <span class="o">::</span> <span class="n">xs</span><span class="p">).</span><span class="n">reduceLeft</span><span class="p">(</span><span class="n">_</span> <span class="o">+</span> <span class="n">_</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">product</span><span class="p">(</span><span class="n">xs</span><span class="p">:</span> <span class="nc">List</span><span class="p">[</span><span class="nc">Int</span><span class="p">])</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">::</span> <span class="n">xs</span><span class="p">).</span><span class="n">reduceLeft</span><span class="p">(</span><span class="n">_</span> <span class="o">*</span> <span class="n">_</span><span class="p">)</span>
 </pre></div>
 </div>
 </li>
 <li><p>A more general version of <code class="docutils literal notranslate"><span class="pre">reduceLeft</span></code> is <code class="docutils literal notranslate"><span class="pre">foldLeft</span></code> which also takes an accumulator <code class="docutils literal notranslate"><span class="pre">z</span></code></p>
-<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="nc">List</span><span class="o">(</span><span class="n">x1</span><span class="o">,</span> <span class="o">...,</span> <span class="n">xn</span><span class="o">).</span><span class="n">foldLeft</span><span class="o">(</span><span class="n">z</span><span class="o">)(</span><span class="n">op</span><span class="o">)</span> <span class="k">=</span> <span class="n">z</span><span class="o">.</span><span class="n">op</span><span class="o">(</span><span class="n">x1</span><span class="o">).</span><span class="n">op</span> <span class="o">...</span> <span class="o">.</span><span class="n">op</span><span class="o">(</span><span class="n">xn</span><span class="o">)</span>
+<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="nc">List</span><span class="p">(</span><span class="n">x1</span><span class="p">,</span> <span class="p">...,</span> <span class="n">xn</span><span class="p">).</span><span class="n">foldLeft</span><span class="p">(</span><span class="n">z</span><span class="p">)(</span><span class="n">op</span><span class="p">)</span> <span class="o">=</span> <span class="n">z</span><span class="p">.</span><span class="n">op</span><span class="p">(</span><span class="n">x1</span><span class="p">).</span><span class="n">op</span> <span class="p">...</span> <span class="p">.</span><span class="n">op</span><span class="p">(</span><span class="n">xn</span><span class="p">)</span>
 </pre></div>
 </div>
 </li>
@@ -434,47 +482,47 @@
 </div>
 </li>
 <li><p><code class="docutils literal notranslate"><span class="pre">foldRight</span></code> and <code class="docutils literal notranslate"><span class="pre">reduceRight</span></code> also exist:</p>
-<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="nc">List</span><span class="o">(</span><span class="n">x1</span><span class="o">,</span> <span class="o">...,</span> <span class="n">x</span><span class="o">{</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="o">},</span> <span class="n">xn</span><span class="o">).</span><span class="n">reduceRight</span><span class="o">(</span><span class="n">op</span><span class="o">)</span> <span class="k">=</span> <span class="n">x1</span><span class="o">.</span><span class="n">op</span><span class="o">(</span><span class="n">x2</span><span class="o">.</span><span class="n">op</span><span class="o">(</span> <span class="o">...</span> <span class="n">x</span><span class="o">{</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="o">}.</span><span class="n">op</span><span class="o">(</span><span class="n">xn</span><span class="o">)</span> <span class="o">...</span> <span class="o">))</span>
-<span class="nc">List</span><span class="o">(</span><span class="n">x1</span><span class="o">,</span> <span class="o">...,</span> <span class="n">xn</span><span class="o">).</span><span class="n">foldRight</span><span class="o">(</span><span class="n">z</span><span class="o">)(</span><span class="n">op</span> <span class="o">)</span> <span class="k">=</span> <span class="n">x1</span><span class="o">.</span><span class="n">op</span><span class="o">(</span><span class="n">x2</span><span class="o">.</span><span class="n">op</span><span class="o">(</span> <span class="o">...</span> <span class="n">xn</span><span class="o">.</span><span class="n">op</span><span class="o">(</span><span class="n">z</span><span class="o">)</span> <span class="o">...))</span>
+<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="nc">List</span><span class="p">(</span><span class="n">x1</span><span class="p">,</span> <span class="p">...,</span> <span class="n">x</span><span class="p">{</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">},</span> <span class="n">xn</span><span class="p">).</span><span class="n">reduceRight</span><span class="p">(</span><span class="n">op</span><span class="p">)</span> <span class="o">=</span> <span class="n">x1</span><span class="p">.</span><span class="n">op</span><span class="p">(</span><span class="n">x2</span><span class="p">.</span><span class="n">op</span><span class="p">(</span> <span class="p">...</span> <span class="n">x</span><span class="p">{</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">}.</span><span class="n">op</span><span class="p">(</span><span class="n">xn</span><span class="p">)</span> <span class="p">...</span> <span class="p">))</span>
+<span class="nc">List</span><span class="p">(</span><span class="n">x1</span><span class="p">,</span> <span class="p">...,</span> <span class="n">xn</span><span class="p">).</span><span class="n">foldRight</span><span class="p">(</span><span class="n">z</span><span class="p">)(</span><span class="n">op</span> <span class="p">)</span> <span class="o">=</span> <span class="n">x1</span><span class="p">.</span><span class="n">op</span><span class="p">(</span><span class="n">x2</span><span class="p">.</span><span class="n">op</span><span class="p">(</span> <span class="p">...</span> <span class="n">xn</span><span class="p">.</span><span class="n">op</span><span class="p">(</span><span class="n">z</span><span class="p">)</span> <span class="p">...))</span>
 </pre></div>
 </div>
 </li>
 <li><p>Better implementation of <code class="docutils literal notranslate"><span class="pre">reverse</span></code>:</p>
-<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="n">reverse</span><span class="o">[</span><span class="kt">T</span><span class="o">](</span><span class="n">xs</span><span class="k">:</span> <span class="kt">List</span><span class="o">[</span><span class="kt">T</span><span class="o">])</span><span class="k">:</span> <span class="kt">List</span><span class="o">[</span><span class="kt">T</span><span class="o">]</span> <span class="k">=</span> <span class="n">xs</span><span class="o">.</span><span class="n">foldLeft</span><span class="o">(</span><span class="n">z</span><span class="o">?)(</span><span class="n">op</span><span class="o">?)</span>
+<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">reverse</span><span class="p">[</span><span class="nc">T</span><span class="p">](</span><span class="n">xs</span><span class="p">:</span> <span class="nc">List</span><span class="p">[</span><span class="nc">T</span><span class="p">]):</span> <span class="nc">List</span><span class="p">[</span><span class="nc">T</span><span class="p">]</span> <span class="o">=</span> <span class="n">xs</span><span class="p">.</span><span class="n">foldLeft</span><span class="p">(</span><span class="n">z</span><span class="o">?</span><span class="p">)(</span><span class="n">op</span><span class="o">?</span><span class="p">)</span>
 </pre></div>
 </div>
 </li>
 <li><p>Deduction of <code class="docutils literal notranslate"><span class="pre">z</span></code> and <code class="docutils literal notranslate"><span class="pre">op</span></code>:</p>
 <div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="nc">Nil</span>
-<span class="k">=</span> <span class="n">reverse</span><span class="o">(</span><span class="nc">Nil</span><span class="o">)</span>
-<span class="k">=</span> <span class="nc">Nil</span><span class="o">.</span><span class="n">foldLeft</span><span class="o">(</span><span class="n">z</span><span class="o">?)(</span><span class="n">op</span><span class="o">)</span>
-<span class="k">=</span> <span class="n">z</span><span class="o">?</span>
+<span class="o">=</span> <span class="n">reverse</span><span class="p">(</span><span class="nc">Nil</span><span class="p">)</span>
+<span class="o">=</span> <span class="nc">Nil</span><span class="p">.</span><span class="n">foldLeft</span><span class="p">(</span><span class="n">z</span><span class="o">?</span><span class="p">)(</span><span class="n">op</span><span class="p">)</span>
+<span class="o">=</span> <span class="n">z</span><span class="o">?</span>
 </pre></div>
 </div>
 <ul class="simple">
 <li><p>Thus <code class="docutils literal notranslate"><span class="pre">z</span></code> is Nil</p></li>
 </ul>
-<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="nc">List</span><span class="o">(</span><span class="n">x</span><span class="o">)</span>
-<span class="k">=</span> <span class="n">reverse</span><span class="o">(</span><span class="nc">List</span><span class="o">(</span><span class="n">x</span><span class="o">))</span>
-<span class="k">=</span> <span class="nc">List</span><span class="o">(</span><span class="n">x</span><span class="o">).</span><span class="n">foldLeft</span><span class="o">(</span><span class="nc">Nil</span><span class="o">)(</span><span class="n">op</span><span class="o">?)</span>
-<span class="k">=</span> <span class="n">op</span><span class="o">?(</span><span class="nc">Nil</span><span class="o">,</span> <span class="n">x</span><span class="o">)</span>
+<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="nc">List</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="o">=</span> <span class="n">reverse</span><span class="p">(</span><span class="nc">List</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+<span class="o">=</span> <span class="nc">List</span><span class="p">(</span><span class="n">x</span><span class="p">).</span><span class="n">foldLeft</span><span class="p">(</span><span class="nc">Nil</span><span class="p">)(</span><span class="n">op</span><span class="o">?</span><span class="p">)</span>
+<span class="o">=</span> <span class="n">op</span><span class="o">?</span><span class="p">(</span><span class="nc">Nil</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>which suggests <code class="docutils literal notranslate"><span class="pre">op</span></code> is a cons operator with reversed operands.</p>
 </li>
 <li><p>Thus,</p>
-<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="n">reverse</span><span class="o">[</span><span class="kt">a</span><span class="o">](</span><span class="n">xs</span><span class="k">:</span> <span class="kt">List</span><span class="o">[</span><span class="kt">T</span><span class="o">])</span><span class="k">:</span> <span class="kt">List</span><span class="o">[</span><span class="kt">T</span><span class="o">]</span> <span class="k">=</span>
-    <span class="n">xs</span><span class="o">.</span><span class="n">foldLeft</span><span class="o">(</span><span class="nc">List</span><span class="o">[</span><span class="kt">T</span><span class="o">]())((</span><span class="n">xs</span><span class="o">,</span> <span class="n">x</span><span class="o">)</span> <span class="k">=&gt;</span> <span class="n">x</span> <span class="o">::</span> <span class="n">xs</span><span class="o">)</span>
+<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">reverse</span><span class="p">[</span><span class="n">a</span><span class="p">](</span><span class="n">xs</span><span class="p">:</span> <span class="nc">List</span><span class="p">[</span><span class="nc">T</span><span class="p">]):</span> <span class="nc">List</span><span class="p">[</span><span class="nc">T</span><span class="p">]</span> <span class="o">=</span>
+    <span class="n">xs</span><span class="p">.</span><span class="n">foldLeft</span><span class="p">(</span><span class="nc">List</span><span class="p">[</span><span class="nc">T</span><span class="p">]())((</span><span class="n">xs</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="n">x</span> <span class="o">::</span> <span class="n">xs</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>Type parameter for <code class="docutils literal notranslate"><span class="pre">z</span></code>, <code class="docutils literal notranslate"><span class="pre">List[T]()</span></code>, is necessary for type inference</p>
 </li>
 <li><p>Some examples with <code class="docutils literal notranslate"><span class="pre">foldRight</span></code></p>
-<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="n">mapFun</span><span class="o">[</span><span class="kt">T</span><span class="p">,</span> <span class="kt">U</span><span class="o">](</span><span class="n">xs</span><span class="k">:</span> <span class="kt">List</span><span class="o">[</span><span class="kt">T</span><span class="o">],</span> <span class="n">f</span><span class="k">:</span> <span class="kt">T</span> <span class="o">=&gt;</span> <span class="n">U</span><span class="o">)</span><span class="k">:</span> <span class="kt">List</span><span class="o">[</span><span class="kt">U</span><span class="o">]</span> <span class="k">=</span>
-    <span class="n">xs</span><span class="o">.</span><span class="n">foldRight</span><span class="o">(</span><span class="nc">List</span><span class="o">[</span><span class="kt">U</span><span class="o">]())((</span><span class="n">y</span><span class="o">,</span> <span class="n">ys</span><span class="o">)</span> <span class="k">=&gt;</span> <span class="n">f</span><span class="o">(</span><span class="n">y</span><span class="o">)</span> <span class="o">::</span> <span class="n">ys</span><span class="o">)</span>
+<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">mapFun</span><span class="p">[</span><span class="nc">T</span><span class="p">,</span> <span class="nc">U</span><span class="p">](</span><span class="n">xs</span><span class="p">:</span> <span class="nc">List</span><span class="p">[</span><span class="nc">T</span><span class="p">],</span> <span class="n">f</span><span class="p">:</span> <span class="nc">T</span> <span class="o">=&gt;</span> <span class="nc">U</span><span class="p">):</span> <span class="nc">List</span><span class="p">[</span><span class="nc">U</span><span class="p">]</span> <span class="o">=</span>
+    <span class="n">xs</span><span class="p">.</span><span class="n">foldRight</span><span class="p">(</span><span class="nc">List</span><span class="p">[</span><span class="nc">U</span><span class="p">]())((</span><span class="n">y</span><span class="p">,</span> <span class="n">ys</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="n">f</span><span class="p">(</span><span class="n">y</span><span class="p">)</span> <span class="o">::</span> <span class="n">ys</span><span class="p">)</span>
 
-<span class="k">def</span> <span class="n">lengthFun</span><span class="o">[</span><span class="kt">T</span><span class="o">](</span><span class="n">xs</span><span class="k">:</span> <span class="kt">List</span><span class="o">[</span><span class="kt">T</span><span class="o">])</span><span class="k">:</span> <span class="kt">Int</span> <span class="o">=</span>
-    <span class="n">xs</span><span class="o">.</span><span class="n">foldRight</span><span class="o">(</span><span class="mi">0</span><span class="o">)((</span><span class="n">y</span><span class="o">,</span> <span class="n">n</span><span class="o">)</span> <span class="k">=&gt;</span> <span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="o">)</span>
+<span class="k">def</span> <span class="nf">lengthFun</span><span class="p">[</span><span class="nc">T</span><span class="p">](</span><span class="n">xs</span><span class="p">:</span> <span class="nc">List</span><span class="p">[</span><span class="nc">T</span><span class="p">]):</span> <span class="nc">Int</span> <span class="o">=</span>
+    <span class="n">xs</span><span class="p">.</span><span class="n">foldRight</span><span class="p">(</span><span class="mi">0</span><span class="p">)((</span><span class="n">y</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
 </pre></div>
 </div>
 <ul class="simple">
@@ -482,14 +530,14 @@
 </ul>
 </li>
 </ul>
-</div>
-<div class="section" id="reasoning-about-lists">
+</section>
+<section id="reasoning-about-lists">
 <h2>5.5 Reasoning about lists<a class="headerlink" href="#reasoning-about-lists" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li><p>Learned about structural induction</p></li>
 </ul>
-</div>
-</div>
+</section>
+</section>
 
     <script type="text/x-thebe-config">
     {
@@ -513,54 +561,42 @@
 
               </div>
               
-        
             
-
-
-
-<div class='prev-next-bottom'>
-    
-    <div id="prev">
-        <a class="left-prev" href="Week_4_Types_and_Pattern_Matching.html" title="previous page">
-            <i class="prevnext-label fas fa-angle-left"></i>
-            <div class="prevnext-info">
-                <p class="prevnext-label">previous</p>
-                <p class="prevnext-title">4 Types and Pattern Matching</p>
-            </div>
-        </a>
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'> 
+    <a class='left-prev' id="prev-link" href="Week_4_Types_and_Pattern_Matching.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">4 Types and Pattern Matching</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="Week_6_Collections.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">6 Collections</p>
     </div>
-     <div id="next">
-        <a class="right-next" href="Week_6_Collections.html" title="next page">
-            <div class="prevnext-info">
-                <p class="prevnext-label">next</p>
-                <p class="prevnext-title">6 Collections</p>
-            </div>
-            <i class="prevnext-label fas fa-angle-right"></i>
-        </a>
-     </div>
-
+    <i class="fas fa-angle-right"></i>
+    </a>
 </div>
-        
+            
         </div>
     </div>
-    <footer class="footer mt-5 mt-md-0">
-    <div class="container">
-      <p>
-        
-          By Manasij Venkatesh<br/>
-        
-            &copy; Copyright 2021.<br/>
-      </p>
-    </div>
-  </footer>
+    <footer class="footer">
+  <p>
+    
+      By Manasij Venkatesh<br/>
+    
+        &copy; Copyright 2021.<br/>
+  </p>
+</footer>
 </main>
 
 
       </div>
     </div>
   
-  <script src="_static/js/index.1c5a1a01449ed65a7b51.js"></script>
+  <script src="_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
 
-  
   </body>
 </html>

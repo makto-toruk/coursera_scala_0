@@ -4,11 +4,12 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>2 Higher Order Functions &#8212; Lectures notes for Functional Programming Principles in Scala by Martin Odersky</title>
     
-  <link href="_static/css/theme.css" rel="stylesheet" />
-  <link href="_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
+  <link href="_static/css/theme.css" rel="stylesheet">
+  <link href="_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
 
     
   <link rel="stylesheet"
@@ -22,8 +23,8 @@
       
 
     
-    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="_static/sphinx-book-theme.e8f53015daec13862f6db5e763c41738.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
     <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
@@ -31,21 +32,21 @@
     <link rel="stylesheet" type="text/css" href="_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
     <link rel="stylesheet" type="text/css" href="_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
     
-  <link rel="preload" as="script" href="_static/js/index.1c5a1a01449ed65a7b51.js">
+  <link rel="preload" as="script" href="_static/js/index.be7d3bbb2ef33a8344ce.js">
 
-    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
     <script src="_static/jquery.js"></script>
     <script src="_static/underscore.js"></script>
     <script src="_static/doctools.js"></script>
     <script src="_static/togglebutton.js"></script>
     <script src="_static/clipboard.min.js"></script>
     <script src="_static/copybutton.js"></script>
-    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-    <script src="_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
-    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
-    <script >
+    <script>
         const thebe_selector = ".thebe"
         const thebe_selector_input = "pre"
         const thebe_selector_output = ".output"
@@ -56,7 +57,10 @@
     <link rel="next" title="3 Data and Abstraction" href="Week_3_Data_and_Abstraction.html" />
     <link rel="prev" title="1 Introduction" href="Week_1_Introduction.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="docsearch:language" content="en" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
     
   </head>
   <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
@@ -72,6 +76,7 @@
     
         <div class="navbar-brand-box">
     <a class="navbar-brand text-wrap" href="index.html">
+      
       
       
       <h1 class="site-logo" id="site-title">Lectures notes for Functional Programming Principles in Scala by Martin Odersky</h1>
@@ -159,7 +164,7 @@
                 data-placement="left">.md</button></a>
         <!-- Download PDF via print -->
         <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
-            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
     </div>
 </div>
 
@@ -195,7 +200,7 @@
         </div>
 
         <!-- Table of contents -->
-        <div class="d-none d-md-block col-md-2 bd-toc show">
+        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
             
             <div class="tocsection onthispage pt-5 pb-3">
                 <i class="fas fa-list"></i> Contents
@@ -245,12 +250,65 @@
 </div>
     <div id="main-content" class="row">
         <div class="col-12 col-md-9 pl-md-3 pr-md-0">
-        
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>2 Higher Order Functions</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#introduction">
+   2.1 Introduction
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#currying">
+   2.2 Currying
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#example-finding-fixed-points">
+   2.3 Example: Finding Fixed Points
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#scala-syntax-summary">
+   2.4 Scala Syntax Summary
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#functions-and-data">
+   2.5 Functions and Data
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#more-fun-with-rationals">
+   2.6 More Fun with Rationals
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#evaluations-and-operators">
+   2.7 Evaluations and Operators
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            
               <div>
                 
-  <div class="section" id="higher-order-functions">
+  <section class="tex2jax_ignore mathjax_ignore" id="higher-order-functions">
 <h1>2 Higher Order Functions<a class="headerlink" href="#higher-order-functions" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="introduction">
+<section id="introduction">
 <h2>2.1 Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
 <ul>
 <li><p>Functional Programming languages treat functions as “first-class values”.</p>
@@ -262,22 +320,22 @@
 <li><p>Example:</p>
 <ul>
 <li><p>Consider sum of integers between <code class="docutils literal notranslate"><span class="pre">a</span></code> and <code class="docutils literal notranslate"><span class="pre">b</span></code>.</p>
-<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="n">sumInts</span><span class="o">(</span><span class="n">a</span><span class="k">:</span> <span class="kt">Int</span><span class="o">,</span> <span class="n">b</span><span class="k">:</span> <span class="kt">Int</span><span class="o">)</span><span class="k">:</span> <span class="kt">Int</span> <span class="o">=</span>
-    <span class="k">if</span> <span class="n">a</span> <span class="o">&gt;</span> <span class="n">b</span> <span class="n">then</span> <span class="mi">0</span> <span class="k">else</span> <span class="n">a</span> <span class="o">+</span> <span class="n">sumInts</span><span class="o">(</span><span class="n">a</span> <span class="o">+</span> <span class="mi">1</span><span class="o">,</span> <span class="n">b</span><span class="o">)</span>
+<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">sumInts</span><span class="p">(</span><span class="n">a</span><span class="p">:</span> <span class="nc">Int</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span> <span class="nc">Int</span><span class="p">):</span> <span class="nc">Int</span> <span class="o">=</span>
+    <span class="k">if</span> <span class="n">a</span> <span class="o">&gt;</span> <span class="n">b</span> <span class="k">then</span> <span class="mi">0</span> <span class="k">else</span> <span class="n">a</span> <span class="o">+</span> <span class="n">sumInts</span><span class="p">(</span><span class="n">a</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
 </pre></div>
 </div>
 </li>
 <li><p>What about sum of cubes of these integers?</p>
-<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="n">cube</span><span class="o">(</span><span class="n">x</span><span class="k">:</span> <span class="kt">Int</span><span class="o">)</span><span class="k">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="n">x</span> <span class="o">*</span> <span class="n">x</span> <span class="o">*</span> <span class="n">x</span>
+<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">cube</span><span class="p">(</span><span class="n">x</span><span class="p">:</span> <span class="nc">Int</span><span class="p">):</span> <span class="nc">Int</span> <span class="o">=</span> <span class="n">x</span> <span class="o">*</span> <span class="n">x</span> <span class="o">*</span> <span class="n">x</span>
 
-<span class="k">def</span> <span class="n">sumCubes</span><span class="o">(</span><span class="n">a</span><span class="k">:</span> <span class="kt">Int</span><span class="o">,</span> <span class="n">b</span><span class="k">:</span> <span class="kt">Int</span><span class="o">)</span><span class="k">:</span> <span class="kt">Int</span> <span class="o">=</span>
-    <span class="k">if</span> <span class="n">a</span> <span class="o">&gt;</span> <span class="n">b</span> <span class="n">then</span> <span class="mi">0</span> <span class="k">else</span> <span class="n">cube</span><span class="o">(</span><span class="n">a</span><span class="o">)</span> <span class="o">+</span> <span class="n">sumCubes</span><span class="o">(</span><span class="n">a</span> <span class="o">+</span> <span class="mi">1</span><span class="o">,</span> <span class="n">b</span><span class="o">)</span>
+<span class="k">def</span> <span class="nf">sumCubes</span><span class="p">(</span><span class="n">a</span><span class="p">:</span> <span class="nc">Int</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span> <span class="nc">Int</span><span class="p">):</span> <span class="nc">Int</span> <span class="o">=</span>
+    <span class="k">if</span> <span class="n">a</span> <span class="o">&gt;</span> <span class="n">b</span> <span class="k">then</span> <span class="mi">0</span> <span class="k">else</span> <span class="n">cube</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="o">+</span> <span class="n">sumCubes</span><span class="p">(</span><span class="n">a</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
 </pre></div>
 </div>
 </li>
 <li><p>What about factorials?</p>
-<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="n">sumFactorials</span><span class="o">(</span><span class="n">a</span><span class="k">:</span> <span class="kt">Int</span><span class="o">,</span> <span class="n">b</span><span class="k">:</span> <span class="kt">Int</span><span class="o">)</span><span class="k">:</span> <span class="kt">Int</span> <span class="o">=</span>
-    <span class="k">if</span> <span class="n">a</span> <span class="o">&gt;</span> <span class="n">b</span> <span class="n">then</span> <span class="mi">0</span> <span class="k">else</span> <span class="n">factorial</span><span class="o">(</span><span class="n">a</span><span class="o">)</span> <span class="o">+</span> <span class="n">sumFactorials</span><span class="o">(</span><span class="n">a</span> <span class="o">+</span> <span class="mi">1</span><span class="o">,</span> <span class="n">b</span><span class="o">)</span>
+<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">sumFactorials</span><span class="p">(</span><span class="n">a</span><span class="p">:</span> <span class="nc">Int</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span> <span class="nc">Int</span><span class="p">):</span> <span class="nc">Int</span> <span class="o">=</span>
+    <span class="k">if</span> <span class="n">a</span> <span class="o">&gt;</span> <span class="n">b</span> <span class="k">then</span> <span class="mi">0</span> <span class="k">else</span> <span class="n">factorial</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="o">+</span> <span class="n">sumFactorials</span><span class="p">(</span><span class="n">a</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
 </pre></div>
 </div>
 </li>
@@ -285,19 +343,19 @@
 </ul>
 </li>
 <li><p>Instead, we can define a higher order function as:</p>
-<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="n">sum</span><span class="o">(</span><span class="n">f</span><span class="k">:</span> <span class="kt">Int</span> <span class="o">=&gt;</span> <span class="nc">Int</span><span class="o">,</span> <span class="n">a</span><span class="k">:</span> <span class="kt">Int</span><span class="o">,</span> <span class="n">b</span><span class="k">:</span> <span class="kt">Int</span><span class="o">)</span><span class="k">:</span> <span class="kt">Int</span> <span class="o">=</span>
-    <span class="k">if</span> <span class="n">a</span> <span class="o">&gt;</span> <span class="n">b</span> <span class="n">then</span> <span class="mi">0</span>
-    <span class="k">else</span> <span class="n">f</span><span class="o">(</span><span class="n">a</span><span class="o">)</span> <span class="o">+</span> <span class="n">sum</span><span class="o">(</span><span class="n">f</span><span class="o">,</span> <span class="n">a</span> <span class="o">+</span> <span class="mi">1</span><span class="o">,</span> <span class="n">b</span><span class="o">)</span>
+<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">sum</span><span class="p">(</span><span class="n">f</span><span class="p">:</span> <span class="nc">Int</span> <span class="o">=&gt;</span> <span class="nc">Int</span><span class="p">,</span> <span class="n">a</span><span class="p">:</span> <span class="nc">Int</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span> <span class="nc">Int</span><span class="p">):</span> <span class="nc">Int</span> <span class="o">=</span>
+    <span class="k">if</span> <span class="n">a</span> <span class="o">&gt;</span> <span class="n">b</span> <span class="k">then</span> <span class="mi">0</span>
+    <span class="k">else</span> <span class="n">f</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="o">+</span> <span class="n">sum</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">a</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
 
-<span class="k">def</span> <span class="n">sumInts</span><span class="o">(</span><span class="n">a</span><span class="k">:</span> <span class="kt">Int</span><span class="o">,</span> <span class="n">b</span><span class="k">:</span> <span class="kt">Int</span><span class="o">)</span> <span class="k">=</span> <span class="n">sum</span><span class="o">(</span><span class="n">id</span><span class="o">,</span> <span class="n">a</span><span class="o">,</span> <span class="n">b</span><span class="o">)</span>
-<span class="k">def</span> <span class="n">sumCubes</span><span class="o">(</span><span class="n">a</span><span class="k">:</span> <span class="kt">Int</span><span class="o">,</span> <span class="n">b</span><span class="k">:</span> <span class="kt">Int</span><span class="o">)</span> <span class="k">=</span> <span class="n">sum</span><span class="o">(</span><span class="n">cube</span><span class="o">,</span> <span class="n">a</span><span class="o">,</span> <span class="n">b</span><span class="o">)</span>
-<span class="k">def</span> <span class="n">sumFactorials</span><span class="o">(</span><span class="n">a</span><span class="k">:</span> <span class="kt">Int</span><span class="o">,</span> <span class="n">b</span><span class="k">:</span> <span class="kt">Int</span><span class="o">)</span> <span class="k">=</span> <span class="n">sum</span><span class="o">(</span><span class="n">fact</span><span class="o">,</span> <span class="n">a</span><span class="o">,</span> <span class="n">b</span><span class="o">)</span>
+<span class="k">def</span> <span class="nf">sumInts</span><span class="p">(</span><span class="n">a</span><span class="p">:</span> <span class="nc">Int</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span> <span class="nc">Int</span><span class="p">)</span> <span class="o">=</span> <span class="n">sum</span><span class="p">(</span><span class="n">id</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">sumCubes</span><span class="p">(</span><span class="n">a</span><span class="p">:</span> <span class="nc">Int</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span> <span class="nc">Int</span><span class="p">)</span> <span class="o">=</span> <span class="n">sum</span><span class="p">(</span><span class="n">cube</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">sumFactorials</span><span class="p">(</span><span class="n">a</span><span class="p">:</span> <span class="nc">Int</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span> <span class="nc">Int</span><span class="p">)</span> <span class="o">=</span> <span class="n">sum</span><span class="p">(</span><span class="n">fact</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>where</p>
-<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="n">id</span><span class="o">(</span><span class="n">x</span><span class="k">:</span> <span class="kt">Int</span><span class="o">)</span><span class="k">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="n">x</span>
-<span class="k">def</span> <span class="n">cube</span><span class="o">(</span><span class="n">x</span><span class="k">:</span> <span class="kt">Int</span><span class="o">)</span><span class="k">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="n">x</span> <span class="o">*</span> <span class="n">x</span> <span class="o">*</span> <span class="n">x</span>
-<span class="k">def</span> <span class="n">fact</span><span class="o">(</span><span class="n">x</span><span class="k">:</span> <span class="kt">Int</span><span class="o">)</span><span class="k">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="k">if</span> <span class="n">x</span> <span class="o">==</span> <span class="mi">0</span> <span class="n">then</span> <span class="mi">1</span> <span class="k">else</span> <span class="n">x</span> <span class="o">*</span> <span class="n">fact</span><span class="o">(</span><span class="n">x</span> <span class="o">-</span> <span class="mi">1</span><span class="o">)</span>   
+<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">id</span><span class="p">(</span><span class="n">x</span><span class="p">:</span> <span class="nc">Int</span><span class="p">):</span> <span class="nc">Int</span> <span class="o">=</span> <span class="n">x</span>
+<span class="k">def</span> <span class="nf">cube</span><span class="p">(</span><span class="n">x</span><span class="p">:</span> <span class="nc">Int</span><span class="p">):</span> <span class="nc">Int</span> <span class="o">=</span> <span class="n">x</span> <span class="o">*</span> <span class="n">x</span> <span class="o">*</span> <span class="n">x</span>
+<span class="k">def</span> <span class="nf">fact</span><span class="p">(</span><span class="n">x</span><span class="p">:</span> <span class="nc">Int</span><span class="p">):</span> <span class="nc">Int</span> <span class="o">=</span> <span class="k">if</span> <span class="n">x</span> <span class="o">==</span> <span class="mi">0</span> <span class="k">then</span> <span class="mi">1</span> <span class="k">else</span> <span class="n">x</span> <span class="o">*</span> <span class="n">fact</span><span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>   
 </pre></div>
 </div>
 </li>
@@ -305,13 +363,13 @@
 <li><p><em>Anonymous functions</em>: we don’t always have to define the functions we pass using <code class="docutils literal notranslate"><span class="pre">def</span></code>.</p>
 <ul>
 <li><p>Example:</p>
-<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="o">(</span><span class="n">x</span><span class="k">:</span> <span class="kt">Int</span><span class="o">)</span> <span class="k">=&gt;</span> <span class="n">x</span> <span class="o">*</span> <span class="n">x</span> <span class="o">*</span> <span class="n">x</span>
+<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">x</span><span class="p">:</span> <span class="nc">Int</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="n">x</span> <span class="o">*</span> <span class="n">x</span> <span class="o">*</span> <span class="n">x</span>
 </pre></div>
 </div>
 <p><code class="docutils literal notranslate"><span class="pre">(x:</span> <span class="pre">Int)</span></code> is the parameter of the function and <code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">*</span> <span class="pre">x</span> <span class="pre">*</span> <span class="pre">x</span></code> is the body. The type of parameter can be omitted if it can be inferred by the compiler from the context.</p>
 </li>
 <li><p>If there are several parameters, separate by commas:</p>
-<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="o">(</span><span class="n">x</span><span class="k">:</span> <span class="kt">Int</span><span class="o">,</span> <span class="n">y</span><span class="k">:</span> <span class="kt">Int</span><span class="o">)</span> <span class="k">=&gt;</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span>
+<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">x</span><span class="p">:</span> <span class="nc">Int</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="nc">Int</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span>
 </pre></div>
 </div>
 </li>
@@ -325,37 +383,37 @@ $<span class="math notranslate nohighlight">\(\text{def} ~f(x_1:T_1, \ldots, x_n
 </ul>
 </li>
 <li><p>With anonumous functions:</p>
-<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="n">sumInts</span><span class="o">(</span><span class="n">a</span><span class="k">:</span> <span class="kt">Int</span><span class="o">,</span> <span class="n">b</span><span class="k">:</span> <span class="kt">Int</span><span class="o">)</span> <span class="k">=</span> <span class="n">sum</span><span class="o">(</span><span class="n">x</span> <span class="k">=&gt;</span> <span class="n">x</span><span class="o">,</span> <span class="n">a</span><span class="o">,</span> <span class="n">b</span><span class="o">)</span>
-<span class="k">def</span> <span class="n">sumCubes</span><span class="o">(</span><span class="n">a</span><span class="k">:</span> <span class="kt">Int</span><span class="o">,</span> <span class="n">b</span><span class="k">:</span> <span class="kt">Int</span><span class="o">)</span> <span class="k">=</span> <span class="n">sum</span><span class="o">(</span><span class="n">x</span> <span class="k">=&gt;</span> <span class="n">x</span> <span class="o">*</span> <span class="n">x</span> <span class="o">*</span> <span class="n">x</span><span class="o">,</span> <span class="n">a</span><span class="o">,</span> <span class="n">b</span><span class="o">)</span>
+<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">sumInts</span><span class="p">(</span><span class="n">a</span><span class="p">:</span> <span class="nc">Int</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span> <span class="nc">Int</span><span class="p">)</span> <span class="o">=</span> <span class="n">sum</span><span class="p">(</span><span class="n">x</span> <span class="o">=&gt;</span> <span class="n">x</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">sumCubes</span><span class="p">(</span><span class="n">a</span><span class="p">:</span> <span class="nc">Int</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span> <span class="nc">Int</span><span class="p">)</span> <span class="o">=</span> <span class="n">sum</span><span class="p">(</span><span class="n">x</span> <span class="o">=&gt;</span> <span class="n">x</span> <span class="o">*</span> <span class="n">x</span> <span class="o">*</span> <span class="n">x</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
 </pre></div>
 </div>
 </li>
 <li><p>Exercise: Tail-recursive version of the sum function?</p></li>
 </ul>
-<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="n">sum</span><span class="o">(</span><span class="n">f</span><span class="k">:</span> <span class="kt">Int</span> <span class="o">=&gt;</span> <span class="nc">Int</span><span class="o">,</span> <span class="n">a</span><span class="k">:</span> <span class="kt">Int</span><span class="o">,</span> <span class="n">b</span><span class="k">:</span> <span class="kt">Int</span><span class="o">)</span><span class="k">:</span> <span class="kt">Int</span> <span class="o">=</span>
-    <span class="k">def</span> <span class="n">loop</span><span class="o">(</span><span class="n">a</span><span class="k">:</span> <span class="kt">Int</span><span class="o">,</span> <span class="n">acc</span><span class="k">:</span> <span class="kt">Int</span><span class="o">)</span><span class="k">:</span> <span class="kt">Int</span> <span class="o">=</span>
-        <span class="k">if</span> <span class="n">a</span> <span class="o">&gt;</span> <span class="n">b</span> <span class="n">then</span> <span class="n">acc</span>
-        <span class="k">else</span> <span class="n">loop</span><span class="o">(</span><span class="n">a</span> <span class="o">+</span> <span class="mi">1</span><span class="o">,</span> <span class="n">acc</span> <span class="o">+</span> <span class="n">f</span><span class="o">(</span><span class="n">a</span><span class="o">))</span>
-    <span class="n">loop</span><span class="o">(</span><span class="n">a</span><span class="o">,</span> <span class="mi">0</span><span class="o">)</span>
+<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">sum</span><span class="p">(</span><span class="n">f</span><span class="p">:</span> <span class="nc">Int</span> <span class="o">=&gt;</span> <span class="nc">Int</span><span class="p">,</span> <span class="n">a</span><span class="p">:</span> <span class="nc">Int</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span> <span class="nc">Int</span><span class="p">):</span> <span class="nc">Int</span> <span class="o">=</span>
+    <span class="k">def</span> <span class="nf">loop</span><span class="p">(</span><span class="n">a</span><span class="p">:</span> <span class="nc">Int</span><span class="p">,</span> <span class="n">acc</span><span class="p">:</span> <span class="nc">Int</span><span class="p">):</span> <span class="nc">Int</span> <span class="o">=</span>
+        <span class="k">if</span> <span class="n">a</span> <span class="o">&gt;</span> <span class="n">b</span> <span class="k">then</span> <span class="n">acc</span>
+        <span class="k">else</span> <span class="n">loop</span><span class="p">(</span><span class="n">a</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">acc</span> <span class="o">+</span> <span class="n">f</span><span class="p">(</span><span class="n">a</span><span class="p">))</span>
+    <span class="n">loop</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="currying">
+</section>
+<section id="currying">
 <h2>2.2 Currying<a class="headerlink" href="#currying" title="Permalink to this headline">¶</a></h2>
 <ul>
 <li><p>Consider:</p>
-<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="n">sumInts</span><span class="o">(</span><span class="n">a</span><span class="k">:</span> <span class="kt">Int</span><span class="o">,</span> <span class="n">b</span><span class="k">:</span> <span class="kt">Int</span><span class="o">)</span> <span class="k">=</span> <span class="n">sum</span><span class="o">(</span><span class="n">x</span> <span class="k">=&gt;</span> <span class="n">x</span><span class="o">,</span> <span class="n">a</span><span class="o">,</span> <span class="n">b</span><span class="o">)</span>
-<span class="k">def</span> <span class="n">sumCubes</span><span class="o">(</span><span class="n">a</span><span class="k">:</span> <span class="kt">Int</span><span class="o">,</span> <span class="n">b</span><span class="k">:</span> <span class="kt">Int</span><span class="o">)</span> <span class="k">=</span> <span class="n">sum</span><span class="o">(</span><span class="n">x</span> <span class="k">=&gt;</span> <span class="n">x</span> <span class="o">*</span> <span class="n">x</span> <span class="o">*</span> <span class="n">x</span><span class="o">,</span> <span class="n">a</span><span class="o">,</span> <span class="n">b</span><span class="o">)</span>
-<span class="k">def</span> <span class="n">sumFactorials</span><span class="o">(</span><span class="n">a</span><span class="k">:</span> <span class="kt">Int</span><span class="o">,</span> <span class="n">b</span><span class="k">:</span> <span class="kt">Int</span><span class="o">)</span> <span class="k">=</span> <span class="n">sum</span><span class="o">(</span><span class="n">fact</span><span class="o">,</span> <span class="n">a</span><span class="o">,</span> <span class="n">b</span><span class="o">)</span>
+<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">sumInts</span><span class="p">(</span><span class="n">a</span><span class="p">:</span> <span class="nc">Int</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span> <span class="nc">Int</span><span class="p">)</span> <span class="o">=</span> <span class="n">sum</span><span class="p">(</span><span class="n">x</span> <span class="o">=&gt;</span> <span class="n">x</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">sumCubes</span><span class="p">(</span><span class="n">a</span><span class="p">:</span> <span class="nc">Int</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span> <span class="nc">Int</span><span class="p">)</span> <span class="o">=</span> <span class="n">sum</span><span class="p">(</span><span class="n">x</span> <span class="o">=&gt;</span> <span class="n">x</span> <span class="o">*</span> <span class="n">x</span> <span class="o">*</span> <span class="n">x</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">sumFactorials</span><span class="p">(</span><span class="n">a</span><span class="p">:</span> <span class="nc">Int</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span> <span class="nc">Int</span><span class="p">)</span> <span class="o">=</span> <span class="n">sum</span><span class="p">(</span><span class="n">fact</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>Do we need to specify <code class="docutils literal notranslate"><span class="pre">a</span></code> and <code class="docutils literal notranslate"><span class="pre">b</span></code> in these cases?</p>
 </li>
 <li><p>Alternate <code class="docutils literal notranslate"><span class="pre">sum</span></code>:</p>
-<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="n">sum</span><span class="o">(</span><span class="n">f</span><span class="k">:</span> <span class="kt">Int</span> <span class="o">=&gt;</span> <span class="nc">Int</span><span class="o">)</span><span class="k">:</span> <span class="o">(</span><span class="kt">Int</span><span class="o">,</span> <span class="kt">Int</span><span class="o">)</span> <span class="k">=&gt;</span> <span class="nc">Int</span> <span class="k">=</span>
-    <span class="k">def</span> <span class="n">sumF</span><span class="o">(</span><span class="n">a</span><span class="k">:</span> <span class="kt">Int</span><span class="o">,</span> <span class="n">b</span><span class="k">:</span> <span class="kt">Int</span><span class="o">)</span><span class="k">:</span> <span class="kt">Int</span> <span class="o">=</span>
-        <span class="k">if</span> <span class="n">a</span> <span class="o">&gt;</span> <span class="n">b</span> <span class="n">then</span> <span class="mi">0</span>
-        <span class="k">else</span> <span class="n">f</span><span class="o">(</span><span class="n">a</span><span class="o">)</span> <span class="o">+</span> <span class="n">sumF</span><span class="o">(</span><span class="n">a</span> <span class="o">+</span> <span class="mi">1</span><span class="o">,</span> <span class="n">b</span><span class="o">)</span>
+<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">sum</span><span class="p">(</span><span class="n">f</span><span class="p">:</span> <span class="nc">Int</span> <span class="o">=&gt;</span> <span class="nc">Int</span><span class="p">):</span> <span class="p">(</span><span class="nc">Int</span><span class="p">,</span> <span class="nc">Int</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nc">Int</span> <span class="o">=</span>
+    <span class="k">def</span> <span class="nf">sumF</span><span class="p">(</span><span class="n">a</span><span class="p">:</span> <span class="nc">Int</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span> <span class="nc">Int</span><span class="p">):</span> <span class="nc">Int</span> <span class="o">=</span>
+        <span class="k">if</span> <span class="n">a</span> <span class="o">&gt;</span> <span class="n">b</span> <span class="k">then</span> <span class="mi">0</span>
+        <span class="k">else</span> <span class="n">f</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="o">+</span> <span class="n">sumF</span><span class="p">(</span><span class="n">a</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
 <span class="n">sumF</span>
 </pre></div>
 </div>
@@ -363,29 +421,29 @@ $<span class="math notranslate nohighlight">\(\text{def} ~f(x_1:T_1, \ldots, x_n
 </li>
 <li><p>Notice that the inner <code class="docutils literal notranslate"><span class="pre">sumF</span></code> function takes <code class="docutils literal notranslate"><span class="pre">a</span></code> and <code class="docutils literal notranslate"><span class="pre">b</span></code> as inputs.</p></li>
 <li><p>We can redefine:</p>
-<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="n">sumInts</span> <span class="k">=</span> <span class="n">sum</span><span class="o">(</span><span class="n">x</span> <span class="k">=&gt;</span> <span class="n">x</span><span class="o">)</span>
-<span class="k">def</span> <span class="n">sumCubes</span> <span class="k">=</span> <span class="n">sum</span><span class="o">(</span><span class="n">x</span> <span class="k">=&gt;</span> <span class="n">x</span> <span class="o">*</span> <span class="n">x</span> <span class="o">*</span> <span class="n">x</span><span class="o">)</span>
-<span class="k">def</span> <span class="n">sumFactorials</span> <span class="k">=</span> <span class="n">sum</span><span class="o">(</span><span class="n">fact</span><span class="o">)</span>
+<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">sumInts</span> <span class="o">=</span> <span class="n">sum</span><span class="p">(</span><span class="n">x</span> <span class="o">=&gt;</span> <span class="n">x</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">sumCubes</span> <span class="o">=</span> <span class="n">sum</span><span class="p">(</span><span class="n">x</span> <span class="o">=&gt;</span> <span class="n">x</span> <span class="o">*</span> <span class="n">x</span> <span class="o">*</span> <span class="n">x</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">sumFactorials</span> <span class="o">=</span> <span class="n">sum</span><span class="p">(</span><span class="n">fact</span><span class="p">)</span>
 
-<span class="n">sumCubes</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span> <span class="mi">10</span><span class="o">)</span> <span class="o">+</span> <span class="n">sumFactorials</span><span class="o">(</span><span class="mi">2</span><span class="o">,</span> <span class="mi">10</span><span class="o">)</span> <span class="c1">// works!</span>
+<span class="n">sumCubes</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span> <span class="o">+</span> <span class="n">sumFactorials</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span> <span class="c1">// works!</span>
 </pre></div>
 </div>
 </li>
 <li><p>We can make this simpler!</p>
-<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="n">sum</span><span class="o">(</span><span class="n">cube</span><span class="o">)(</span><span class="mi">1</span><span class="o">,</span> <span class="mi">10</span><span class="o">)</span>
+<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="n">sum</span><span class="p">(</span><span class="n">cube</span><span class="p">)(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>is equivalent to <code class="docutils literal notranslate"><span class="pre">sumCubes</span></code>. Function application associates to the left: <code class="docutils literal notranslate"><span class="pre">(sum(cube))(1,</span> <span class="pre">10)</span></code>.</p>
 </li>
 <li><p>Wait, we can make it even simpler.</p>
-<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="n">sum</span><span class="o">(</span><span class="n">f</span><span class="k">:</span> <span class="kt">Int</span> <span class="o">=&gt;</span> <span class="nc">Int</span><span class="o">)(</span><span class="n">a</span><span class="k">:</span> <span class="kt">Int</span><span class="o">,</span> <span class="n">b</span><span class="k">:</span> <span class="kt">Int</span><span class="o">)</span><span class="k">:</span> <span class="kt">Int</span> <span class="o">=</span>
-    <span class="k">if</span> <span class="n">a</span> <span class="o">&gt;</span> <span class="n">b</span> <span class="n">then</span> <span class="mi">0</span> <span class="k">else</span> <span class="n">f</span><span class="o">(</span><span class="n">a</span><span class="o">)</span> <span class="o">+</span> <span class="n">sum</span><span class="o">(</span><span class="n">f</span><span class="o">)(</span><span class="n">a</span> <span class="o">+</span> <span class="mi">1</span><span class="o">,</span> <span class="n">b</span><span class="o">)</span>
+<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">sum</span><span class="p">(</span><span class="n">f</span><span class="p">:</span> <span class="nc">Int</span> <span class="o">=&gt;</span> <span class="nc">Int</span><span class="p">)(</span><span class="n">a</span><span class="p">:</span> <span class="nc">Int</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span> <span class="nc">Int</span><span class="p">):</span> <span class="nc">Int</span> <span class="o">=</span>
+    <span class="k">if</span> <span class="n">a</span> <span class="o">&gt;</span> <span class="n">b</span> <span class="k">then</span> <span class="mi">0</span> <span class="k">else</span> <span class="n">f</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="o">+</span> <span class="n">sum</span><span class="p">(</span><span class="n">f</span><span class="p">)(</span><span class="n">a</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
 </pre></div>
 </div>
 <ul>
 <li><p>Notice this is actually very similar to:</p>
-<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="n">sum</span><span class="o">(</span><span class="n">f</span><span class="k">:</span> <span class="kt">Int</span> <span class="o">=&gt;</span> <span class="nc">Int</span><span class="o">,</span> <span class="n">a</span><span class="k">:</span> <span class="kt">Int</span><span class="o">,</span> <span class="n">b</span><span class="k">:</span> <span class="kt">Int</span><span class="o">)</span><span class="k">:</span> <span class="kt">Int</span> <span class="o">=</span>
-    <span class="k">if</span> <span class="n">a</span> <span class="o">&gt;</span> <span class="n">b</span> <span class="n">then</span> <span class="mi">0</span> <span class="k">else</span> <span class="n">f</span><span class="o">(</span><span class="n">a</span><span class="o">)</span> <span class="o">+</span> <span class="n">sum</span><span class="o">(</span><span class="n">f</span><span class="o">,</span> <span class="n">a</span> <span class="o">+</span> <span class="mi">1</span><span class="o">,</span> <span class="n">b</span><span class="o">)</span>
+<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">sum</span><span class="p">(</span><span class="n">f</span><span class="p">:</span> <span class="nc">Int</span> <span class="o">=&gt;</span> <span class="nc">Int</span><span class="p">,</span> <span class="n">a</span><span class="p">:</span> <span class="nc">Int</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span> <span class="nc">Int</span><span class="p">):</span> <span class="nc">Int</span> <span class="o">=</span>
+    <span class="k">if</span> <span class="n">a</span> <span class="o">&gt;</span> <span class="n">b</span> <span class="k">then</span> <span class="mi">0</span> <span class="k">else</span> <span class="n">f</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="o">+</span> <span class="n">sum</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">a</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>but instead we’re composing functions.</p>
@@ -403,76 +461,76 @@ By repeating \)</span>n<span class="math notranslate nohighlight">\( times,
 \)</span><span class="math notranslate nohighlight">\( \text{def } f = (ps_1 \implies (ps_2 \implies \ldots (ps_n \implies E)\ldots)) \)</span>$
 Theoretically, you wouldn’t need function parameters in <code class="docutils literal notranslate"><span class="pre">def</span></code> at all, you would only need anonymous functions. This is called “currying”.</p></li>
 <li><p>What is the type of <code class="docutils literal notranslate"><span class="pre">sum</span></code>?</p>
-<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="n">sum</span><span class="o">(</span><span class="n">f</span><span class="k">:</span> <span class="kt">Int</span> <span class="o">=&gt;</span> <span class="nc">Int</span><span class="o">)(</span><span class="n">a</span><span class="k">:</span> <span class="kt">Int</span><span class="o">,</span> <span class="n">b</span><span class="k">:</span> <span class="kt">Int</span><span class="o">)</span><span class="k">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="o">...</span>
+<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">sum</span><span class="p">(</span><span class="n">f</span><span class="p">:</span> <span class="nc">Int</span> <span class="o">=&gt;</span> <span class="nc">Int</span><span class="p">)(</span><span class="n">a</span><span class="p">:</span> <span class="nc">Int</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span> <span class="nc">Int</span><span class="p">):</span> <span class="nc">Int</span> <span class="o">=</span> <span class="p">...</span>
 
-<span class="o">(</span><span class="nc">Int</span> <span class="k">=&gt;</span> <span class="nc">Int</span><span class="o">)</span> <span class="k">=&gt;</span> <span class="o">(</span><span class="nc">Int</span><span class="o">,</span> <span class="nc">Int</span><span class="o">)</span> <span class="k">=&gt;</span> <span class="nc">Int</span>
+<span class="p">(</span><span class="nc">Int</span> <span class="o">=&gt;</span> <span class="nc">Int</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">(</span><span class="nc">Int</span><span class="p">,</span> <span class="nc">Int</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nc">Int</span>
 </pre></div>
 </div>
 </li>
 <li><p>Exercise: Write a product function, that calculates the product of the values of a function for the points of a given interval, similar to what we did to see sum function. As a second step, write the factorial function in terms of product. And as a third step, can you may be write a more general function, that generalizes both sum and product?</p></li>
 </ul>
-<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="n">product</span><span class="o">(</span><span class="n">f</span><span class="k">:</span> <span class="kt">Int</span> <span class="o">=&gt;</span> <span class="nc">Int</span><span class="o">)(</span><span class="n">a</span><span class="k">:</span> <span class="kt">Int</span><span class="o">,</span> <span class="n">b</span><span class="k">:</span> <span class="kt">Int</span><span class="o">)</span><span class="k">:</span> <span class="kt">Int</span> <span class="o">=</span>
-    <span class="k">if</span> <span class="n">a</span> <span class="o">&gt;</span> <span class="n">b</span> <span class="n">then</span> <span class="mi">1</span>
-    <span class="k">else</span> <span class="n">f</span><span class="o">(</span><span class="n">a</span><span class="o">)</span> <span class="o">*</span> <span class="n">product</span><span class="o">(</span><span class="n">f</span><span class="o">)(</span><span class="n">a</span> <span class="o">+</span> <span class="mi">1</span><span class="o">,</span> <span class="n">b</span><span class="o">)</span>
+<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">product</span><span class="p">(</span><span class="n">f</span><span class="p">:</span> <span class="nc">Int</span> <span class="o">=&gt;</span> <span class="nc">Int</span><span class="p">)(</span><span class="n">a</span><span class="p">:</span> <span class="nc">Int</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span> <span class="nc">Int</span><span class="p">):</span> <span class="nc">Int</span> <span class="o">=</span>
+    <span class="k">if</span> <span class="n">a</span> <span class="o">&gt;</span> <span class="n">b</span> <span class="k">then</span> <span class="mi">1</span>
+    <span class="k">else</span> <span class="n">f</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="o">*</span> <span class="n">product</span><span class="p">(</span><span class="n">f</span><span class="p">)(</span><span class="n">a</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="n">factorial</span><span class="o">(</span><span class="n">n</span><span class="k">:</span> <span class="kt">Int</span><span class="o">)</span><span class="k">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="n">product</span><span class="o">(</span><span class="n">x</span> <span class="k">=&gt;</span> <span class="n">x</span><span class="o">)(</span><span class="mi">1</span><span class="o">,</span> <span class="n">n</span><span class="o">)</span>
+<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">factorial</span><span class="p">(</span><span class="n">n</span><span class="p">:</span> <span class="nc">Int</span><span class="p">):</span> <span class="nc">Int</span> <span class="o">=</span> <span class="n">product</span><span class="p">(</span><span class="n">x</span> <span class="o">=&gt;</span> <span class="n">x</span><span class="p">)(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="n">mapReduce</span><span class="o">(</span><span class="n">f</span><span class="k">:</span> <span class="kt">Int</span> <span class="o">=&gt;</span> <span class="nc">Int</span><span class="o">,</span> <span class="n">gather</span><span class="k">:</span> <span class="o">(</span><span class="kt">Int</span><span class="o">,</span> <span class="kt">Int</span><span class="o">)</span> <span class="k">=&gt;</span> <span class="nc">Int</span><span class="o">,</span> <span class="n">zero</span><span class="k">:</span> <span class="kt">Int</span><span class="o">)(</span><span class="n">a</span><span class="k">:</span> <span class="kt">Int</span><span class="o">,</span> <span class="n">b</span><span class="k">:</span> <span class="kt">Int</span><span class="o">)</span><span class="k">:</span> <span class="kt">Int</span> <span class="o">=</span> 
-    <span class="k">def</span> <span class="n">recur</span><span class="o">(</span><span class="n">a</span><span class="k">:</span> <span class="kt">Int</span><span class="o">)</span><span class="k">:</span> <span class="kt">Int</span> <span class="o">=</span> 
-        <span class="k">if</span> <span class="n">a</span> <span class="o">&gt;</span> <span class="n">b</span> <span class="n">then</span> <span class="n">zero</span>
-        <span class="k">else</span> <span class="n">gather</span><span class="o">(</span><span class="n">f</span><span class="o">(</span><span class="n">a</span><span class="o">),</span> <span class="n">recur</span><span class="o">(</span><span class="n">a</span> <span class="o">+</span> <span class="mi">1</span><span class="o">))</span>
-    <span class="n">recur</span><span class="o">(</span><span class="n">a</span><span class="o">)</span>
+<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">mapReduce</span><span class="p">(</span><span class="n">f</span><span class="p">:</span> <span class="nc">Int</span> <span class="o">=&gt;</span> <span class="nc">Int</span><span class="p">,</span> <span class="n">gather</span><span class="p">:</span> <span class="p">(</span><span class="nc">Int</span><span class="p">,</span> <span class="nc">Int</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nc">Int</span><span class="p">,</span> <span class="n">zero</span><span class="p">:</span> <span class="nc">Int</span><span class="p">)(</span><span class="n">a</span><span class="p">:</span> <span class="nc">Int</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span> <span class="nc">Int</span><span class="p">):</span> <span class="nc">Int</span> <span class="o">=</span> 
+    <span class="k">def</span> <span class="nf">recur</span><span class="p">(</span><span class="n">a</span><span class="p">:</span> <span class="nc">Int</span><span class="p">):</span> <span class="nc">Int</span> <span class="o">=</span> 
+        <span class="k">if</span> <span class="n">a</span> <span class="o">&gt;</span> <span class="n">b</span> <span class="k">then</span> <span class="n">zero</span>
+        <span class="k">else</span> <span class="n">gather</span><span class="p">(</span><span class="n">f</span><span class="p">(</span><span class="n">a</span><span class="p">),</span> <span class="n">recur</span><span class="p">(</span><span class="n">a</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span>
+    <span class="n">recur</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="n">sum</span><span class="o">(</span><span class="n">f</span><span class="k">:</span> <span class="kt">Int</span> <span class="o">=&gt;</span> <span class="nc">Int</span><span class="o">)</span> <span class="k">=</span> <span class="n">mapReduce</span><span class="o">(</span><span class="n">f</span><span class="o">,</span> <span class="o">(</span><span class="n">x</span><span class="o">,</span> <span class="n">y</span><span class="o">)</span> <span class="k">=&gt;</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span><span class="o">,</span> <span class="mi">0</span><span class="o">)</span>
-<span class="k">def</span> <span class="n">product</span><span class="o">(</span><span class="n">f</span><span class="k">:</span> <span class="kt">Int</span> <span class="o">=&gt;</span> <span class="nc">Int</span><span class="o">)</span> <span class="k">=</span> <span class="n">mapReduce</span><span class="o">(</span><span class="n">f</span><span class="o">,</span> <span class="o">(</span><span class="n">x</span><span class="o">,</span> <span class="n">y</span><span class="o">)</span> <span class="k">=&gt;</span> <span class="n">x</span> <span class="o">*</span> <span class="n">y</span><span class="o">,</span> <span class="mi">1</span><span class="o">)</span>
+<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">sum</span><span class="p">(</span><span class="n">f</span><span class="p">:</span> <span class="nc">Int</span> <span class="o">=&gt;</span> <span class="nc">Int</span><span class="p">)</span> <span class="o">=</span> <span class="n">mapReduce</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">product</span><span class="p">(</span><span class="n">f</span><span class="p">:</span> <span class="nc">Int</span> <span class="o">=&gt;</span> <span class="nc">Int</span><span class="p">)</span> <span class="o">=</span> <span class="n">mapReduce</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="n">x</span> <span class="o">*</span> <span class="n">y</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="example-finding-fixed-points">
+</section>
+<section id="example-finding-fixed-points">
 <h2>2.3 Example: Finding Fixed Points<a class="headerlink" href="#example-finding-fixed-points" title="Permalink to this headline">¶</a></h2>
 <ul>
 <li><p>A number <span class="math notranslate nohighlight">\(x\)</span> is a “fixed point” of a function <span class="math notranslate nohighlight">\(f\)</span> if <span class="math notranslate nohighlight">\(f(x) = x\)</span>.</p></li>
 <li><p>Function for finding a fixed point:</p>
-<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="k">val</span> <span class="n">tolerance</span> <span class="k">=</span> <span class="mf">0.0001</span>
+<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="kd">val</span> <span class="n">tolerance</span> <span class="o">=</span> <span class="mf">0.0001</span>
 
-<span class="k">def</span> <span class="n">isCloseEnough</span><span class="o">(</span><span class="n">x</span><span class="k">:</span> <span class="kt">Double</span><span class="o">,</span> <span class="n">y</span><span class="k">:</span> <span class="kt">Double</span><span class="o">)</span> <span class="k">=</span>
-    <span class="n">abs</span><span class="o">((</span><span class="n">x</span> <span class="o">-</span> <span class="n">y</span><span class="o">)</span> <span class="o">/</span> <span class="n">x</span><span class="o">)</span> <span class="o">&lt;</span> <span class="n">tolerance</span>
+<span class="k">def</span> <span class="nf">isCloseEnough</span><span class="p">(</span><span class="n">x</span><span class="p">:</span> <span class="nc">Double</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="nc">Double</span><span class="p">)</span> <span class="o">=</span>
+    <span class="n">abs</span><span class="p">((</span><span class="n">x</span> <span class="o">-</span> <span class="n">y</span><span class="p">)</span> <span class="o">/</span> <span class="n">x</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">tolerance</span>
 
-<span class="k">def</span> <span class="n">fixedPoint</span><span class="o">(</span><span class="n">f</span><span class="k">:</span> <span class="kt">Double</span> <span class="o">=&gt;</span> <span class="nc">Double</span><span class="o">)(</span><span class="n">firstGuess</span><span class="k">:</span> <span class="kt">Double</span><span class="o">)</span><span class="k">:</span> <span class="kt">Double</span> <span class="o">=</span>
-    <span class="k">def</span> <span class="n">iterate</span><span class="o">(</span><span class="n">guess</span><span class="k">:</span> <span class="kt">Double</span><span class="o">)</span><span class="k">:</span> <span class="kt">Double</span> <span class="o">=</span>
-        <span class="k">val</span> <span class="n">next</span> <span class="k">=</span> <span class="n">f</span><span class="o">(</span><span class="n">guess</span><span class="o">)</span>
-        <span class="k">if</span> <span class="n">isCloseEnough</span><span class="o">(</span><span class="n">guess</span><span class="o">,</span> <span class="n">next</span><span class="o">)</span> <span class="n">then</span> <span class="n">next</span>
-        <span class="k">else</span> <span class="n">iterate</span><span class="o">(</span><span class="n">next</span><span class="o">)</span>
-    <span class="n">iterate</span><span class="o">(</span><span class="n">firstGuess</span><span class="o">)</span>
+<span class="k">def</span> <span class="nf">fixedPoint</span><span class="p">(</span><span class="n">f</span><span class="p">:</span> <span class="nc">Double</span> <span class="o">=&gt;</span> <span class="nc">Double</span><span class="p">)(</span><span class="n">firstGuess</span><span class="p">:</span> <span class="nc">Double</span><span class="p">):</span> <span class="nc">Double</span> <span class="o">=</span>
+    <span class="k">def</span> <span class="nf">iterate</span><span class="p">(</span><span class="n">guess</span><span class="p">:</span> <span class="nc">Double</span><span class="p">):</span> <span class="nc">Double</span> <span class="o">=</span>
+        <span class="kd">val</span> <span class="n">next</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">guess</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">isCloseEnough</span><span class="p">(</span><span class="n">guess</span><span class="p">,</span> <span class="n">next</span><span class="p">)</span> <span class="k">then</span> <span class="n">next</span>
+        <span class="k">else</span> <span class="n">iterate</span><span class="p">(</span><span class="n">next</span><span class="p">)</span>
+    <span class="n">iterate</span><span class="p">(</span><span class="n">firstGuess</span><span class="p">)</span>
 </pre></div>
 </div>
 </li>
 <li><p><code class="docutils literal notranslate"><span class="pre">sqrt(x)</span></code> = the number <span class="math notranslate nohighlight">\(y\)</span> such that <span class="math notranslate nohighlight">\(y = x / y\)</span>. So <code class="docutils literal notranslate"><span class="pre">sqrt(x)</span></code> is a fixed point of the function (<code class="docutils literal notranslate"><span class="pre">y</span> <span class="pre">=&gt;</span> <span class="pre">x/y</span></code>).</p>
-<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="n">sqrt</span><span class="o">(</span><span class="n">x</span><span class="k">:</span> <span class="kt">Double</span><span class="o">)</span> <span class="k">=</span>
-    <span class="n">fixedPoint</span><span class="o">(</span><span class="n">y</span> <span class="k">=&gt;</span> <span class="n">x</span> <span class="o">/</span> <span class="n">y</span><span class="o">)(</span><span class="mf">1.0</span><span class="o">)</span>
+<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">sqrt</span><span class="p">(</span><span class="n">x</span><span class="p">:</span> <span class="nc">Double</span><span class="p">)</span> <span class="o">=</span>
+    <span class="n">fixedPoint</span><span class="p">(</span><span class="n">y</span> <span class="o">=&gt;</span> <span class="n">x</span> <span class="o">/</span> <span class="n">y</span><span class="p">)(</span><span class="mf">1.0</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>Unfortunately, this doesn’t converge. (Oscillates between 1 and 2)</p>
-<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="n">sqrt</span><span class="o">(</span><span class="n">x</span><span class="k">:</span> <span class="kt">Double</span><span class="o">)</span> <span class="k">=</span> <span class="n">fixedPoint</span><span class="o">(</span><span class="n">y</span> <span class="k">=&gt;</span> <span class="o">(</span><span class="n">y</span> <span class="o">+</span> <span class="n">x</span> <span class="o">/</span> <span class="n">y</span><span class="o">)</span> <span class="o">/</span> <span class="mi">2</span><span class="o">)(</span><span class="mf">1.0</span><span class="o">)</span>
+<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">sqrt</span><span class="p">(</span><span class="n">x</span><span class="p">:</span> <span class="nc">Double</span><span class="p">)</span> <span class="o">=</span> <span class="n">fixedPoint</span><span class="p">(</span><span class="n">y</span> <span class="o">=&gt;</span> <span class="p">(</span><span class="n">y</span> <span class="o">+</span> <span class="n">x</span> <span class="o">/</span> <span class="n">y</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)(</span><span class="mf">1.0</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>The <em>averaging</em> prevents estimations from varying too much.</p>
 </li>
 <li><p>It can be written more clearly:</p>
-<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="n">averageDamp</span><span class="o">(</span><span class="n">f</span><span class="k">:</span> <span class="kt">Double</span> <span class="o">=&gt;</span> <span class="nc">Double</span><span class="o">)(</span><span class="n">x</span><span class="k">:</span> <span class="kt">Double</span><span class="o">)</span><span class="k">:</span> <span class="kt">Double</span> <span class="o">=</span>
-    <span class="o">(</span><span class="n">x</span> <span class="o">+</span> <span class="n">f</span><span class="o">(</span><span class="n">x</span><span class="o">))</span> <span class="o">/</span> <span class="mi">2</span>
+<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">averageDamp</span><span class="p">(</span><span class="n">f</span><span class="p">:</span> <span class="nc">Double</span> <span class="o">=&gt;</span> <span class="nc">Double</span><span class="p">)(</span><span class="n">x</span><span class="p">:</span> <span class="nc">Double</span><span class="p">):</span> <span class="nc">Double</span> <span class="o">=</span>
+    <span class="p">(</span><span class="n">x</span> <span class="o">+</span> <span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">))</span> <span class="o">/</span> <span class="mi">2</span>
 
-<span class="k">def</span> <span class="n">sqrt</span><span class="o">(</span><span class="n">x</span><span class="k">:</span> <span class="kt">Double</span><span class="o">)</span> <span class="k">=</span> <span class="n">fixedPoint</span> <span class="o">(</span><span class="n">averageDamp</span> <span class="o">(</span><span class="n">y</span> <span class="k">=&gt;</span> <span class="n">x</span><span class="o">/</span><span class="n">y</span><span class="o">))</span> <span class="o">(</span><span class="mf">1.0</span><span class="o">)</span>
+<span class="k">def</span> <span class="nf">sqrt</span><span class="p">(</span><span class="n">x</span><span class="p">:</span> <span class="nc">Double</span><span class="p">)</span> <span class="o">=</span> <span class="n">fixedPoint</span> <span class="p">(</span><span class="n">averageDamp</span> <span class="p">(</span><span class="n">y</span> <span class="o">=&gt;</span> <span class="n">x</span><span class="o">/</span><span class="n">y</span><span class="p">))</span> <span class="p">(</span><span class="mf">1.0</span><span class="p">)</span>
 </pre></div>
 </div>
 </li>
 <li><p>As a programmer, one must look for opportunities to abstract and reuse.</p></li>
 </ul>
-</div>
-<div class="section" id="scala-syntax-summary">
+</section>
+<section id="scala-syntax-summary">
 <h2>2.4 Scala Syntax Summary<a class="headerlink" href="#scala-syntax-summary" title="Permalink to this headline">¶</a></h2>
 <ul>
 <li><p>Types:</p>
@@ -503,21 +561,21 @@ Types = Type { ‘ , ’ Type }
 </ul>
 </li>
 </ul>
-</div>
-<div class="section" id="functions-and-data">
+</section>
+<section id="functions-and-data">
 <h2>2.5 Functions and Data<a class="headerlink" href="#functions-and-data" title="Permalink to this headline">¶</a></h2>
 <ul>
 <li><p>Example: package for doing rational arithmetic.</p>
-<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="n">addRationalNumerator</span><span class="o">(</span><span class="n">n1</span><span class="k">:</span> <span class="kt">Int</span><span class="o">,</span> <span class="n">d1</span><span class="k">:</span> <span class="kt">Int</span><span class="o">,</span> <span class="n">n2</span><span class="k">:</span> <span class="kt">Int</span><span class="o">,</span> <span class="n">d2</span><span class="k">:</span> <span class="kt">Int</span><span class="o">)</span><span class="k">:</span> <span class="kt">Int</span>
-<span class="k">def</span> <span class="n">addRationalDenominator</span><span class="o">(</span><span class="n">n1</span><span class="k">:</span> <span class="kt">Int</span><span class="o">,</span> <span class="n">d1</span><span class="k">:</span> <span class="kt">Int</span><span class="o">,</span> <span class="n">n2</span><span class="k">:</span> <span class="kt">Int</span><span class="o">,</span> <span class="n">d2</span><span class="k">:</span> <span class="kt">Int</span><span class="o">)</span><span class="k">:</span> <span class="kt">Int</span>
+<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">addRationalNumerator</span><span class="p">(</span><span class="n">n1</span><span class="p">:</span> <span class="nc">Int</span><span class="p">,</span> <span class="n">d1</span><span class="p">:</span> <span class="nc">Int</span><span class="p">,</span> <span class="n">n2</span><span class="p">:</span> <span class="nc">Int</span><span class="p">,</span> <span class="n">d2</span><span class="p">:</span> <span class="nc">Int</span><span class="p">):</span> <span class="nc">Int</span>
+<span class="k">def</span> <span class="nf">addRationalDenominator</span><span class="p">(</span><span class="n">n1</span><span class="p">:</span> <span class="nc">Int</span><span class="p">,</span> <span class="n">d1</span><span class="p">:</span> <span class="nc">Int</span><span class="p">,</span> <span class="n">n2</span><span class="p">:</span> <span class="nc">Int</span><span class="p">,</span> <span class="n">d2</span><span class="p">:</span> <span class="nc">Int</span><span class="p">):</span> <span class="nc">Int</span>
 </pre></div>
 </div>
 <p>is a possibility but difficult. Instead, combine in a different data structure.</p>
 </li>
 <li><p>In Scala, define a <em>class</em>:</p>
-<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Rational</span><span class="o">(</span><span class="n">x</span><span class="k">:</span> <span class="kt">Int</span><span class="o">,</span> <span class="n">y</span><span class="k">:</span> <span class="kt">Int</span><span class="o">)</span><span class="k">:</span>
-    <span class="kt">def</span> <span class="kt">numer</span> <span class="o">=</span> <span class="n">x</span>
-    <span class="k">def</span> <span class="n">denom</span> <span class="k">=</span> <span class="n">y</span>
+<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Rational</span><span class="p">(</span><span class="n">x</span><span class="p">:</span> <span class="nc">Int</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="nc">Int</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">numer</span> <span class="o">=</span> <span class="n">x</span>
+    <span class="k">def</span> <span class="nf">denom</span> <span class="o">=</span> <span class="n">y</span>
 </pre></div>
 </div>
 <p>Introduces two entities:</p>
@@ -529,92 +587,92 @@ Types = Type { ‘ , ’ Type }
 </li>
 <li><p>We call the elements of a class type <em>objects</em>.</p></li>
 <li><p>We select the members of an object with the infix operator “.”.</p>
-<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="k">val</span> <span class="n">x</span> <span class="k">=</span> <span class="nc">Rational</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span> <span class="mi">2</span><span class="o">)</span> <span class="c1">// x: Rational = Rational@2abe0e27</span>
-<span class="n">x</span><span class="o">.</span><span class="n">numer</span> <span class="c1">// 1</span>
-<span class="n">x</span><span class="o">.</span><span class="n">denom</span> <span class="c1">// 2</span>
+<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="kd">val</span> <span class="n">x</span> <span class="o">=</span> <span class="nc">Rational</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span> <span class="c1">// x: Rational = Rational@2abe0e27</span>
+<span class="n">x</span><span class="p">.</span><span class="n">numer</span> <span class="c1">// 1</span>
+<span class="n">x</span><span class="p">.</span><span class="n">denom</span> <span class="c1">// 2</span>
 </pre></div>
 </div>
 </li>
 <li><p>We can then define addition:</p>
-<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="n">addRational</span><span class="o">(</span><span class="n">r</span><span class="k">:</span> <span class="kt">Rational</span><span class="o">,</span> <span class="n">s</span><span class="k">:</span> <span class="kt">Rational</span><span class="o">)</span><span class="k">:</span> <span class="kt">Rational</span> <span class="o">=</span>
-    <span class="nc">Rational</span><span class="o">(</span>
-        <span class="n">r</span><span class="o">.</span><span class="n">numer</span> <span class="o">*</span> <span class="n">s</span><span class="o">.</span><span class="n">denom</span> <span class="o">+</span> <span class="n">s</span><span class="o">.</span><span class="n">numer</span> <span class="o">*</span> <span class="n">r</span><span class="o">.</span><span class="n">denom</span><span class="o">,</span>
-        <span class="n">r</span><span class="o">.</span><span class="n">denom</span> <span class="o">*</span> <span class="n">s</span><span class="o">.</span><span class="n">denom</span><span class="o">)</span>
+<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">addRational</span><span class="p">(</span><span class="n">r</span><span class="p">:</span> <span class="nc">Rational</span><span class="p">,</span> <span class="n">s</span><span class="p">:</span> <span class="nc">Rational</span><span class="p">):</span> <span class="nc">Rational</span> <span class="o">=</span>
+    <span class="nc">Rational</span><span class="p">(</span>
+        <span class="n">r</span><span class="p">.</span><span class="n">numer</span> <span class="o">*</span> <span class="n">s</span><span class="p">.</span><span class="n">denom</span> <span class="o">+</span> <span class="n">s</span><span class="p">.</span><span class="n">numer</span> <span class="o">*</span> <span class="n">r</span><span class="p">.</span><span class="n">denom</span><span class="p">,</span>
+        <span class="n">r</span><span class="p">.</span><span class="n">denom</span> <span class="o">*</span> <span class="n">s</span><span class="p">.</span><span class="n">denom</span><span class="p">)</span>
 
-<span class="k">def</span> <span class="n">makeString</span><span class="o">(</span><span class="n">r</span><span class="k">:</span> <span class="kt">Rational</span><span class="o">)</span><span class="k">:</span> <span class="kt">String</span> <span class="o">=</span>
-    <span class="s">s&quot;</span><span class="si">${</span><span class="n">r</span><span class="o">.</span><span class="n">numer</span><span class="si">}</span><span class="s">/</span><span class="si">${</span><span class="n">r</span><span class="o">.</span><span class="n">denom</span><span class="si">}</span><span class="s">&quot;</span> <span class="c1">// interpolated string similar to f-strings</span>
+<span class="k">def</span> <span class="nf">makeString</span><span class="p">(</span><span class="n">r</span><span class="p">:</span> <span class="nc">Rational</span><span class="p">):</span> <span class="nc">String</span> <span class="o">=</span>
+    <span class="s">s&quot;</span><span class="si">${</span><span class="n">r</span><span class="p">.</span><span class="n">numer</span><span class="si">}</span><span class="s">/</span><span class="si">${</span><span class="n">r</span><span class="p">.</span><span class="n">denom</span><span class="si">}</span><span class="s">&quot;</span> <span class="c1">// interpolated string similar to f-strings</span>
 
-<span class="n">makeString</span><span class="o">(</span><span class="n">addRational</span><span class="o">(</span><span class="nc">Rational</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span> <span class="mi">2</span><span class="o">),</span> <span class="nc">Rational</span><span class="o">(</span><span class="mi">2</span><span class="o">,</span> <span class="mi">3</span><span class="o">)))</span> <span class="o">&gt;</span> <span class="mi">7</span><span class="o">/</span><span class="mi">6</span>
+<span class="n">makeString</span><span class="p">(</span><span class="n">addRational</span><span class="p">(</span><span class="nc">Rational</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="nc">Rational</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">)))</span> <span class="o">&gt;</span> <span class="mi">7</span><span class="o">/</span><span class="mi">6</span>
 </pre></div>
 </div>
 </li>
 <li><p>We can define and package functions operating on a data abstraction in the abstraction itself. Such functions are called methods.</p>
-<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Rational</span><span class="o">(</span><span class="n">x</span><span class="k">:</span> <span class="kt">Int</span><span class="o">,</span> <span class="n">y</span><span class="k">:</span> <span class="kt">Int</span><span class="o">)</span><span class="k">:</span>
-    <span class="kt">def</span> <span class="kt">numer</span> <span class="o">=</span> <span class="n">x</span>
-    <span class="k">def</span> <span class="n">denom</span> <span class="k">=</span> <span class="n">y</span>
-    <span class="k">def</span> <span class="n">add</span><span class="o">(</span><span class="n">r</span><span class="k">:</span> <span class="kt">Rational</span><span class="o">)</span> <span class="k">=</span>
-        <span class="nc">Rational</span><span class="o">(</span><span class="n">numer</span> <span class="o">*</span> <span class="n">r</span><span class="o">.</span><span class="n">denom</span> <span class="o">+</span> <span class="n">r</span><span class="o">.</span><span class="n">numer</span> <span class="o">*</span> <span class="n">denom</span><span class="o">,</span>
-                <span class="n">denom</span> <span class="o">*</span> <span class="n">r</span><span class="o">.</span><span class="n">denom</span><span class="o">)</span> <span class="c1">// called as x.add(y)</span>
-    <span class="k">def</span> <span class="n">mul</span><span class="o">(</span><span class="n">r</span><span class="k">:</span> <span class="kt">Rational</span><span class="o">)</span> <span class="k">=</span> <span class="o">...</span>
-    <span class="o">...</span>
-    <span class="k">override</span> <span class="k">def</span> <span class="n">toString</span> <span class="k">=</span> <span class="s">s&quot;</span><span class="si">$numer</span><span class="s">/</span><span class="si">$denom</span><span class="s">&quot;</span> <span class="c1">// all scala classes support a toString function by default. </span>
+<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Rational</span><span class="p">(</span><span class="n">x</span><span class="p">:</span> <span class="nc">Int</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="nc">Int</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">numer</span> <span class="o">=</span> <span class="n">x</span>
+    <span class="k">def</span> <span class="nf">denom</span> <span class="o">=</span> <span class="n">y</span>
+    <span class="k">def</span> <span class="nf">add</span><span class="p">(</span><span class="n">r</span><span class="p">:</span> <span class="nc">Rational</span><span class="p">)</span> <span class="o">=</span>
+        <span class="nc">Rational</span><span class="p">(</span><span class="n">numer</span> <span class="o">*</span> <span class="n">r</span><span class="p">.</span><span class="n">denom</span> <span class="o">+</span> <span class="n">r</span><span class="p">.</span><span class="n">numer</span> <span class="o">*</span> <span class="n">denom</span><span class="p">,</span>
+                <span class="n">denom</span> <span class="o">*</span> <span class="n">r</span><span class="p">.</span><span class="n">denom</span><span class="p">)</span> <span class="c1">// called as x.add(y)</span>
+    <span class="k">def</span> <span class="nf">mul</span><span class="p">(</span><span class="n">r</span><span class="p">:</span> <span class="nc">Rational</span><span class="p">)</span> <span class="o">=</span> <span class="p">...</span>
+    <span class="p">...</span>
+    <span class="k">override</span> <span class="k">def</span> <span class="nf">toString</span> <span class="o">=</span> <span class="s">s&quot;</span><span class="si">$</span><span class="n">numer</span><span class="s">/</span><span class="si">$</span><span class="n">denom</span><span class="s">&quot;</span> <span class="c1">// all scala classes support a toString function by default. </span>
     <span class="c1">// Override redefines this. </span>
     <span class="c1">// Braces aren&#39;t always necessary if it&#39;s a simple expression</span>
 </pre></div>
 </div>
 </li>
 <li><p>Exercise: Negative of a rational number</p>
-<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Rational</span><span class="o">(</span><span class="n">x</span><span class="k">:</span> <span class="kt">Int</span><span class="o">,</span> <span class="n">y</span><span class="k">:</span> <span class="kt">Int</span><span class="o">)</span><span class="k">:</span>
-    <span class="kt">def</span> <span class="kt">numer</span> <span class="o">=</span> <span class="n">x</span>
-    <span class="k">def</span> <span class="n">denom</span> <span class="k">=</span> <span class="n">y</span>
-    <span class="k">def</span> <span class="n">neg</span> <span class="k">=</span> <span class="nc">Rational</span><span class="o">(-</span><span class="n">numer</span><span class="o">,</span> <span class="n">denom</span><span class="o">)</span>
+<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Rational</span><span class="p">(</span><span class="n">x</span><span class="p">:</span> <span class="nc">Int</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="nc">Int</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">numer</span> <span class="o">=</span> <span class="n">x</span>
+    <span class="k">def</span> <span class="nf">denom</span> <span class="o">=</span> <span class="n">y</span>
+    <span class="k">def</span> <span class="nf">neg</span> <span class="o">=</span> <span class="nc">Rational</span><span class="p">(</span><span class="o">-</span><span class="n">numer</span><span class="p">,</span> <span class="n">denom</span><span class="p">)</span>
     
-    <span class="k">def</span> <span class="n">add</span><span class="o">(</span><span class="n">r</span><span class="k">:</span> <span class="kt">Rational</span><span class="o">)</span> <span class="k">=</span>
-        <span class="nc">Rational</span><span class="o">(</span><span class="n">numer</span> <span class="o">*</span> <span class="n">r</span><span class="o">.</span><span class="n">denom</span> <span class="o">+</span> <span class="n">r</span><span class="o">.</span><span class="n">numer</span> <span class="o">*</span> <span class="n">denom</span><span class="o">,</span>
-                <span class="n">denom</span> <span class="o">*</span> <span class="n">r</span><span class="o">.</span><span class="n">denom</span><span class="o">)</span> <span class="c1">// called as x.add(y)</span>
+    <span class="k">def</span> <span class="nf">add</span><span class="p">(</span><span class="n">r</span><span class="p">:</span> <span class="nc">Rational</span><span class="p">)</span> <span class="o">=</span>
+        <span class="nc">Rational</span><span class="p">(</span><span class="n">numer</span> <span class="o">*</span> <span class="n">r</span><span class="p">.</span><span class="n">denom</span> <span class="o">+</span> <span class="n">r</span><span class="p">.</span><span class="n">numer</span> <span class="o">*</span> <span class="n">denom</span><span class="p">,</span>
+                <span class="n">denom</span> <span class="o">*</span> <span class="n">r</span><span class="p">.</span><span class="n">denom</span><span class="p">)</span> <span class="c1">// called as x.add(y)</span>
     
-    <span class="k">def</span> <span class="n">mul</span><span class="o">(</span><span class="n">r</span><span class="k">:</span> <span class="kt">Rational</span><span class="o">)</span> <span class="k">=</span> <span class="o">...</span>
+    <span class="k">def</span> <span class="nf">mul</span><span class="p">(</span><span class="n">r</span><span class="p">:</span> <span class="nc">Rational</span><span class="p">)</span> <span class="o">=</span> <span class="p">...</span>
     
-    <span class="k">def</span> <span class="n">sub</span><span class="o">(</span><span class="n">r</span><span class="k">:</span> <span class="kt">Rational</span><span class="o">)</span> <span class="k">=</span> <span class="n">add</span><span class="o">(</span><span class="n">r</span><span class="o">.</span><span class="n">neg</span><span class="o">)</span>
-    <span class="o">...</span>
-    <span class="k">override</span> <span class="k">def</span> <span class="n">toString</span> <span class="k">=</span> <span class="s">s&quot;</span><span class="si">$numer</span><span class="s">/</span><span class="si">$denom</span><span class="s">&quot;</span>
+    <span class="k">def</span> <span class="nf">sub</span><span class="p">(</span><span class="n">r</span><span class="p">:</span> <span class="nc">Rational</span><span class="p">)</span> <span class="o">=</span> <span class="n">add</span><span class="p">(</span><span class="n">r</span><span class="p">.</span><span class="n">neg</span><span class="p">)</span>
+    <span class="p">...</span>
+    <span class="k">override</span> <span class="k">def</span> <span class="nf">toString</span> <span class="o">=</span> <span class="s">s&quot;</span><span class="si">$</span><span class="n">numer</span><span class="s">/</span><span class="si">$</span><span class="n">denom</span><span class="s">&quot;</span>
 </pre></div>
 </div>
 </li>
 </ul>
-</div>
-<div class="section" id="more-fun-with-rationals">
+</section>
+<section id="more-fun-with-rationals">
 <h2>2.6 More Fun with Rationals<a class="headerlink" href="#more-fun-with-rationals" title="Permalink to this headline">¶</a></h2>
 <ul>
 <li><p>Rational numbers weren’t always represented in their simplest form.</p>
-<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Rational</span><span class="o">(</span><span class="n">x</span><span class="k">:</span> <span class="kt">Int</span><span class="o">,</span> <span class="n">y</span><span class="k">:</span> <span class="kt">Int</span><span class="o">)</span><span class="k">:</span>
-    <span class="kt">private</span> <span class="kt">def</span> <span class="kt">gcd</span><span class="o">(</span><span class="kt">a:</span> <span class="kt">Int</span><span class="o">,</span> <span class="kt">b:</span> <span class="kt">Int</span><span class="o">)</span><span class="k">:</span> <span class="kt">Int</span> <span class="o">=</span>
-        <span class="k">if</span> <span class="n">b</span> <span class="o">==</span> <span class="mi">0</span> <span class="n">then</span> <span class="n">a</span> <span class="k">else</span> <span class="n">gcd</span><span class="o">(</span><span class="n">b</span><span class="o">,</span> <span class="n">a</span> <span class="o">%</span> <span class="n">b</span><span class="o">)</span>
-    <span class="k">private</span> <span class="k">val</span> <span class="n">g</span> <span class="k">=</span> <span class="n">gcd</span><span class="o">(</span><span class="n">x</span><span class="o">,</span> <span class="n">y</span><span class="o">)</span> <span class="c1">// private members can be accesed only from inside the class</span>
-    <span class="k">def</span> <span class="n">numer</span> <span class="k">=</span> <span class="n">x</span> <span class="o">/</span> <span class="n">g</span>
-    <span class="k">def</span> <span class="n">denom</span> <span class="k">=</span> <span class="n">y</span> <span class="o">/</span> <span class="n">g</span> <span class="c1">// call-by-value so we can reuse.</span>
-    <span class="o">...</span>
+<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Rational</span><span class="p">(</span><span class="n">x</span><span class="p">:</span> <span class="nc">Int</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="nc">Int</span><span class="p">):</span>
+    <span class="k">private</span> <span class="k">def</span> <span class="nf">gcd</span><span class="p">(</span><span class="n">a</span><span class="p">:</span> <span class="nc">Int</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span> <span class="nc">Int</span><span class="p">):</span> <span class="nc">Int</span> <span class="o">=</span>
+        <span class="k">if</span> <span class="n">b</span> <span class="o">==</span> <span class="mi">0</span> <span class="k">then</span> <span class="n">a</span> <span class="k">else</span> <span class="n">gcd</span><span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="n">a</span> <span class="o">%</span> <span class="n">b</span><span class="p">)</span>
+    <span class="k">private</span> <span class="kd">val</span> <span class="n">g</span> <span class="o">=</span> <span class="n">gcd</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span> <span class="c1">// private members can be accesed only from inside the class</span>
+    <span class="k">def</span> <span class="nf">numer</span> <span class="o">=</span> <span class="n">x</span> <span class="o">/</span> <span class="n">g</span>
+    <span class="k">def</span> <span class="nf">denom</span> <span class="o">=</span> <span class="n">y</span> <span class="o">/</span> <span class="n">g</span> <span class="c1">// call-by-value so we can reuse.</span>
+    <span class="p">...</span>
 </pre></div>
 </div>
 <p>Alternatively,</p>
-<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Rational</span><span class="o">(</span><span class="n">x</span><span class="k">:</span> <span class="kt">Int</span><span class="o">,</span> <span class="n">y</span><span class="k">:</span> <span class="kt">Int</span><span class="o">)</span><span class="k">:</span>
-    <span class="kt">private</span> <span class="kt">def</span> <span class="kt">gcd</span><span class="o">(</span><span class="kt">a:</span> <span class="kt">Int</span><span class="o">,</span> <span class="kt">b:</span> <span class="kt">Int</span><span class="o">)</span><span class="k">:</span> <span class="kt">Int</span> <span class="o">=</span>
-        <span class="k">if</span> <span class="n">b</span> <span class="o">==</span> <span class="mi">0</span> <span class="n">then</span> <span class="n">a</span> <span class="k">else</span> <span class="n">gcd</span><span class="o">(</span><span class="n">b</span><span class="o">,</span> <span class="n">a</span> <span class="o">%</span> <span class="n">b</span><span class="o">)</span>
-    <span class="k">val</span> <span class="n">numer</span> <span class="k">=</span> <span class="n">x</span> <span class="o">/</span> <span class="n">g</span>
-    <span class="k">val</span> <span class="n">denom</span> <span class="k">=</span> <span class="n">y</span> <span class="o">/</span> <span class="n">g</span> <span class="c1">// advantageous when numer and denom are called often.</span>
-    <span class="o">...</span>
+<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Rational</span><span class="p">(</span><span class="n">x</span><span class="p">:</span> <span class="nc">Int</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="nc">Int</span><span class="p">):</span>
+    <span class="k">private</span> <span class="k">def</span> <span class="nf">gcd</span><span class="p">(</span><span class="n">a</span><span class="p">:</span> <span class="nc">Int</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span> <span class="nc">Int</span><span class="p">):</span> <span class="nc">Int</span> <span class="o">=</span>
+        <span class="k">if</span> <span class="n">b</span> <span class="o">==</span> <span class="mi">0</span> <span class="k">then</span> <span class="n">a</span> <span class="k">else</span> <span class="n">gcd</span><span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="n">a</span> <span class="o">%</span> <span class="n">b</span><span class="p">)</span>
+    <span class="kd">val</span> <span class="n">numer</span> <span class="o">=</span> <span class="n">x</span> <span class="o">/</span> <span class="n">g</span>
+    <span class="kd">val</span> <span class="n">denom</span> <span class="o">=</span> <span class="n">y</span> <span class="o">/</span> <span class="n">g</span> <span class="c1">// advantageous when numer and denom are called often.</span>
+    <span class="p">...</span>
 </pre></div>
 </div>
 </li>
 <li><p>Clients observe exactly the same behavior in each case. Ability to choose different implementations: “data abstraction” -&gt; Cornerstone of software engineering.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">this</span></code>: represents the object on which the current method is executed.</p>
-<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Rational</span><span class="o">(</span><span class="n">x</span><span class="k">:</span> <span class="kt">Int</span><span class="o">,</span> <span class="n">y</span><span class="k">:</span> <span class="kt">Int</span><span class="o">)</span><span class="k">:</span>
+<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Rational</span><span class="p">(</span><span class="n">x</span><span class="p">:</span> <span class="nc">Int</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="nc">Int</span><span class="p">):</span>
 
-    <span class="kt">def</span> <span class="kt">less</span><span class="o">(</span><span class="kt">that:</span> <span class="kt">Rational</span><span class="o">)</span><span class="kt">:</span> <span class="kt">Boolean</span> <span class="o">=</span>
-        <span class="n">numer</span> <span class="o">*</span> <span class="n">that</span><span class="o">.</span><span class="n">denom</span> <span class="o">&lt;</span> <span class="n">that</span><span class="o">.</span><span class="n">numer</span> <span class="o">*</span> <span class="n">denom</span> <span class="c1">// x1y2 &lt; x2y1 (no need to use this.numer here but is equivalent)</span>
+    <span class="k">def</span> <span class="nf">less</span><span class="p">(</span><span class="n">that</span><span class="p">:</span> <span class="nc">Rational</span><span class="p">):</span> <span class="nc">Boolean</span> <span class="o">=</span>
+        <span class="n">numer</span> <span class="o">*</span> <span class="n">that</span><span class="p">.</span><span class="n">denom</span> <span class="o">&lt;</span> <span class="n">that</span><span class="p">.</span><span class="n">numer</span> <span class="o">*</span> <span class="n">denom</span> <span class="c1">// x1y2 &lt; x2y1 (no need to use this.numer here but is equivalent)</span>
 
-    <span class="k">def</span> <span class="n">max</span><span class="o">(</span><span class="n">that</span><span class="k">:</span> <span class="kt">Rational</span><span class="o">)</span><span class="k">:</span> <span class="kt">Rational</span> <span class="o">=</span>
-        <span class="k">if</span> <span class="k">this</span><span class="o">.</span><span class="n">less</span><span class="o">(</span><span class="n">that</span><span class="o">)</span> <span class="n">then</span> <span class="n">that</span> <span class="k">else</span> <span class="k">this</span> <span class="c1">// this is required (can&#39;t use numer and denom here conveniently)</span>
+    <span class="k">def</span> <span class="nf">max</span><span class="p">(</span><span class="n">that</span><span class="p">:</span> <span class="nc">Rational</span><span class="p">):</span> <span class="nc">Rational</span> <span class="o">=</span>
+        <span class="k">if</span> <span class="bp">this</span><span class="p">.</span><span class="n">less</span><span class="p">(</span><span class="n">that</span><span class="p">)</span> <span class="k">then</span> <span class="n">that</span> <span class="k">else</span> <span class="bp">this</span> <span class="c1">// this is required (can&#39;t use numer and denom here conveniently)</span>
 </pre></div>
 </div>
 </li>
@@ -639,15 +697,15 @@ Types = Type { ‘ , ’ Type }
 </ul>
 </li>
 <li><p>Scala also allows the declaration of <em>auxiliary constructors</em>. These are methods named <code class="docutils literal notranslate"><span class="pre">this</span></code>. Example:</p>
-<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Rational</span><span class="o">(</span><span class="n">x</span><span class="k">:</span> <span class="kt">Int</span><span class="o">,</span> <span class="n">y</span><span class="k">:</span> <span class="kt">Int</span><span class="o">)</span><span class="k">:</span>
-    <span class="kt">def</span> <span class="kt">this</span><span class="o">(</span><span class="kt">x:</span> <span class="kt">Int</span><span class="o">)</span> <span class="o">=</span> <span class="k">this</span><span class="o">(</span><span class="n">x</span><span class="o">,</span> <span class="mi">1</span><span class="o">)</span>
+<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Rational</span><span class="p">(</span><span class="n">x</span><span class="p">:</span> <span class="nc">Int</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="nc">Int</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">this</span><span class="p">(</span><span class="n">x</span><span class="p">:</span> <span class="nc">Int</span><span class="p">)</span> <span class="o">=</span> <span class="bp">this</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
 </pre></div>
 </div>
 </li>
 <li><p>End markers: (optional) used to identify the end of a class. Example, adding <code class="docutils literal notranslate"><span class="pre">end</span> <span class="pre">Rational</span></code>. Can also be used with <code class="docutils literal notranslate"><span class="pre">def</span></code> or with <code class="docutils literal notranslate"><span class="pre">if</span></code>.</p></li>
 </ul>
-</div>
-<div class="section" id="evaluations-and-operators">
+</section>
+<section id="evaluations-and-operators">
 <h2>2.7 Evaluations and Operators<a class="headerlink" href="#evaluations-and-operators" title="Permalink to this headline">¶</a></h2>
 <ul>
 <li><p>How is an instantiation of the class <span class="math notranslate nohighlight">\(C(e_1, \ldots, e_m)\)</span> evaluated?</p>
@@ -660,9 +718,9 @@ Types = Type { ‘ , ’ Type }
 <li><p>Defining all methods that belong to a class inside the class itself can lead to large classes and isn’t modular.</p></li>
 <li><p>Methods that do not need to access the internals of a class can alternatively be defined as extenstion methods.</p></li>
 <li><p>Example:</p>
-<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="n">extension</span> <span class="o">(</span><span class="n">r</span><span class="k">:</span> <span class="kt">Rational</span><span class="o">)</span>
-    <span class="k">def</span> <span class="n">min</span><span class="o">(</span><span class="n">s</span><span class="k">:</span> <span class="kt">Rational</span><span class="o">)</span><span class="k">:</span> <span class="kt">Boolean</span> <span class="o">=</span> <span class="k">if</span> <span class="n">s</span><span class="o">.</span><span class="n">less</span><span class="o">(</span><span class="n">r</span><span class="o">)</span> <span class="n">then</span> <span class="n">s</span> <span class="k">else</span> <span class="n">r</span>
-    <span class="k">def</span> <span class="n">abs</span><span class="k">:</span> <span class="kt">Rational</span> <span class="o">=</span> <span class="nc">Rational</span><span class="o">(</span><span class="n">r</span><span class="o">.</span><span class="n">numer</span><span class="o">.</span><span class="n">abs</span><span class="o">,</span> <span class="n">r</span><span class="o">.</span><span class="n">denom</span><span class="o">)</span>
+<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="k">extension</span> <span class="p">(</span><span class="n">r</span><span class="p">:</span> <span class="nc">Rational</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">min</span><span class="p">(</span><span class="n">s</span><span class="p">:</span> <span class="nc">Rational</span><span class="p">):</span> <span class="nc">Boolean</span> <span class="o">=</span> <span class="k">if</span> <span class="n">s</span><span class="p">.</span><span class="n">less</span><span class="p">(</span><span class="n">r</span><span class="p">)</span> <span class="k">then</span> <span class="n">s</span> <span class="k">else</span> <span class="n">r</span>
+    <span class="k">def</span> <span class="nf">abs</span><span class="p">:</span> <span class="nc">Rational</span> <span class="o">=</span> <span class="nc">Rational</span><span class="p">(</span><span class="n">r</span><span class="p">.</span><span class="n">numer</span><span class="p">.</span><span class="n">abs</span><span class="p">,</span> <span class="n">r</span><span class="p">.</span><span class="n">denom</span><span class="p">)</span>
 </pre></div>
 </div>
 </li>
@@ -679,43 +737,43 @@ Types = Type { ‘ , ’ Type }
 <li><p>Step 1: Relaxed Identifiers. The following are valid identifiers in Scala:</p>
 <ul>
 <li><p><code class="docutils literal notranslate"><span class="pre">x1</span> <span class="pre">*</span> <span class="pre">+?%&amp;</span> <span class="pre">vector_++</span> <span class="pre">counter_=x1</span> <span class="pre">*</span> <span class="pre">+?%&amp;</span> <span class="pre">vector_++</span> <span class="pre">counter_=</span></code></p>
-<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="n">extension</span> <span class="o">(</span><span class="n">x</span><span class="k">:</span> <span class="kt">Rational</span><span class="o">)</span>
-    <span class="k">def</span> <span class="o">+</span> <span class="o">(</span><span class="n">y</span><span class="k">:</span> <span class="kt">Rational</span><span class="o">)</span><span class="k">:</span> <span class="kt">Rational</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">add</span><span class="o">(</span><span class="n">y</span><span class="o">)</span>
-    <span class="k">def</span> <span class="o">*</span> <span class="o">(</span><span class="n">y</span><span class="k">:</span> <span class="kt">Rational</span><span class="o">)</span><span class="k">:</span> <span class="kt">Rational</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">mul</span><span class="o">(</span><span class="n">y</span><span class="o">)</span>
+<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="k">extension</span> <span class="p">(</span><span class="n">x</span><span class="p">:</span> <span class="nc">Rational</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">+</span> <span class="p">(</span><span class="n">y</span><span class="p">:</span> <span class="nc">Rational</span><span class="p">):</span> <span class="nc">Rational</span> <span class="o">=</span> <span class="n">x</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">*</span> <span class="p">(</span><span class="n">y</span><span class="p">:</span> <span class="nc">Rational</span><span class="p">):</span> <span class="nc">Rational</span> <span class="o">=</span> <span class="n">x</span><span class="p">.</span><span class="n">mul</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
 </pre></div>
 </div>
 </li>
 </ul>
 </li>
 <li><p>Step 2: Infix Notation: An operator method with a single parameter can be used as an infix operator.</p>
-<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="n">extension</span> <span class="o">(</span><span class="n">x</span><span class="k">:</span> <span class="kt">Rational</span><span class="o">)</span>
-    <span class="n">infix</span> <span class="k">def</span> <span class="n">min</span><span class="o">(</span><span class="n">that</span><span class="k">:</span> <span class="kt">Rational</span><span class="o">)</span><span class="k">:</span> <span class="kt">Rational</span> <span class="o">=</span> <span class="o">...</span>
+<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="k">extension</span> <span class="p">(</span><span class="n">x</span><span class="p">:</span> <span class="nc">Rational</span><span class="p">)</span>
+    <span class="k">infix</span> <span class="k">def</span> <span class="nf">min</span><span class="p">(</span><span class="n">that</span><span class="p">:</span> <span class="nc">Rational</span><span class="p">):</span> <span class="nc">Rational</span> <span class="o">=</span> <span class="p">...</span>
 
-<span class="n">r</span> <span class="o">+</span> <span class="n">s</span>                   <span class="n">r</span><span class="o">.+(</span><span class="n">s</span><span class="o">)</span>
-<span class="n">r</span> <span class="o">&lt;</span> <span class="n">s</span> <span class="cm">/* in place of */</span> <span class="n">r</span><span class="o">.&lt;(</span><span class="n">s</span><span class="o">)</span>
-<span class="n">r</span> <span class="n">min</span> <span class="n">s</span>                 <span class="n">r</span><span class="o">.</span><span class="n">min</span><span class="o">(</span><span class="n">s</span><span class="o">)</span>
+<span class="n">r</span> <span class="o">+</span> <span class="n">s</span>                   <span class="n">r</span><span class="p">.</span><span class="o">+</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+<span class="n">r</span> <span class="o">&lt;</span> <span class="n">s</span> <span class="cm">/* in place of */</span> <span class="n">r</span><span class="p">.</span><span class="o">&lt;</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+<span class="n">r</span> <span class="n">min</span> <span class="n">s</span>                 <span class="n">r</span><span class="p">.</span><span class="n">min</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
 </pre></div>
 </div>
 </li>
 </ul>
 </li>
 <li><p>Precedence Rules for operators: similar to rules we have for integers. From low to high:</p>
-<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="o">(</span><span class="n">all</span> <span class="n">letters</span><span class="o">)</span>
+<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">all</span> <span class="n">letters</span><span class="p">)</span>
 <span class="o">|</span>
-<span class="o">^</span>
-<span class="o">&amp;</span>
+<span class="n">^</span>
+<span class="n">&amp;</span>
 <span class="o">&lt;</span> <span class="o">&gt;</span>
-<span class="k">=</span> <span class="o">!</span>
-<span class="k">:</span>
-<span class="kt">+</span> <span class="kt">-</span>
+<span class="o">=</span> <span class="o">!</span>
+<span class="p">:</span>
+<span class="o">+</span> <span class="o">-</span>
 <span class="o">*</span> <span class="o">/</span> <span class="o">%</span>
-<span class="o">(</span><span class="n">all</span> <span class="n">other</span> <span class="n">special</span> <span class="n">characters</span><span class="o">)</span>
+<span class="p">(</span><span class="n">all</span> <span class="n">other</span> <span class="n">special</span> <span class="n">characters</span><span class="p">)</span>
 </pre></div>
 </div>
 </li>
 </ul>
-</div>
-</div>
+</section>
+</section>
 
     <script type="text/x-thebe-config">
     {
@@ -739,54 +797,42 @@ Types = Type { ‘ , ’ Type }
 
               </div>
               
-        
             
-
-
-
-<div class='prev-next-bottom'>
-    
-    <div id="prev">
-        <a class="left-prev" href="Week_1_Introduction.html" title="previous page">
-            <i class="prevnext-label fas fa-angle-left"></i>
-            <div class="prevnext-info">
-                <p class="prevnext-label">previous</p>
-                <p class="prevnext-title">1 Introduction</p>
-            </div>
-        </a>
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'> 
+    <a class='left-prev' id="prev-link" href="Week_1_Introduction.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">1 Introduction</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="Week_3_Data_and_Abstraction.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">3 Data and Abstraction</p>
     </div>
-     <div id="next">
-        <a class="right-next" href="Week_3_Data_and_Abstraction.html" title="next page">
-            <div class="prevnext-info">
-                <p class="prevnext-label">next</p>
-                <p class="prevnext-title">3 Data and Abstraction</p>
-            </div>
-            <i class="prevnext-label fas fa-angle-right"></i>
-        </a>
-     </div>
-
+    <i class="fas fa-angle-right"></i>
+    </a>
 </div>
-        
+            
         </div>
     </div>
-    <footer class="footer mt-5 mt-md-0">
-    <div class="container">
-      <p>
-        
-          By Manasij Venkatesh<br/>
-        
-            &copy; Copyright 2021.<br/>
-      </p>
-    </div>
-  </footer>
+    <footer class="footer">
+  <p>
+    
+      By Manasij Venkatesh<br/>
+    
+        &copy; Copyright 2021.<br/>
+  </p>
+</footer>
 </main>
 
 
       </div>
     </div>
   
-  <script src="_static/js/index.1c5a1a01449ed65a7b51.js"></script>
+  <script src="_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
 
-  
   </body>
 </html>

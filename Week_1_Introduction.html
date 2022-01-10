@@ -4,11 +4,12 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>1 Introduction &#8212; Lectures notes for Functional Programming Principles in Scala by Martin Odersky</title>
     
-  <link href="_static/css/theme.css" rel="stylesheet" />
-  <link href="_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
+  <link href="_static/css/theme.css" rel="stylesheet">
+  <link href="_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
 
     
   <link rel="stylesheet"
@@ -22,8 +23,8 @@
       
 
     
-    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="_static/sphinx-book-theme.e8f53015daec13862f6db5e763c41738.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
     <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
@@ -31,19 +32,19 @@
     <link rel="stylesheet" type="text/css" href="_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
     <link rel="stylesheet" type="text/css" href="_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
     
-  <link rel="preload" as="script" href="_static/js/index.1c5a1a01449ed65a7b51.js">
+  <link rel="preload" as="script" href="_static/js/index.be7d3bbb2ef33a8344ce.js">
 
-    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
     <script src="_static/jquery.js"></script>
     <script src="_static/underscore.js"></script>
     <script src="_static/doctools.js"></script>
     <script src="_static/togglebutton.js"></script>
     <script src="_static/clipboard.min.js"></script>
     <script src="_static/copybutton.js"></script>
-    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-    <script src="_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
     <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
-    <script >
+    <script>
         const thebe_selector = ".thebe"
         const thebe_selector_input = "pre"
         const thebe_selector_output = ".output"
@@ -54,7 +55,10 @@
     <link rel="next" title="2 Higher Order Functions" href="Week_2_Higher_Order_Functions.html" />
     <link rel="prev" title="Lectures notes for Functional Programming Principles in Scala by Martin Odersky" href="README.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="docsearch:language" content="en" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
     
   </head>
   <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
@@ -70,6 +74,7 @@
     
         <div class="navbar-brand-box">
     <a class="navbar-brand text-wrap" href="index.html">
+      
       
       
       <h1 class="site-logo" id="site-title">Lectures notes for Functional Programming Principles in Scala by Martin Odersky</h1>
@@ -157,7 +162,7 @@
                 data-placement="left">.md</button></a>
         <!-- Download PDF via print -->
         <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
-            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
     </div>
 </div>
 
@@ -193,7 +198,7 @@
         </div>
 
         <!-- Table of contents -->
-        <div class="d-none d-md-block col-md-2 bd-toc show">
+        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
             
             <div class="tocsection onthispage pt-5 pb-3">
                 <i class="fas fa-list"></i> Contents
@@ -238,12 +243,60 @@
 </div>
     <div id="main-content" class="row">
         <div class="col-12 col-md-9 pl-md-3 pr-md-0">
-        
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>1 Introduction</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#elements-of-programming">
+   1.2 Elements of Programming
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#evaluation-strategies-and-termination">
+   1.3 Evaluation Strategies and Termination
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#conditionals-and-value-definitions">
+   1.4 Conditionals and Value Definitions
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#exammple-square-roots-with-newton-s-method">
+   1.5 Exammple: Square roots with Newton’s method
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#blocks-and-lexical-scope">
+   1.6 Blocks and Lexical Scope
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#tail-recursion">
+   1.7 Tail recursion
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            
               <div>
                 
-  <div class="section" id="introduction">
+  <section class="tex2jax_ignore mathjax_ignore" id="introduction">
 <h1>1 Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="elements-of-programming">
+<section id="elements-of-programming">
 <h2>1.2 Elements of Programming<a class="headerlink" href="#elements-of-programming" title="Permalink to this headline">¶</a></h2>
 <ul>
 <li><p>What’s a REPL?</p>
@@ -259,9 +312,9 @@
 <li><p>Apply the operator to the operands.</p></li>
 </ol>
 <p>Example:</p>
-<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="n">pi</span> <span class="k">=</span> <span class="mf">3.14159</span>
-<span class="k">def</span> <span class="n">radius</span> <span class="k">=</span> <span class="mi">10</span>
-<span class="o">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">pi</span> <span class="o">*</span> <span class="n">radius</span><span class="o">)</span>
+<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">pi</span> <span class="o">=</span> <span class="mf">3.14159</span>
+<span class="k">def</span> <span class="nf">radius</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">pi</span> <span class="o">*</span> <span class="n">radius</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>is evaluated as:</p>
@@ -275,11 +328,11 @@
 <li><p><code class="docutils literal notranslate"><span class="pre">def</span></code></p>
 <ul>
 <li><p>Definitions can have parameters</p>
-<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="n">square</span><span class="o">(</span><span class="n">x</span><span class="k">:</span> <span class="kt">Double</span><span class="o">)</span> <span class="k">=</span> <span class="n">x</span> <span class="o">*</span> <span class="n">x</span>
-<span class="n">square</span><span class="o">(</span><span class="mi">2</span><span class="o">)</span>
-<span class="n">square</span><span class="o">(</span><span class="n">square</span><span class="o">(</span><span class="mi">4</span><span class="o">))</span>
+<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">square</span><span class="p">(</span><span class="n">x</span><span class="p">:</span> <span class="nc">Double</span><span class="p">)</span> <span class="o">=</span> <span class="n">x</span> <span class="o">*</span> <span class="n">x</span>
+<span class="n">square</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">square</span><span class="p">(</span><span class="n">square</span><span class="p">(</span><span class="mi">4</span><span class="p">))</span>
 
-<span class="k">def</span> <span class="n">sumOfSquares</span><span class="o">(</span><span class="n">x</span><span class="k">:</span> <span class="kt">Double</span><span class="o">,</span> <span class="n">y</span><span class="k">:</span> <span class="kt">Double</span><span class="o">)</span> <span class="k">=</span> <span class="n">square</span><span class="o">(</span><span class="n">x</span><span class="o">)</span> <span class="o">+</span> <span class="n">square</span><span class="o">(</span><span class="n">y</span><span class="o">)</span>
+<span class="k">def</span> <span class="nf">sumOfSquares</span><span class="p">(</span><span class="n">x</span><span class="p">:</span> <span class="nc">Double</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="nc">Double</span><span class="p">)</span> <span class="o">=</span> <span class="n">square</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">+</span> <span class="n">square</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
 </pre></div>
 </div>
 </li>
@@ -306,11 +359,11 @@
 <li><p>Replace the formal parameters of the function by the actual arguments.</p></li>
 </ol>
 <p>Example:</p>
-<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="n">sumOfSquares</span><span class="o">(</span><span class="mi">3</span><span class="o">,</span> <span class="mi">2</span><span class="o">+</span><span class="mi">2</span><span class="o">)</span>
-<span class="n">sumOfSquares</span><span class="o">(</span><span class="mi">3</span><span class="o">,</span> <span class="mi">4</span><span class="o">)</span>
-<span class="n">square</span><span class="o">(</span><span class="mi">3</span><span class="o">)</span> <span class="o">+</span> <span class="n">square</span><span class="o">(</span><span class="mi">4</span><span class="o">)</span>
-<span class="mi">3</span> <span class="o">*</span> <span class="mi">3</span> <span class="o">+</span> <span class="n">square</span><span class="o">(</span><span class="mi">4</span><span class="o">)</span>
-<span class="mi">9</span> <span class="o">+</span> <span class="n">square</span><span class="o">(</span><span class="mi">4</span><span class="o">)</span>
+<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="n">sumOfSquares</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="o">+</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">sumOfSquares</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+<span class="n">square</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span> <span class="o">+</span> <span class="n">square</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+<span class="mi">3</span> <span class="o">*</span> <span class="mi">3</span> <span class="o">+</span> <span class="n">square</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+<span class="mi">9</span> <span class="o">+</span> <span class="n">square</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
 <span class="mi">9</span> <span class="o">+</span> <span class="mi">4</span> <span class="o">*</span> <span class="mi">4</span>
 <span class="mi">9</span> <span class="o">+</span> <span class="mi">16</span>
 <span class="mi">25</span>
@@ -324,7 +377,7 @@
 <li><p>Does every expression reduce to a value (in a finite number of steps?)</p>
 <ul>
 <li><p>No. Counter example</p>
-<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="n">loop</span><span class="k">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="n">loop</span>
+<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">loop</span><span class="p">:</span> <span class="nc">Int</span> <span class="o">=</span> <span class="n">loop</span>
 <span class="n">loop</span>
 </pre></div>
 </div>
@@ -338,12 +391,12 @@
 <li><p>One could instead apply the function to unreduced arguments.</p></li>
 </ul>
 <p>Example:</p>
-<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="n">sumOfSquares</span><span class="o">(</span><span class="mi">3</span><span class="o">,</span> <span class="mi">2</span><span class="o">+</span><span class="mi">2</span><span class="o">)</span>
-<span class="n">square</span><span class="o">(</span><span class="mi">3</span><span class="o">)</span> <span class="o">+</span> <span class="n">square</span><span class="o">(</span><span class="mi">2</span><span class="o">+</span><span class="mi">2</span><span class="o">)</span>
-<span class="mi">3</span> <span class="o">*</span> <span class="mi">3</span> <span class="o">+</span> <span class="n">square</span><span class="o">(</span><span class="mi">2</span><span class="o">+</span><span class="mi">2</span><span class="o">)</span>
-<span class="mi">9</span> <span class="o">+</span> <span class="n">square</span><span class="o">(</span><span class="mi">2</span><span class="o">+</span><span class="mi">2</span><span class="o">)</span>
-<span class="mi">9</span> <span class="o">+</span> <span class="o">(</span><span class="mi">2</span><span class="o">+</span><span class="mi">2</span><span class="o">)</span> <span class="o">*</span> <span class="o">(</span><span class="mi">2</span><span class="o">+</span><span class="mi">2</span><span class="o">)</span>
-<span class="mi">9</span> <span class="o">+</span> <span class="mi">4</span> <span class="o">*</span> <span class="o">(</span><span class="mi">2</span><span class="o">+</span><span class="mi">2</span><span class="o">)</span>
+<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="n">sumOfSquares</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="o">+</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">square</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span> <span class="o">+</span> <span class="n">square</span><span class="p">(</span><span class="mi">2</span><span class="o">+</span><span class="mi">2</span><span class="p">)</span>
+<span class="mi">3</span> <span class="o">*</span> <span class="mi">3</span> <span class="o">+</span> <span class="n">square</span><span class="p">(</span><span class="mi">2</span><span class="o">+</span><span class="mi">2</span><span class="p">)</span>
+<span class="mi">9</span> <span class="o">+</span> <span class="n">square</span><span class="p">(</span><span class="mi">2</span><span class="o">+</span><span class="mi">2</span><span class="p">)</span>
+<span class="mi">9</span> <span class="o">+</span> <span class="p">(</span><span class="mi">2</span><span class="o">+</span><span class="mi">2</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="mi">2</span><span class="o">+</span><span class="mi">2</span><span class="p">)</span>
+<span class="mi">9</span> <span class="o">+</span> <span class="mi">4</span> <span class="o">*</span> <span class="p">(</span><span class="mi">2</span><span class="o">+</span><span class="mi">2</span><span class="p">)</span>
 <span class="mi">9</span> <span class="o">+</span> <span class="mi">4</span> <span class="o">*</span> <span class="mi">4</span>
 <span class="mi">25</span>
 </pre></div>
@@ -362,35 +415,35 @@
 </ul>
 </li>
 </ul>
-</div>
-<div class="section" id="evaluation-strategies-and-termination">
+</section>
+<section id="evaluation-strategies-and-termination">
 <h2>1.3 Evaluation Strategies and Termination<a class="headerlink" href="#evaluation-strategies-and-termination" title="Permalink to this headline">¶</a></h2>
 <ul>
 <li><p>Do call-by-name and call-by-value strategies terminate in the same expression if termination is not guaranteed?</p>
 <ul>
 <li><p>if CNV evaluation terminates, so does CBN.</p></li>
 <li><p>the other direction is not true.</p>
-<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="n">first</span><span class="o">(</span><span class="n">x</span><span class="k">:</span> <span class="kt">Int</span><span class="o">,</span> <span class="n">y</span><span class="k">:</span> <span class="kt">Int</span><span class="o">)</span> <span class="k">=</span> <span class="n">x</span>
-<span class="n">first</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span> <span class="n">loop</span><span class="o">)</span> <span class="c1">// does not terminate</span>
+<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">first</span><span class="p">(</span><span class="n">x</span><span class="p">:</span> <span class="nc">Int</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="nc">Int</span><span class="p">)</span> <span class="o">=</span> <span class="n">x</span>
+<span class="n">first</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">loop</span><span class="p">)</span> <span class="c1">// does not terminate</span>
 </pre></div>
 </div>
 <p>evaluates under CBN but not under CBV.</p>
 </li>
 <li><p>Scala normally uses CBV, unless type of a function parameter starts with <code class="docutils literal notranslate"><span class="pre">=&gt;</span></code></p>
-<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="n">constOne</span><span class="o">(</span><span class="n">x</span><span class="k">:</span> <span class="kt">Int</span><span class="o">,</span> <span class="n">y</span><span class="k">:</span> <span class="o">=&gt;</span> <span class="nc">Int</span><span class="o">)</span> <span class="k">=</span> <span class="mi">1</span>
-<span class="n">constOne</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span> <span class="n">loop</span><span class="o">)</span> <span class="c1">// terminates</span>
+<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">constOne</span><span class="p">(</span><span class="n">x</span><span class="p">:</span> <span class="nc">Int</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="o">=&gt;</span> <span class="nc">Int</span><span class="p">)</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">constOne</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">loop</span><span class="p">)</span> <span class="c1">// terminates</span>
 </pre></div>
 </div>
 </li>
 </ul>
 </li>
 </ul>
-</div>
-<div class="section" id="conditionals-and-value-definitions">
+</section>
+<section id="conditionals-and-value-definitions">
 <h2>1.4 Conditionals and Value Definitions<a class="headerlink" href="#conditionals-and-value-definitions" title="Permalink to this headline">¶</a></h2>
 <ul>
 <li><p>Conditionals</p>
-<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="n">abs</span><span class="o">(</span><span class="n">x</span><span class="k">:</span> <span class="kt">Int</span><span class="o">)</span> <span class="k">=</span> <span class="k">if</span> <span class="n">x</span> <span class="o">&gt;=</span> <span class="mi">0</span> <span class="n">then</span> <span class="n">x</span> <span class="k">else</span> <span class="o">-</span><span class="n">x</span>
+<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">abs</span><span class="p">(</span><span class="n">x</span><span class="p">:</span> <span class="nc">Int</span><span class="p">)</span> <span class="o">=</span> <span class="k">if</span> <span class="n">x</span> <span class="o">&gt;=</span> <span class="mi">0</span> <span class="k">then</span> <span class="n">x</span> <span class="k">else</span> <span class="o">-</span><span class="n">x</span>
 </pre></div>
 </div>
 </li>
@@ -414,32 +467,32 @@
 <ul>
 <li><p>the <code class="docutils literal notranslate"><span class="pre">def</span></code> form is “by-name”, its right hand side is evaluated on each use.</p></li>
 <li><p>the <code class="docutils literal notranslate"><span class="pre">val</span></code>form is “by-value”. Example:</p>
-<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="k">val</span> <span class="n">x</span> <span class="k">=</span> <span class="mi">2</span>
-<span class="k">val</span> <span class="n">y</span> <span class="k">=</span> <span class="n">square</span><span class="o">(</span><span class="n">x</span><span class="o">)</span>
+<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="kd">val</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="kd">val</span> <span class="n">y</span> <span class="o">=</span> <span class="n">square</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>The RHS of a <code class="docutils literal notranslate"><span class="pre">val</span></code> definition is evaluated at the point of the definition.</p>
 </li>
 <li><p>Difference:</p>
-<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="n">x</span> <span class="k">=</span> <span class="n">loop</span> <span class="c1">// is OK</span>
-<span class="k">val</span> <span class="n">x</span> <span class="k">=</span> <span class="n">loop</span> <span class="c1">// not ok, infinite loop</span>
+<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">x</span> <span class="o">=</span> <span class="n">loop</span> <span class="c1">// is OK</span>
+<span class="kd">val</span> <span class="n">x</span> <span class="o">=</span> <span class="n">loop</span> <span class="c1">// not ok, infinite loop</span>
 </pre></div>
 </div>
 </li>
 </ul>
 </li>
 <li><p>Exercise: implement <code class="docutils literal notranslate"><span class="pre">and(x,</span> <span class="pre">y)</span></code> and <code class="docutils literal notranslate"><span class="pre">or(x,</span> <span class="pre">y)</span></code></p>
-<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="n">and</span><span class="o">(</span><span class="n">x</span><span class="k">:</span> <span class="kt">Boolean</span><span class="o">,</span> <span class="n">y</span><span class="k">:</span> <span class="o">=&gt;</span> <span class="nc">Boolean</span><span class="o">)</span><span class="k">:</span> <span class="kt">Boolean</span> <span class="o">=</span> 
-    <span class="k">if</span> <span class="n">x</span> <span class="n">then</span> <span class="n">y</span> <span class="k">else</span> <span class="kc">false</span>
+<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">and</span><span class="p">(</span><span class="n">x</span><span class="p">:</span> <span class="nc">Boolean</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="o">=&gt;</span> <span class="nc">Boolean</span><span class="p">):</span> <span class="nc">Boolean</span> <span class="o">=</span> 
+    <span class="k">if</span> <span class="n">x</span> <span class="k">then</span> <span class="n">y</span> <span class="k">else</span> <span class="kc">false</span>
 </pre></div>
 </div>
 <p><code class="docutils literal notranslate"><span class="pre">y</span></code> needs to CBN for short-circuit evaluation.</p>
 </li>
 </ul>
-</div>
-<div class="section" id="exammple-square-roots-with-newton-s-method">
+</section>
+<section id="exammple-square-roots-with-newton-s-method">
 <h2>1.5 Exammple: Square roots with Newton’s method<a class="headerlink" href="#exammple-square-roots-with-newton-s-method" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="n">sqrt</span><span class="o">(</span><span class="n">x</span><span class="k">:</span> <span class="kt">Double</span><span class="o">)</span><span class="k">:</span> <span class="kt">Double</span> <span class="o">=</span> <span class="o">...</span>
+<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">sqrt</span><span class="p">(</span><span class="n">x</span><span class="p">:</span> <span class="nc">Double</span><span class="p">):</span> <span class="nc">Double</span> <span class="o">=</span> <span class="p">...</span>
 
 <span class="cm">/*</span>
 <span class="cm">newton&#39;s method</span>
@@ -447,38 +500,38 @@
 <span class="cm">2. improve the estiamte by taking the mean of `y` and `x/y`</span>
 <span class="cm">*/</span>
 
-<span class="k">def</span> <span class="n">sqrtIter</span><span class="o">(</span><span class="n">guess</span><span class="k">:</span> <span class="kt">Double</span><span class="o">,</span> <span class="n">x</span><span class="k">:</span> <span class="kt">Double</span><span class="o">)</span><span class="k">:</span> <span class="kt">Double</span> <span class="o">=</span> 
-    <span class="k">if</span> <span class="n">isGoodEnough</span><span class="o">(</span><span class="n">guess</span><span class="o">,</span> <span class="n">x</span><span class="o">)</span> <span class="n">then</span> <span class="n">guess</span>
-    <span class="k">else</span> <span class="n">sqrtIter</span><span class="o">(</span><span class="n">improve</span><span class="o">(</span><span class="n">guess</span><span class="o">,</span> <span class="n">x</span><span class="o">),</span> <span class="n">x</span><span class="o">)</span>
+<span class="k">def</span> <span class="nf">sqrtIter</span><span class="p">(</span><span class="n">guess</span><span class="p">:</span> <span class="nc">Double</span><span class="p">,</span> <span class="n">x</span><span class="p">:</span> <span class="nc">Double</span><span class="p">):</span> <span class="nc">Double</span> <span class="o">=</span> 
+    <span class="k">if</span> <span class="n">isGoodEnough</span><span class="p">(</span><span class="n">guess</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span> <span class="k">then</span> <span class="n">guess</span>
+    <span class="k">else</span> <span class="n">sqrtIter</span><span class="p">(</span><span class="n">improve</span><span class="p">(</span><span class="n">guess</span><span class="p">,</span> <span class="n">x</span><span class="p">),</span> <span class="n">x</span><span class="p">)</span>
 
-<span class="k">def</span> <span class="n">isGoodEnough</span><span class="o">(</span><span class="n">guess</span><span class="k">:</span> <span class="kt">Double</span><span class="o">,</span> <span class="n">x</span><span class="k">:</span> <span class="kt">Double</span><span class="o">)</span> <span class="k">=</span> 
-    <span class="n">abs</span><span class="o">(</span><span class="n">guess</span> <span class="o">*</span> <span class="n">guess</span> <span class="o">-</span> <span class="n">x</span><span class="o">)</span> <span class="o">&lt;</span> <span class="mf">0.001</span>
+<span class="k">def</span> <span class="nf">isGoodEnough</span><span class="p">(</span><span class="n">guess</span><span class="p">:</span> <span class="nc">Double</span><span class="p">,</span> <span class="n">x</span><span class="p">:</span> <span class="nc">Double</span><span class="p">)</span> <span class="o">=</span> 
+    <span class="n">abs</span><span class="p">(</span><span class="n">guess</span> <span class="o">*</span> <span class="n">guess</span> <span class="o">-</span> <span class="n">x</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mf">0.001</span>
 
-<span class="k">def</span> <span class="n">improve</span><span class="o">(</span><span class="n">guess</span><span class="k">:</span> <span class="kt">Double</span><span class="o">,</span> <span class="n">x</span><span class="k">:</span><span class="kt">Double</span><span class="o">)</span> <span class="k">=</span> 
-    <span class="o">(</span><span class="n">guess</span> <span class="o">+</span> <span class="n">x</span> <span class="o">/</span> <span class="n">guess</span><span class="o">)</span> <span class="o">/</span> <span class="mi">2</span>
+<span class="k">def</span> <span class="nf">improve</span><span class="p">(</span><span class="n">guess</span><span class="p">:</span> <span class="nc">Double</span><span class="p">,</span> <span class="n">x</span><span class="p">:</span><span class="nc">Double</span><span class="p">)</span> <span class="o">=</span> 
+    <span class="p">(</span><span class="n">guess</span> <span class="o">+</span> <span class="n">x</span> <span class="o">/</span> <span class="n">guess</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span>
 
-<span class="k">def</span> <span class="n">sqrt</span><span class="o">(</span><span class="n">x</span><span class="k">:</span> <span class="kt">Double</span><span class="o">)</span><span class="k">:</span> <span class="kt">Double</span> <span class="o">=</span> <span class="n">sqrtIter</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span> <span class="n">x</span><span class="o">)</span>
+<span class="k">def</span> <span class="nf">sqrt</span><span class="p">(</span><span class="n">x</span><span class="p">:</span> <span class="nc">Double</span><span class="p">):</span> <span class="nc">Double</span> <span class="o">=</span> <span class="n">sqrtIter</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
 </pre></div>
 </div>
 <ul class="simple">
 <li><p>Return type is required for recursive functions. For non-recursive, return type is optional.</p></li>
 </ul>
-</div>
-<div class="section" id="blocks-and-lexical-scope">
+</section>
+<section id="blocks-and-lexical-scope">
 <h2>1.6 Blocks and Lexical Scope<a class="headerlink" href="#blocks-and-lexical-scope" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="n">sqrt</span><span class="o">(</span><span class="n">x</span><span class="k">:</span> <span class="kt">Double</span><span class="o">)</span> <span class="k">=</span> <span class="o">{</span>
-    <span class="k">def</span> <span class="n">sqrtIter</span><span class="o">(</span><span class="n">guess</span><span class="k">:</span> <span class="kt">Double</span><span class="o">,</span> <span class="n">x</span><span class="k">:</span> <span class="kt">Double</span><span class="o">)</span><span class="k">:</span> <span class="kt">Double</span> <span class="o">=</span>
-        <span class="k">if</span> <span class="n">isGoodEnough</span><span class="o">(</span><span class="n">guess</span><span class="o">,</span> <span class="n">x</span><span class="o">)</span> <span class="n">then</span> <span class="n">guess</span>
-        <span class="k">else</span> <span class="n">sqrtIter</span><span class="o">(</span><span class="n">improve</span><span class="o">(</span><span class="n">guess</span><span class="o">,</span> <span class="n">x</span><span class="o">),</span> <span class="n">x</span><span class="o">)</span>
+<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">sqrt</span><span class="p">(</span><span class="n">x</span><span class="p">:</span> <span class="nc">Double</span><span class="p">)</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="k">def</span> <span class="nf">sqrtIter</span><span class="p">(</span><span class="n">guess</span><span class="p">:</span> <span class="nc">Double</span><span class="p">,</span> <span class="n">x</span><span class="p">:</span> <span class="nc">Double</span><span class="p">):</span> <span class="nc">Double</span> <span class="o">=</span>
+        <span class="k">if</span> <span class="n">isGoodEnough</span><span class="p">(</span><span class="n">guess</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span> <span class="k">then</span> <span class="n">guess</span>
+        <span class="k">else</span> <span class="n">sqrtIter</span><span class="p">(</span><span class="n">improve</span><span class="p">(</span><span class="n">guess</span><span class="p">,</span> <span class="n">x</span><span class="p">),</span> <span class="n">x</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="n">improve</span><span class="o">(</span><span class="n">guess</span><span class="k">:</span> <span class="kt">Double</span><span class="o">,</span> <span class="n">x</span><span class="k">:</span> <span class="kt">Double</span><span class="o">)</span> <span class="k">=</span>
-        <span class="o">(</span><span class="n">guess</span> <span class="o">+</span> <span class="n">x</span> <span class="o">/</span> <span class="n">guess</span><span class="o">)</span> <span class="o">/</span> <span class="mi">2</span>
+    <span class="k">def</span> <span class="nf">improve</span><span class="p">(</span><span class="n">guess</span><span class="p">:</span> <span class="nc">Double</span><span class="p">,</span> <span class="n">x</span><span class="p">:</span> <span class="nc">Double</span><span class="p">)</span> <span class="o">=</span>
+        <span class="p">(</span><span class="n">guess</span> <span class="o">+</span> <span class="n">x</span> <span class="o">/</span> <span class="n">guess</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span>
 
-    <span class="k">def</span> <span class="n">isGoodEnough</span><span class="o">(</span><span class="n">guess</span><span class="k">:</span> <span class="kt">Double</span><span class="o">,</span> <span class="n">x</span><span class="k">:</span> <span class="kt">Double</span><span class="o">)</span> <span class="k">=</span>
-        <span class="n">abs</span><span class="o">(</span><span class="n">square</span><span class="o">(</span><span class="n">guess</span><span class="o">)</span> <span class="o">-</span> <span class="n">x</span><span class="o">)</span> <span class="o">&lt;</span> <span class="mf">0.001</span>
+    <span class="k">def</span> <span class="nf">isGoodEnough</span><span class="p">(</span><span class="n">guess</span><span class="p">:</span> <span class="nc">Double</span><span class="p">,</span> <span class="n">x</span><span class="p">:</span> <span class="nc">Double</span><span class="p">)</span> <span class="o">=</span>
+        <span class="n">abs</span><span class="p">(</span><span class="n">square</span><span class="p">(</span><span class="n">guess</span><span class="p">)</span> <span class="o">-</span> <span class="n">x</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mf">0.001</span>
     
-    <span class="n">sqrtIter</span><span class="o">(</span><span class="mf">1.0</span><span class="o">,</span> <span class="n">x</span><span class="o">)</span>
-<span class="o">}</span>
+    <span class="n">sqrtIter</span><span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+<span class="p">}</span>
 </pre></div>
 </div>
 <ul>
@@ -491,29 +544,29 @@
 <ul>
 <li><p>Definitions inside a block are only visible within the block.</p></li>
 <li><p>Definitions inside a block <em>shadow</em> definitions of the same names outside the block. (i.e, outer definitions don’t have any impact inside the block if same name exists within the block)</p>
-<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="k">val</span> <span class="n">x</span> <span class="k">=</span> <span class="mi">0</span>
-<span class="k">def</span> <span class="n">f</span><span class="o">(</span><span class="n">y</span><span class="k">:</span> <span class="kt">Int</span><span class="o">)</span> <span class="k">=</span> <span class="n">y</span> <span class="o">+</span> <span class="mi">1</span>
-<span class="k">val</span> <span class="n">y</span> <span class="k">=</span>
-    <span class="k">val</span> <span class="n">x</span> <span class="k">=</span> <span class="n">f</span><span class="o">(</span><span class="mi">3</span><span class="o">)</span>
+<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="kd">val</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">y</span><span class="p">:</span> <span class="nc">Int</span><span class="p">)</span> <span class="o">=</span> <span class="n">y</span> <span class="o">+</span> <span class="mi">1</span>
+<span class="kd">val</span> <span class="n">y</span> <span class="o">=</span>
+    <span class="kd">val</span> <span class="n">x</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
     <span class="n">x</span> <span class="o">*</span> <span class="n">x</span>
-<span class="k">val</span> <span class="n">result</span> <span class="k">=</span> <span class="n">y</span> <span class="o">+</span> <span class="n">x</span>
+<span class="kd">val</span> <span class="n">result</span> <span class="o">=</span> <span class="n">y</span> <span class="o">+</span> <span class="n">x</span>
 </pre></div>
 </div>
 <p>result = 16</p>
 </li>
 <li><p>Definitions of outer blocks are visible inside a block unless they are shadowed. So cleaner sqrt function</p>
-<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="n">sqrt</span><span class="o">(</span><span class="n">x</span><span class="k">:</span> <span class="kt">Double</span><span class="o">)</span> <span class="k">=</span>
-    <span class="k">def</span> <span class="n">sqrtIter</span><span class="o">(</span><span class="n">guess</span><span class="k">:</span> <span class="kt">Double</span><span class="o">)</span><span class="k">:</span> <span class="kt">Double</span> <span class="o">=</span>
-        <span class="k">if</span> <span class="n">isGoodEnough</span><span class="o">(</span><span class="n">guess</span><span class="o">)</span> <span class="n">then</span> <span class="n">guess</span>
-        <span class="k">else</span> <span class="n">sqrtIter</span><span class="o">(</span><span class="n">improve</span><span class="o">(</span><span class="n">guess</span><span class="o">))</span>
+<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">sqrt</span><span class="p">(</span><span class="n">x</span><span class="p">:</span> <span class="nc">Double</span><span class="p">)</span> <span class="o">=</span>
+    <span class="k">def</span> <span class="nf">sqrtIter</span><span class="p">(</span><span class="n">guess</span><span class="p">:</span> <span class="nc">Double</span><span class="p">):</span> <span class="nc">Double</span> <span class="o">=</span>
+        <span class="k">if</span> <span class="n">isGoodEnough</span><span class="p">(</span><span class="n">guess</span><span class="p">)</span> <span class="k">then</span> <span class="n">guess</span>
+        <span class="k">else</span> <span class="n">sqrtIter</span><span class="p">(</span><span class="n">improve</span><span class="p">(</span><span class="n">guess</span><span class="p">))</span>
     
-    <span class="k">def</span> <span class="n">improve</span><span class="o">(</span><span class="n">guess</span><span class="k">:</span> <span class="kt">Double</span><span class="o">)</span> <span class="k">=</span>
-        <span class="o">(</span><span class="n">guess</span> <span class="o">+</span> <span class="n">x</span> <span class="o">/</span> <span class="n">guess</span><span class="o">)</span> <span class="o">/</span> <span class="mi">2</span>
+    <span class="k">def</span> <span class="nf">improve</span><span class="p">(</span><span class="n">guess</span><span class="p">:</span> <span class="nc">Double</span><span class="p">)</span> <span class="o">=</span>
+        <span class="p">(</span><span class="n">guess</span> <span class="o">+</span> <span class="n">x</span> <span class="o">/</span> <span class="n">guess</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span>
     
-    <span class="k">def</span> <span class="n">isGoodEnough</span><span class="o">(</span><span class="n">guess</span><span class="k">:</span> <span class="kt">Double</span><span class="o">)</span> <span class="k">=</span>
-        <span class="n">abs</span><span class="o">(</span><span class="n">square</span><span class="o">(</span><span class="n">guess</span><span class="o">)</span> <span class="o">-</span> <span class="n">x</span><span class="o">)</span> <span class="o">&lt;</span> <span class="mf">0.001</span>
+    <span class="k">def</span> <span class="nf">isGoodEnough</span><span class="p">(</span><span class="n">guess</span><span class="p">:</span> <span class="nc">Double</span><span class="p">)</span> <span class="o">=</span>
+        <span class="n">abs</span><span class="p">(</span><span class="n">square</span><span class="p">(</span><span class="n">guess</span><span class="p">)</span> <span class="o">-</span> <span class="n">x</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mf">0.001</span>
     
-    <span class="n">sqrtIter</span><span class="o">(</span><span class="mf">1.0</span><span class="o">)</span>
+    <span class="n">sqrtIter</span><span class="p">(</span><span class="mf">1.0</span><span class="p">)</span>
 </pre></div>
 </div>
 </li>
@@ -522,15 +575,15 @@
 <li><p>Semicolons</p>
 <ul>
 <li><p>if there are more than one statments on a line, they need to be separated by semicolons.</p>
-<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="k">val</span> <span class="n">y</span> <span class="k">=</span> <span class="n">x</span> <span class="o">+</span> <span class="mi">1</span><span class="o">;</span> <span class="n">y</span> <span class="o">*</span> <span class="n">y</span>
+<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="kd">val</span> <span class="n">y</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span> <span class="n">y</span> <span class="o">*</span> <span class="n">y</span>
 </pre></div>
 </div>
 </li>
 </ul>
 </li>
 </ul>
-</div>
-<div class="section" id="tail-recursion">
+</section>
+<section id="tail-recursion">
 <h2>1.7 Tail recursion<a class="headerlink" href="#tail-recursion" title="Permalink to this headline">¶</a></h2>
 <ul>
 <li><p>Evaluation a function application:</p>
@@ -543,43 +596,43 @@
 </ul>
 </li>
 </ul>
-<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="n">f</span><span class="o">(</span><span class="n">x1</span><span class="o">,</span> <span class="o">...,</span> <span class="n">xn</span><span class="o">)</span> <span class="k">=</span> <span class="n">B</span><span class="o">;</span> <span class="o">...</span> <span class="n">f</span><span class="o">(</span><span class="n">v1</span><span class="o">,</span> <span class="o">...,</span> <span class="n">vn</span><span class="o">)</span>
+<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">x1</span><span class="p">,</span> <span class="p">...,</span> <span class="n">xn</span><span class="p">)</span> <span class="o">=</span> <span class="nc">B</span><span class="p">;</span> <span class="p">...</span> <span class="n">f</span><span class="p">(</span><span class="n">v1</span><span class="p">,</span> <span class="p">...,</span> <span class="n">vn</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>is the same as</p>
-<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="n">f</span><span class="o">(</span><span class="n">x1</span><span class="o">,</span> <span class="o">...,</span> <span class="n">xn</span><span class="o">)</span> <span class="k">=</span> <span class="n">B</span><span class="o">;</span> <span class="o">...</span> <span class="o">[</span><span class="kt">v1/x1</span><span class="p">,</span> <span class="kt">...</span><span class="p">,</span> <span class="kt">vn/xn</span><span class="o">]</span> <span class="n">B</span>
+<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">x1</span><span class="p">,</span> <span class="p">...,</span> <span class="n">xn</span><span class="p">)</span> <span class="o">=</span> <span class="nc">B</span><span class="p">;</span> <span class="p">...</span> <span class="p">[</span><span class="n">v1</span><span class="o">/</span><span class="n">x1</span><span class="p">,</span> <span class="p">...,</span> <span class="n">vn</span><span class="o">/</span><span class="n">xn</span><span class="p">]</span> <span class="nc">B</span>
 </pre></div>
 </div>
 <p>where <code class="docutils literal notranslate"><span class="pre">[v1/x1,</span> <span class="pre">...,</span> <span class="pre">vn/xn]</span> <span class="pre">B</span></code> means the expression <code class="docutils literal notranslate"><span class="pre">B</span></code> in which all occurrences of <code class="docutils literal notranslate"><span class="pre">xi</span></code> have been repaced by <code class="docutils literal notranslate"><span class="pre">vi</span></code>. This is called a <strong>substitution</strong>.</p>
 </li>
 <li><p>Example:</p>
-<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="n">gcd</span><span class="o">(</span><span class="n">a</span><span class="k">:</span> <span class="kt">Int</span><span class="o">,</span> <span class="n">b</span><span class="k">:</span> <span class="kt">Int</span><span class="o">)</span><span class="k">:</span> <span class="kt">Int</span> <span class="o">=</span>
-    <span class="k">if</span> <span class="n">b</span> <span class="o">==</span> <span class="mi">0</span> <span class="n">then</span> <span class="n">a</span> <span class="k">else</span> <span class="n">gcd</span><span class="o">(</span><span class="n">b</span><span class="o">,</span> <span class="n">a</span> <span class="o">%</span> <span class="n">b</span><span class="o">)</span>
+<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">gcd</span><span class="p">(</span><span class="n">a</span><span class="p">:</span> <span class="nc">Int</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span> <span class="nc">Int</span><span class="p">):</span> <span class="nc">Int</span> <span class="o">=</span>
+    <span class="k">if</span> <span class="n">b</span> <span class="o">==</span> <span class="mi">0</span> <span class="k">then</span> <span class="n">a</span> <span class="k">else</span> <span class="n">gcd</span><span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="n">a</span> <span class="o">%</span> <span class="n">b</span><span class="p">)</span>
 </pre></div>
 </div>
 <p><code class="docutils literal notranslate"><span class="pre">gcd(14,</span> <span class="pre">21)</span></code> is evaluated as</p>
-<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="o">→</span> <span class="k">if</span> <span class="mi">21</span> <span class="o">==</span> <span class="mi">0</span> <span class="n">then</span> <span class="mi">14</span> <span class="k">else</span> <span class="n">gcd</span><span class="o">(</span><span class="mi">21</span><span class="o">,</span> <span class="mi">14</span> <span class="o">%</span> <span class="mi">21</span><span class="o">)</span>
-<span class="o">→</span> <span class="k">if</span> <span class="kc">false</span> <span class="n">then</span> <span class="mi">14</span> <span class="k">else</span> <span class="n">gcd</span><span class="o">(</span><span class="mi">21</span><span class="o">,</span> <span class="mi">14</span> <span class="o">%</span> <span class="mi">21</span><span class="o">)</span>
-<span class="o">→</span> <span class="n">gcd</span><span class="o">(</span><span class="mi">21</span><span class="o">,</span> <span class="mi">14</span> <span class="o">%</span> <span class="mi">21</span><span class="o">)</span>
-<span class="o">→</span> <span class="n">gcd</span><span class="o">(</span><span class="mi">21</span><span class="o">,</span> <span class="mi">14</span><span class="o">)</span>
-<span class="o">→</span> <span class="k">if</span> <span class="mi">14</span> <span class="o">==</span> <span class="mi">0</span> <span class="n">then</span> <span class="mi">21</span> <span class="k">else</span> <span class="n">gcd</span><span class="o">(</span><span class="mi">14</span><span class="o">,</span> <span class="mi">21</span> <span class="o">%</span> <span class="mi">14</span><span class="o">)</span>
-<span class="o">→→</span> <span class="n">gcd</span><span class="o">(</span><span class="mi">14</span><span class="o">,</span> <span class="mi">7</span><span class="o">)</span>
-<span class="o">→→</span> <span class="n">gcd</span><span class="o">(</span><span class="mi">7</span><span class="o">,</span> <span class="mi">0</span><span class="o">)</span>
-<span class="o">→</span> <span class="k">if</span> <span class="mi">0</span> <span class="o">==</span> <span class="mi">0</span> <span class="n">then</span> <span class="mi">7</span> <span class="k">else</span> <span class="n">gcd</span><span class="o">(</span><span class="mi">0</span><span class="o">,</span> <span class="mi">7</span> <span class="o">%</span> <span class="mi">0</span><span class="o">)</span>
+<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="o">→</span> <span class="k">if</span> <span class="mi">21</span> <span class="o">==</span> <span class="mi">0</span> <span class="k">then</span> <span class="mi">14</span> <span class="k">else</span> <span class="n">gcd</span><span class="p">(</span><span class="mi">21</span><span class="p">,</span> <span class="mi">14</span> <span class="o">%</span> <span class="mi">21</span><span class="p">)</span>
+<span class="o">→</span> <span class="k">if</span> <span class="kc">false</span> <span class="k">then</span> <span class="mi">14</span> <span class="k">else</span> <span class="n">gcd</span><span class="p">(</span><span class="mi">21</span><span class="p">,</span> <span class="mi">14</span> <span class="o">%</span> <span class="mi">21</span><span class="p">)</span>
+<span class="o">→</span> <span class="n">gcd</span><span class="p">(</span><span class="mi">21</span><span class="p">,</span> <span class="mi">14</span> <span class="o">%</span> <span class="mi">21</span><span class="p">)</span>
+<span class="o">→</span> <span class="n">gcd</span><span class="p">(</span><span class="mi">21</span><span class="p">,</span> <span class="mi">14</span><span class="p">)</span>
+<span class="o">→</span> <span class="k">if</span> <span class="mi">14</span> <span class="o">==</span> <span class="mi">0</span> <span class="k">then</span> <span class="mi">21</span> <span class="k">else</span> <span class="n">gcd</span><span class="p">(</span><span class="mi">14</span><span class="p">,</span> <span class="mi">21</span> <span class="o">%</span> <span class="mi">14</span><span class="p">)</span>
+<span class="o">→→</span> <span class="n">gcd</span><span class="p">(</span><span class="mi">14</span><span class="p">,</span> <span class="mi">7</span><span class="p">)</span>
+<span class="o">→→</span> <span class="n">gcd</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<span class="o">→</span> <span class="k">if</span> <span class="mi">0</span> <span class="o">==</span> <span class="mi">0</span> <span class="k">then</span> <span class="mi">7</span> <span class="k">else</span> <span class="n">gcd</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">7</span> <span class="o">%</span> <span class="mi">0</span><span class="p">)</span>
 </pre></div>
 </div>
 </li>
 <li><p>Another example:</p>
-<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="n">factorial</span><span class="o">(</span><span class="n">n</span><span class="k">:</span> <span class="kt">Int</span><span class="o">)</span><span class="k">:</span> <span class="kt">Int</span> <span class="o">=</span>
-    <span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">0</span> <span class="n">then</span> <span class="mi">1</span> <span class="k">else</span> <span class="n">n</span> <span class="o">*</span> <span class="n">factorial</span><span class="o">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="o">)</span>
+<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">factorial</span><span class="p">(</span><span class="n">n</span><span class="p">:</span> <span class="nc">Int</span><span class="p">):</span> <span class="nc">Int</span> <span class="o">=</span>
+    <span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">0</span> <span class="k">then</span> <span class="mi">1</span> <span class="k">else</span> <span class="n">n</span> <span class="o">*</span> <span class="n">factorial</span><span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
 </pre></div>
 </div>
 <p><code class="docutils literal notranslate"><span class="pre">factorial(4)</span></code> is evaluated as</p>
-<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="o">→</span> <span class="k">if</span> <span class="mi">4</span> <span class="o">==</span> <span class="mi">0</span> <span class="n">then</span> <span class="mi">1</span> <span class="k">else</span> <span class="mi">4</span> <span class="o">*</span> <span class="n">factorial</span><span class="o">(</span><span class="mi">4</span> <span class="o">-</span> <span class="mi">1</span><span class="o">)</span> <span class="mi">3</span><span class="o">-&gt;</span> <span class="o">→→</span> <span class="mi">4</span> <span class="o">*</span> <span class="n">factorial</span><span class="o">(</span><span class="mi">3</span><span class="o">)</span>
-<span class="o">→→</span> <span class="mi">4</span> <span class="o">*</span> <span class="o">(</span><span class="mi">3</span> <span class="o">*</span> <span class="n">factorial</span><span class="o">(</span><span class="mi">2</span><span class="o">))</span>
-<span class="o">→→</span> <span class="mi">4</span> <span class="o">*</span> <span class="o">(</span><span class="mi">3</span> <span class="o">*</span> <span class="o">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">factorial</span><span class="o">(</span><span class="mi">1</span><span class="o">)))</span>
-<span class="o">→→</span> <span class="mi">4</span> <span class="o">*</span> <span class="o">(</span><span class="mi">3</span> <span class="o">*</span> <span class="o">(</span><span class="mi">2</span> <span class="o">*</span> <span class="o">(</span><span class="mi">1</span> <span class="o">*</span> <span class="n">factorial</span><span class="o">(</span><span class="mi">0</span><span class="o">)))</span>
-<span class="o">→→</span> <span class="mi">4</span> <span class="o">*</span> <span class="o">(</span><span class="mi">3</span> <span class="o">*</span> <span class="o">(</span><span class="mi">2</span> <span class="o">*</span> <span class="o">(</span><span class="mi">1</span> <span class="o">*</span> <span class="mi">1</span><span class="o">)))</span>
+<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="o">→</span> <span class="k">if</span> <span class="mi">4</span> <span class="o">==</span> <span class="mi">0</span> <span class="k">then</span> <span class="mi">1</span> <span class="k">else</span> <span class="mi">4</span> <span class="o">*</span> <span class="n">factorial</span><span class="p">(</span><span class="mi">4</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="mi">3</span><span class="o">-&gt;</span> <span class="o">→→</span> <span class="mi">4</span> <span class="o">*</span> <span class="n">factorial</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="o">→→</span> <span class="mi">4</span> <span class="o">*</span> <span class="p">(</span><span class="mi">3</span> <span class="o">*</span> <span class="n">factorial</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span>
+<span class="o">→→</span> <span class="mi">4</span> <span class="o">*</span> <span class="p">(</span><span class="mi">3</span> <span class="o">*</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">factorial</span><span class="p">(</span><span class="mi">1</span><span class="p">)))</span>
+<span class="o">→→</span> <span class="mi">4</span> <span class="o">*</span> <span class="p">(</span><span class="mi">3</span> <span class="o">*</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">*</span> <span class="n">factorial</span><span class="p">(</span><span class="mi">0</span><span class="p">)))</span>
+<span class="o">→→</span> <span class="mi">4</span> <span class="o">*</span> <span class="p">(</span><span class="mi">3</span> <span class="o">*</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">*</span> <span class="mi">1</span><span class="p">)))</span>
 <span class="o">→→</span> <span class="mi">24</span>
 </pre></div>
 </div>
@@ -591,25 +644,25 @@
 </ul>
 </li>
 <li><p>In scala one can require that a function is tail-recursive using <code class="docutils literal notranslate"><span class="pre">&#64;tailrec</span></code> annotation</p>
-<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="k">import</span> <span class="nn">scala.annotation.tailrec</span>
+<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="k">import</span> <span class="nn">scala</span><span class="p">.</span><span class="nn">annotation</span><span class="p">.</span><span class="n">tailrec</span>
 
 <span class="nd">@tailrec</span>
-<span class="k">def</span> <span class="n">gcd</span><span class="o">(</span><span class="n">a</span><span class="k">:</span> <span class="kt">Int</span><span class="o">,</span> <span class="n">b</span><span class="k">:</span> <span class="kt">Int</span><span class="o">)</span><span class="k">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="o">...</span>
+<span class="k">def</span> <span class="nf">gcd</span><span class="p">(</span><span class="n">a</span><span class="p">:</span> <span class="nc">Int</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span> <span class="nc">Int</span><span class="p">):</span> <span class="nc">Int</span> <span class="o">=</span> <span class="p">...</span>
 </pre></div>
 </div>
 </li>
 <li><p>Exercise: Tail-recursive version of <code class="docutils literal notranslate"><span class="pre">factorial</span></code></p>
-<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="n">fact</span><span class="o">(</span><span class="n">n</span><span class="k">:</span> <span class="kt">Int</span><span class="o">)</span> <span class="k">=</span> 
-    <span class="k">def</span> <span class="n">factIter</span><span class="o">(</span><span class="n">n</span><span class="k">:</span> <span class="kt">Int</span><span class="o">,</span> <span class="n">mult</span><span class="k">:</span> <span class="kt">Int</span><span class="o">)</span><span class="k">:</span> <span class="kt">Int</span> <span class="o">=</span> 
-        <span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">1</span> <span class="n">then</span> <span class="n">mult</span> <span class="k">else</span> <span class="n">factIter</span><span class="o">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="o">,</span> <span class="n">mult</span> <span class="o">*</span> <span class="n">n</span><span class="o">)</span>
+<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">fact</span><span class="p">(</span><span class="n">n</span><span class="p">:</span> <span class="nc">Int</span><span class="p">)</span> <span class="o">=</span> 
+    <span class="k">def</span> <span class="nf">factIter</span><span class="p">(</span><span class="n">n</span><span class="p">:</span> <span class="nc">Int</span><span class="p">,</span> <span class="n">mult</span><span class="p">:</span> <span class="nc">Int</span><span class="p">):</span> <span class="nc">Int</span> <span class="o">=</span> 
+        <span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">1</span> <span class="k">then</span> <span class="n">mult</span> <span class="k">else</span> <span class="n">factIter</span><span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">mult</span> <span class="o">*</span> <span class="n">n</span><span class="p">)</span>
 
-    <span class="n">factIter</span><span class="o">(</span><span class="n">n</span><span class="o">,</span> <span class="mi">1</span><span class="o">)</span>
+    <span class="n">factIter</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
 </pre></div>
 </div>
 </li>
 </ul>
-</div>
-</div>
+</section>
+</section>
 
     <script type="text/x-thebe-config">
     {
@@ -633,54 +686,42 @@
 
               </div>
               
-        
             
-
-
-
-<div class='prev-next-bottom'>
-    
-    <div id="prev">
-        <a class="left-prev" href="README.html" title="previous page">
-            <i class="prevnext-label fas fa-angle-left"></i>
-            <div class="prevnext-info">
-                <p class="prevnext-label">previous</p>
-                <p class="prevnext-title">Lectures notes for Functional Programming Principles in Scala by Martin Odersky</p>
-            </div>
-        </a>
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'> 
+    <a class='left-prev' id="prev-link" href="README.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Lectures notes for Functional Programming Principles in Scala by Martin Odersky</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="Week_2_Higher_Order_Functions.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">2 Higher Order Functions</p>
     </div>
-     <div id="next">
-        <a class="right-next" href="Week_2_Higher_Order_Functions.html" title="next page">
-            <div class="prevnext-info">
-                <p class="prevnext-label">next</p>
-                <p class="prevnext-title">2 Higher Order Functions</p>
-            </div>
-            <i class="prevnext-label fas fa-angle-right"></i>
-        </a>
-     </div>
-
+    <i class="fas fa-angle-right"></i>
+    </a>
 </div>
-        
+            
         </div>
     </div>
-    <footer class="footer mt-5 mt-md-0">
-    <div class="container">
-      <p>
-        
-          By Manasij Venkatesh<br/>
-        
-            &copy; Copyright 2021.<br/>
-      </p>
-    </div>
-  </footer>
+    <footer class="footer">
+  <p>
+    
+      By Manasij Venkatesh<br/>
+    
+        &copy; Copyright 2021.<br/>
+  </p>
+</footer>
 </main>
 
 
       </div>
     </div>
   
-  <script src="_static/js/index.1c5a1a01449ed65a7b51.js"></script>
+  <script src="_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
 
-  
   </body>
 </html>
